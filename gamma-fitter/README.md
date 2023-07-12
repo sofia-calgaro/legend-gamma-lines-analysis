@@ -1,6 +1,6 @@
 Load the macros like in "Load.C" in order to use the objects in a root session.
 
-The fit functions are defined in "GammaFitFunctions.h" (the `GammaFitFunction` is a wrapper for TF1 functions that also contains the actual function implementation, like `G`ammaProtoGauss`_` with some added functionality, like parameter naming etc.).
+The fit functions are defined in "GammaFitFunctions.h" (the `GammaFitFunction` is a wrapper for TF1 functions that also contains the actual function implementation, like `GammaProtoGauss` with some added functionality, like parameter naming etc.).
 
 The fit can be done with the `GammaLineFit` object: it needs to be created with a name, a TH1D histogram, and the expected resolution as value or TF1 resolution curve. The fit is then performed using `GammaLineFit::Fit` where one needs to define the expected line positions, the range, which type of background (if I remember a step like background is not really working), and the MCMC precision. The fit is then performed in steps, first it fits only the background range with the background model, then it fits the full model with fixed position/resolution, this fits are simple root fits and used to define the parameter ranges for the bat fit, and only then the bayesian bat fit is preformed using the BCHistogramFitter .
 
