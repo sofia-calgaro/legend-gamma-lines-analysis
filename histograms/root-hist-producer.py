@@ -49,7 +49,7 @@ for p in periods:
         # merge dataframes and add metadata information (detector name, string, position, etc.)
         data = data.merge(channel_map, on = "channel_id")
 
-        # create root file ni which histograms will be saved
+        # create root file in which histograms will be saved
         myfile = ROOT.TFile(f'{p}-{r_name}-spectra.root', 'RECREATE')
 
         print(f"Producing run {r_name}...")
@@ -76,6 +76,13 @@ for p in periods:
             # temporary dataframe
             tmp_data = pd.DataFrame()
             tmp_data = data[condition]
+            
+            # create summary histograms
+            h_bege = ROOT.TH1D('BEGe', 'BEGe', number_bins, hist_range[0], hist_range[1])
+            h_coax = ROOT.TH1D('COAX', 'COAX', number_bins, hist_range[0], hist_range[1])
+            h_icpc = ROOT.TH1D('ICPC', 'ICPC', number_bins, hist_range[0], hist_range[1])
+            h_ppc = ROOT.TH1D('PPC', 'PPC', number_bins, hist_range[0], hist_range[1])
+            h_all = ROOT.TH1D('All', 'All', number_bins, hist_range[0], hist_range[1])
 
             # loop over HPGe detectors
             for ch in tmp_data.sort_values(by = ["location", "position"]).channel_id.unique():
@@ -91,7 +98,21 @@ for p in periods:
                 # fill single channel histogram
                 for e in tmp_data[tmp_data.channel_id == ch].energy:
                     h.Fill(e)
+                    if ch_name[0] == "B": h_bege.Fill(e)
+                    if ch_name[0] == "C": h_coax.Fill(e)
+                    if ch_name[0] == "V": h_icpc.Fill(e)
+                    if ch_name[0] == "P": h_ppc.Fill(e)
+
+                # fill all channels (full array) histogram
+                for e in tmp_data.energy:
+                    h_all.Fill(e)
 
                 h.Write()
+                
+            h_bege.Write()
+            h_coax.Write()
+            h_icpc.Write()
+            h_ppc.Write()
+            h_all.Write()
         
         myfile.Close()
