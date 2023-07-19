@@ -79,15 +79,28 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
         parser = argparse.ArgumentParser(description="Evaluate exposure, run by run, detector by detector, starting from input livetimes expressed in seconds.", formatter_class=RawTextHelpFormatter)
         
         livetime_help = """\
-        Path to the input JSON file (or dictionary object) that stores the livetime in seconds for a given run and period.
+        Path to the input JSON file (or dictionary object) that stores the livetime in seconds for a given run and period and the starting key of a given run.
+        In the future, this dictionary will be fully retrievable from metadata.
         The content of the dictionary has to be of the following type:
 
         {
-            "L200-p03-r000-T%%-phy": 443740,
-            "L200-p03-r001-T%%-phy": 550760,
-            "L200-p03-r002-T%%-phy": 554660,
-            "L200-p04-r000-T%%-phy": 543560,
-            "L200-p04-r001-T%%-phy": 238000
+        "phy": {
+            "p03": {
+                "r000": {
+                    "start_key": "20230312T043356Z",
+                    "livetime_in_s": 443740
+                },
+                "r001": {
+                    "start_key": "20230318T015140Z",
+                    "livetime_in_s": 550760
+                },
+                "r002": {
+                    "start_key": "20230324T205907Z",
+                    "livetime_in_s": 554660
+                },
+                ...
+            },
+            ...
         }
 
         Note: If you use a dictionary from the command line, be sure to enclose the dictionary argument within single quotes (') 
@@ -149,7 +162,7 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
         os.remove('output.log')
 
     # get livetimes
-    livetimes = parse_json_or_dict(LT_file)
+    run_info = parse_json_or_dict(LT_file)
 
     expo_all_periods_runs = {}
 
@@ -162,22 +175,12 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
 
         # inspect each run individually
         for run in runs:
-            run = f"r{str(run).zfill(3)}"
-            logger_expo.info(f"...... {run}")
-            expo_all_periods_runs[period].update({run: {}})
+            r_run = f"r{str(run).zfill(3)}"
+            logger_expo.info(f"...... {r_run}")
+            expo_all_periods_runs[period].update({r_run: {}})
 
             # get channel map for a specific run and period
-            dataset = {
-                "experiment": "L200", 
-                "period": period,
-                "type": "phy",
-                "version": "",
-                "path": "/data2/public/prodenv/prod-blind/tmp/auto", # CHANGE THIS
-                "runs": int(run.split("r")[-1])
-            }
-
-            _, first_timestamp, _ = ldm.utils.get_query_times(dataset=dataset)
-
+            first_timestamp = run_info["phy"][period][r_run]["start_key"]
             full_map = lmeta.dataprod.config.on(
                 timestamp=first_timestamp, system="geds"
             )["analysis"]
@@ -191,8 +194,7 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
             # ===================================================
             # Get livetime from input dictionary
             # ===================================================
-            run_to_inspect = f"L200-{period}-{run}-T%-phy"
-            livetime_run = livetimes[run_to_inspect]
+            livetime_run = run_info["phy"][period][r_run]["livetime_in_s"]
 
             tot_expo = 0
             tot_expo_coax = 0
@@ -224,7 +226,7 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
                 tot_mass_ppc += mass_in_kg if "P" == det_name[0] else 0
 
                 # save exposure for a given channel
-                expo_all_periods_runs[period][run].update({det_name: ch_expo})
+                expo_all_periods_runs[period][r_run].update({det_name: ch_expo})
             
             # save summary exposure in output file
             logging.basicConfig(filename='output.log', level=logging.INFO, format='%(message)s')
