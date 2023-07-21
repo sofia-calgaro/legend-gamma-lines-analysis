@@ -11,7 +11,8 @@ hist_range = [0, 5500]
 number_bins = int((hist_range[1] - hist_range[0]) / bin_width)
 
 # path to hdf5 data files
-path = "/data1/users/krause/share/high_lvl/v02"
+version = "v02"
+path = f"/data1/users/krause/share/high_lvl/{version}"
 
 # list avalilable periods
 periods = os.listdir(path)
@@ -50,7 +51,7 @@ for p in periods:
         data = data.merge(channel_map, on = "channel_id")
 
         # create root file in which histograms will be saved
-        myfile = ROOT.TFile(f'{p}-{r_name}-spectra.root', 'RECREATE')
+        myfile = ROOT.TFile(f'{p}-{r_name}-{version}-spectra.root', 'RECREATE')
 
         print(f"Producing run {r_name}...")
 
