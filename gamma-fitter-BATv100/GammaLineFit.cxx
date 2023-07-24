@@ -149,6 +149,9 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
     // Get the marginalized posterior for the intensity parameter
     BCH1D intensity = fHistFitter->GetMarginalized(nBkgPars + 3 * i + 2);
 
+    // fix the bands for each posterior at 68.3%, 95.4%, 99.7%
+    fHistFitter->GetBCH1DdrawingOptions().SetBandType(BCH1D::kCentralInterval);
+
     double mode = intensity.GetBestFitParameters();
     double low=0, high=0;
     //intensity.GetSmallestIntervals(0.682689); // not able to convert from 0.9.4 to 1.0.0
