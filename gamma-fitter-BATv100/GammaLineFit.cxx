@@ -128,20 +128,21 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
    log << "------------------------------------------------------------"                   << "\n";
    log << std::setw(60)          << std::setfill('*') << Form(" %s *",name.Data())                   << "\n"; 
    log << "-------------- " << std::setfill(' ')                                                << "\n";
-   log << Form(" range:%27s",Form("[%.1f,%.f] keV",range.first,range.second))              << "\n";
-  for(int i=0;i<fBkgFunction->GetNpar();i++)                               // background parameters
-   log << std::setw(15) << left  << Form(" %s:",fBkgFunction->GetParName(i))
-       << std::setw(15) << right << Form("(%.1f+-%.1f)",bestFitPars[i],bestFitParErrors[i])
+   log << Form(" range: %27s",Form("[%.3f,%.3f] keV",range.first,range.second))              << "\n";
+  for(int i=0;i<fBkgFunction->GetNpar();i++) {                               // background parameters
+   log << std::setw(5) << left  << Form(" %s:",fBkgFunction->GetParName(i))
+       << std::setw(5) << right << Form("(%.3f+-%.3f)",bestFitPars[i],bestFitParErrors[i])
        << " cts" << (i>0&&backgroundType!=kStep?"/keV":"") << (i>1?Form("^%d",i):"")       << "\n";
+  }
   for(unsigned int i=0;i<lines.size();i++) {                                     // line parameters
    log << "--------------"                                                                 << "\n";
-   log << std::setw(15) << left  << Form(" %s:",fFitFunction->GetParName(nBkgPars+3*i+0))
-       << std::setw(15) << right << Form("(%.1f+-%.1f)",bestFitPars[nBkgPars+3*i+0],bestFitParErrors[nBkgPars+3*i+0])
+   log << std::setw(5) << left  << Form(" %s:",fFitFunction->GetParName(nBkgPars+3*i+0))
+       << std::setw(5) << right << Form("(%.3f+-%.3f)",bestFitPars[nBkgPars+3*i+0],bestFitParErrors[nBkgPars+3*i+0])
        << Form(" keV (nom. %.1f keV)",lines.at(i))                                         << "\n";
-   log << std::setw(15) << left  << Form(" %s:",fFitFunction->GetParName(nBkgPars+3*i+1))
-       << std::setw(15) << right << Form("(%.2f+-%.2f)",bestFitPars[nBkgPars+3*i+1],bestFitParErrors[nBkgPars+3*i+1])
+   log << std::setw(5) << left  << Form(" %s:",fFitFunction->GetParName(nBkgPars+3*i+1))
+       << std::setw(5) << right << Form("(%.3f+-%.3f)",bestFitPars[nBkgPars+3*i+1],bestFitParErrors[nBkgPars+3*i+1])
        << Form(" keV (nom. %.1f keV)",fRes->Eval(lines.at(i)))                             << "\n";
-   log << std::setw(15) << left << Form(" %s:",fFitFunction->GetParName(nBkgPars+3*i+2));
+   log << std::setprecision(5) << left << Form(" %s:",fFitFunction->GetParName(nBkgPars+3*i+2));
   //************************************************************************
     // Perform the fit and get the marginalized posterior
     fHistFitter->MarginalizeAll();
@@ -155,15 +156,17 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
     double mode = intensity.GetBestFitParameters();
     double low=0, high=0;
     //intensity.GetSmallestIntervals(0.682689); // not able to convert from 0.9.4 to 1.0.0
+    low = intensity.GetQuantile(0.16); // put better numbers
+    high = intensity.GetQuantile(0.84);
 
   //************************************************************************
     if(low>0) {                                                                        // intensity
-   log << Form("(%*.1f [%*.1f,%*.1f])",5,mode,5,low,5,high) << " cts (mode [68%])"         << "\n";
+   log << std::setw(5) << Form("(%*.3f [%*.3f,%*.3f])",5,mode,5,low,5,high) << " cts (mode [68%])"         << "\n";
     } else                                                                           // upper limit
-   log << Form(" <%*.1f",5,intensity.GetQuantile(0.90)) << " cts (90%)"                   << "\n";
+   log << std::setw(5) << Form(" <%*.3f",5,intensity.GetQuantile(0.90)) << " cts (90%)"                   << "\n";
    log << "-------------- " << std::setfill(' ')                                                << "\n";
   }                                                                                      // p-value
-   log << " p-value:      " << std::setw(15) << fHistFitter->GetPValue()                        << "\n";    
+   log << " p-value:      " << std::setprecision(5) << fHistFitter->GetPValue()                        << "\n";    
    log << "------------------------------------------------------------"                   << "\n";
   //-----------------------------------------------------------------------------------------------
   log.close();
@@ -183,7 +186,7 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
   //! provide pdf file with posterior distributions
   fHistFitter->PrintAllMarginalized(Form("%s/%s.%s.pdf",fOutputDir.Data(),GetName(),name.Data()), 2,2);
   //! provide pdf file with prior+posterior distributions
-  fHistFitter->PrintKnowledgeUpdatePlots(Form("%s/%s.%s.pdf",fOutputDir.Data(),GetName(),name.Data()), 2,2);
+  fHistFitter->PrintKnowledgeUpdatePlots(Form("%s/%s.priorsANDposteriors.%s.pdf",fOutputDir.Data(),GetName(),name.Data()), 2,2);
   fHistFitter->PrintSummary();
   fHistFitter->WriteMarginalizedDistributions(Form("%s/%s_marginalized.root",fOutputDir.Data(),GetName()), "RECREATE");
 
