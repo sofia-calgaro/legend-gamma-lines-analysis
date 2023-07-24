@@ -51,7 +51,7 @@ make
 ```
 to generate an executable, you can later run as
 ``` bash
-./runGammaAnalaysis
+./runGammaAnalysis
 ```
 
-Everything contained in the main function of "runGammaAnalaysis.cxx" will be executed!
+Everything contained in the main function of "runGammaAnalysis.cxx" will be executed!
