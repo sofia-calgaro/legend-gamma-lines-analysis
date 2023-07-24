@@ -181,7 +181,11 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
   file->Close();
 
   //! provide pdf file with posterior distributions
-  fHistFitter->PrintAllMarginalized(Form("%s/%s.%s.pdf",fOutputDir.Data(),GetName(),name.Data()));
+  fHistFitter->PrintAllMarginalized(Form("%s/%s.%s.pdf",fOutputDir.Data(),GetName(),name.Data()), 2,2);
+  //! provide pdf file with prior+posterior distributions
+  fHistFitter->PrintKnowledgeUpdatePlots(Form("%s/%s.%s.pdf",fOutputDir.Data(),GetName(),name.Data()), 2,2);
+  fHistFitter->PrintSummary();
+  fHistFitter->WriteMarginalizedDistributions(Form("%s/%s_marginalized.root",fOutputDir.Data(),GetName()), "RECREATE");
 
   return 0;
 }
