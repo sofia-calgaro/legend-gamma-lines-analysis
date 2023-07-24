@@ -1,0 +1,13 @@
+{
+    "output": "/data1/users/biancacc/gamma-lines/legend-gamma-lines-analysis/output",
+    "comments": ["The user can set the list of periods, runs and detector types ('single','all','BEGe', 'ICPC', 'COAX','PPC' )",
+                "If they want to study only some detector then set a list [] in the 'detectors' key",
+                 "The user can choose the cut to apply among ['raw',  'LAr AC', 'LAr C']"],
+    "dataset": {
+      "periods": ["p03"],
+      "runs": ["r000","r001"],
+      "detectors": "COAX" ,
+      "version": "v01.06",
+      "cut": "raw"
+    }
+}  
