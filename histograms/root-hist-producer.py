@@ -18,6 +18,11 @@ path = f"/data1/users/krause/share/high_lvl/{version}"
 periods = os.listdir(path)
 print(f"Available periods: {periods}")
 
+# create output folder (if not already existing)
+folder_name = "root_files"
+if not os.path.exists(folder_name):
+    os.mkdir(folder_name)
+
 for p in periods:
     
     # list available runs
@@ -51,7 +56,7 @@ for p in periods:
         data = data.merge(channel_map, on = "channel_id")
 
         # create root file in which histograms will be saved
-        myfile = ROOT.TFile(f'{p}-{r_name}-{version}-spectra.root', 'RECREATE')
+        myfile = ROOT.TFile(f'root_files/{p}-{r_name}-{version}-spectra.root', 'RECREATE')
 
         print(f"Producing run {r_name}...")
 
