@@ -238,8 +238,11 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
 
     # save the single-channel exposure dictionary to a JSON file
     output_json_file = f'exposure_in_kg_{time_unit}'
-    for st in status:
-        output_json_file += f"_{st}" 
+    if isinstance(status,list):
+        for st in status:
+            output_json_file += f"_{st}" 
+    if isinstance(status, str):
+        output_json_file += f"_{status}" 
     output_json_file += '.json'
     with open(output_json_file, 'w') as json_file:
         json.dump(expo_all_periods_runs, json_file, indent=4)

@@ -1,29 +1,34 @@
-import os, json
+import os, json, sys
 import numpy as np
+sys.path.insert(1, './')
+import main
 
 import legend_data_monitor as ldm
 from legendmeta import LegendMetadata
 
-#periods=["p03","p04"]
-#runs=["r000"]#,"r001"]
-#detectors= "all" #{[],"all","BEGe", "ICPC", "Coax"}
-#version='v01.06'
 operation ='ecal'
 par ='cuspEmax_ctc_cal'
 pars = 'eres_pars'
 
-def get_resolution(version, periods, runs, detectors):
+def get_resolution(config_file, detectors):
+    # retrieve useful info
+    gamma_src_code, info, expo = main.return_config_info(config_file)
 
-    path = '/data1/users/biancacc/gamma-lines/legend-gamma-lines-analysis/'
-    file_exposure = f'{path}livetime_and_exposure/exposure_in_kg_yr_on_ac.json'
+    file_exposure = f'exposure_in_kg_{expo[0]}'
+    if isinstance(expo[2],list):
+        for st in expo[2]:
+            file_exposure += f"_{st}" 
+    if isinstance(expo[2], str):
+        file_exposure += f"_{expo[2]}" 
+    file_exposure += '.json'
     with open(file_exposure, "r") as file:
         exposure_det = json.load(file)
     exposure_list = []
     resolution_list = []
 
-    for p in periods:
+    for p in info[1]:
         runs_avail = exposure_det[p].keys()
-        for r in runs:
+        for r in info[2]:
             if not r in runs_avail:
                 continue 
 
@@ -32,9 +37,9 @@ def get_resolution(version, periods, runs, detectors):
                 "experiment": "L200",
                 "period": p,
                 "type": "phy",
-                "version": "",
-                "path": "/data2/public/prodenv/prod-blind/tmp/auto",
-                "runs": int(r[1:]),
+                "version": info[4],
+                "path": info[0],
+                "runs": int(r.split("r")[-1]),
             }
             geds = ldm.Subsystem("geds", dataset=dataset)
             channel_map = geds.channel_map
@@ -66,9 +71,9 @@ def get_resolution(version, periods, runs, detectors):
                 #get resolution
                 c=channel_map.channel[channel_map.name==d]
                 c="ch"+str(c.values[0])
-                path_resolutions = f'/data2/public/prodenv/prod-blind/ref/{version}/generated/par/hit/cal/{p}/{r}/'
+                path_resolutions = os.path.join(info[0], info[4], "generated/par/hit/cal", p, r)
                 file= [file for file in os.listdir(path_resolutions) if file.endswith("results.json")]
-                with open(path_resolutions+file[0], "r") as file:
+                with open(os.path.join(path_resolutions, file[0]), "r") as file:
                     resolution_det = json.load(file)
                     res_det = resolution_det[c][operation][par][pars]
                 resolution_list.append(res_det)
@@ -87,4 +92,3 @@ def get_resolution(version, periods, runs, detectors):
 
 def weighted_average(pars, weights):
     return sum(weights * pars) / sum(weights)            
-

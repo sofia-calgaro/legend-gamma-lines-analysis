@@ -1,13 +1,23 @@
 {
-    "output": "/data1/users/biancacc/gamma-lines/legend-gamma-lines-analysis/output",
-    "comments": ["The user can set the list of periods, runs and detector types ('single','all','BEGe', 'ICPC', 'COAX','PPC' )",
-                "If they want to study only some detector then set a list [] in the 'detectors' key",
-                 "The user can choose the cut to apply among ['raw',  'LAr AC', 'LAr C']"],
+    "gamma-src-code": "/lfs/l1/legend/users/calgaro/taup/legend-gamma-lines-analysis/",
+    "output": "/lfs/l1/legend/users/calgaro/taup/legend-gamma-lines-analysis/output/",
     "dataset": {
-      "periods": ["p03"],
-      "runs": ["r000","r001"],
-      "detectors": "COAX" ,
+      "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
       "version": "v01.06",
+      "comments": ["The user can set the list of periods, runs and detector types ('single','all','BEGe', 'ICPC', 'COAX','PPC' )",
+                "If they want to study only some detector then set a list [] in the 'detectors' key",
+                "The user can choose the cut to apply among ['raw',  'LAr AC', 'LAr C']"], 
+      "periods": ["p03"],
+      "runs": ["r000"],
+      "detectors": "BEGe" ,
       "cut": "raw"
+    },
+    "exposure": {
+      "comments": ["The user can set the time unit of exposure evaluation ('sec', 'min', 'hour', 'day', 'yr')",
+              "Set path to the input JSON file that stores the livetime in seconds for a given run and period and the starting key of a given run.",
+              "The user can choose the status of detectors to include in the exposure evaluation among 'on', 'off', 'ac' (other?) or a combination of them."], 
+      "time-unit": "yr",
+      "run-info-path": "/lfs/l1/legend/users/calgaro/taup/legend-gamma-lines-analysis/livetime_and_exposure/runinfo.json",
+      "status": "on"
     }
 }  
