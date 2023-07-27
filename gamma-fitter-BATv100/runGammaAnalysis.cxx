@@ -8,6 +8,14 @@
 #include <TF1.h>
 #include <TParameter.h>
 
+//C++
+#include <cstdio>
+#include <cstdlib>
+#include <string>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+
 
 
 void GammaAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir )
@@ -55,9 +63,12 @@ int main()
   TH1D* hEnrBEGeRaw = (TH1D*)file->Get("Spectrum");
   TParameter<double>* a_res = (TParameter<double>*)file->Get("a_res");
   TParameter<double>* b_res = (TParameter<double>*)file->Get("b_res");
-  TF1* begeRes = new TF1("res",Form("2.35482*sqrt(%d+%d*x)",a_res, b_res));
-  //TF1* begeRes = new TF1("bege","2.35482*sqrt(0.7066704786968127+0.0004285840596287735*x)");
-  GammaAnalysis("EnrBEGeRaw" , hEnrBEGeRaw, begeRes, outputDir);
+  double a_res_double = (double) a_res->GetVal();
+  double b_res_double = (double) b_res->GetVal();
+  TF1* f_res = new TF1("f_res","sqrt([0]+[1]*x)");
+  f_res->SetParameter(0,a_res_double);
+  f_res->SetParameter(1,b_res_double);
+  GammaAnalysis("EnrBEGeRaw" , hEnrBEGeRaw, f_res, outputDir);
   
 }
 
