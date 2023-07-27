@@ -82,24 +82,35 @@ def main():
     #check periods and runs set by the user
     list_avail = []
 
-    result_dict = {p: [i for i in range(len(info[2]) * 2)] for p in info[1]}
-    exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2])
-    periods_avail = list(exposure_det.keys())
+    with open(expo[1], "r") as file:
+        run_info = json.load(file)
+    periods_avail = list(run_info["phy"].keys())
     for p in periods_avail:
-        runs_avail = list(exposure_det[p].keys())
+        runs_avail = list(run_info["phy"][p].keys())
         list_avail.append((p,runs_avail))
+
+    result_dict = {}
 
     for p in info[1]:
         if not p in np.take(list_avail,0,1):
             print(f"{p} is not an available period")
-            return    
+            return
         tot_idx=len(periods_avail)
         idx=[idx for idx in range(0,tot_idx) if list_avail[idx][0]==p][0]
+        run_avail= []
         for r in info[2]:
             if not r in list_avail[idx][1]:
                 print(f"{p} {r} is not an available run")
-                return       
+                #return
+            else:
+                run_avail.append(r)
+        result_dict[p] = run_avail   
 
+    exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2])
+    periods_avail = list(exposure_det.keys())
+
+    for p in result_dict.keys():
+        for r in result_dict[p]:
             # get all the detector names
             dataset = {
                 "experiment": "L200",
