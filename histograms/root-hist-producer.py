@@ -11,7 +11,7 @@ hist_range = [0, 5500]
 number_bins = int((hist_range[1] - hist_range[0]) / bin_width)
 
 # path to hdf5 data files
-version = "v02"
+version = "v01_06"
 path = f"/data1/users/krause/share/high_lvl/{version}"
 
 # list avalilable periods
