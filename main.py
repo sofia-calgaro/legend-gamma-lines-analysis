@@ -17,6 +17,8 @@ def return_config_info(config_file):
         config = json.load(file)
     # src path
     gamma_src_code = config["gamma-src-code"]
+    # output path
+    output = config["output"]
     # general info
     prodenv = config["dataset"]["prodenv"]
     periods = config["dataset"]["periods"]
@@ -31,7 +33,7 @@ def return_config_info(config_file):
     status = config["exposure"]["status"]
     expo = [exposure_time_unit, run_info_path, status]
 
-    return gamma_src_code, info, expo
+    return gamma_src_code, output, info, expo
         
 def get_histo(gamma_src_code, periods, runs, detectors, cut):
     """Combine single histograms."""
@@ -45,7 +47,7 @@ def get_histo(gamma_src_code, periods, runs, detectors, cut):
             file_root.Close()
             histo_list.push_back(histo)  
     histo_tot = histo_list.at(0)
-    histo_tot.SetName("Sum")
+    histo_tot.SetName("Spectrum")
     for i in range(1,histo_list.size()):
         histo_tot.Add(histo_list.at(i))
     histo_ = histo_tot.Clone()
@@ -60,8 +62,9 @@ def main():
     config_file = args.config
     print(f"You are going to inspect config={config_file}")
 
+
     # ...reading the config file...
-    gamma_src_code, info, expo = return_config_info(config_file)
+    gamma_src_code, output, info, expo = return_config_info(config_file)
     print("...inspected!")
     
     #check version set by the user
@@ -114,13 +117,22 @@ def main():
     if info[3] == "single":
         for d in all_detectors:
             d=[d]
-            resolution = get_resolution(config_file, d)
+            outputdir = ROOT.TNamed("outputDir",output)
             histo  = get_histo(gamma_src_code, info[1], info[2], d, info[5])
-            #save
-            tmp_file_name = './tmp/tmp-spectra.root'
+            resolution = get_resolution(config_file, d)
+            a_res = ROOT.TParameter("double")( "a_res", resolution[0] )
+            b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
+            #store in tmp files
+            tmp_directory = './tmp'
+            if not os.path.exists(tmp_directory):
+                os.makedirs(tmp_directory)
+            tmp_file_name = f'{tmp_directory}/tmp-spectra.root'
             tmp_file = ROOT.TFile(tmp_file_name, 'RECREATE')
+            outputDir.Write()
             histo.Write()
-            myfile.Close()
+            a_res.Write()
+            b_res.Write()
+            tmp_file.Close()
             #bashCommand = "make"
             #bashCommand2 = f"./runGammaAnalysis {tmp_file_name} {resolution[0]} {resolution[1]}"
             #os.system(bashCommand)
@@ -128,17 +140,27 @@ def main():
         return
             
             
-    else:      
-        resolution = get_resolution(config_file, info[3])
+    else:
+        outputDir = ROOT.TNamed("outputDir",output)
         histo =  get_histo(gamma_src_code, info[1], info[2], info[3], info[5])
-        tmp_file_name = './tmp/tmp-spectra.root'
+        resolution = get_resolution(config_file, info[3])
+        a_res = ROOT.TParameter("double")( "a_res", resolution[0] )
+        b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
+        #store in tmp files
+        tmp_directory = './tmp'
+        if not os.path.exists(tmp_directory):
+            os.makedirs(tmp_directory)
+        tmp_file_name = f'{tmp_directory}/tmp-spectra.root'
         tmp_file = ROOT.TFile(tmp_file_name, 'RECREATE')
+        outputDir.Write()
         histo.Write()
+        a_res.Write()
+        b_res.Write()
         tmp_file.Close()
-        bashCommand = "cd gamma-fitter-BATv100 && make"
-        bashCommand2 = f"cd gamma-fitter-BATv100 && ./runGammaAnalysis {gamma_src_code} {info} {resolution[0]} {resolution[1]}"
+        #bashCommand = "cd gamma-fitter-BATv100 && make"
+        #bashCommand2 = f"cd gamma-fitter-BATv100 && ./runGammaAnalysis {gamma_src_code} {info} {resolution[0]} {resolution[1]}"
         #os.system(bashCommand)
-        #os.system(bashCommand2)
+        #os.system(bashCommand2) 
         return
 
     print("EOF")

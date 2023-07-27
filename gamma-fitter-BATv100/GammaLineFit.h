@@ -32,12 +32,12 @@ class GammaLineFit : public TNamed
 {
 public:
     //! Constructors
-    GammaLineFit(TString name, TH1D* hist, TF1* res, TString outputDir = "output")
+    GammaLineFit(TString name, TH1D* hist, TF1* res, TString outputDir)
         : TNamed(name.Data(), ""), fHist(hist), fRes(res), fOutputDir(outputDir), fFitPerformed(false)
     {
         gSystem->Exec(Form("mkdir -p %s", outputDir.Data()));
     };
-    GammaLineFit(TString name, TH1D* hist, double res, TString outputDir = "output")
+    GammaLineFit(TString name, TH1D* hist, double res, TString outputDir)
         : GammaLineFit(name, hist, new TF1("res", Form("%f", res), 0, 10000), outputDir){};
     ~GammaLineFit()
     {

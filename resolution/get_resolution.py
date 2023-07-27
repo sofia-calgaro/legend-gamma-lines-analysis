@@ -12,7 +12,7 @@ pars = 'eres_pars'
 
 def get_resolution(config_file, detectors):
     # retrieve useful info
-    gamma_src_code, info, expo = main.return_config_info(config_file)
+    gamma_src_code, output, info, expo = main.return_config_info(config_file)
 
     file_exposure = f'exposure_in_kg_{expo[0]}'
     if isinstance(expo[2],list):

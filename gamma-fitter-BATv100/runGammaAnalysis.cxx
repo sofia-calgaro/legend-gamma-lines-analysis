@@ -6,13 +6,16 @@
 #include <TMath.h>
 #include <TString.h>
 #include <TF1.h>
+#include <TParameter.h>
 
 
-void GammaAnalysis( TString name, TH1D* histo, TF1* res )
+
+void GammaAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir )
 {
-  std::GammaLineFit fitter(name,histo,res);
+  std::GammaLineFit fitter(name,histo,res, outputDir);
   //misc
   fitter.Fit("K42_1525", {1524.7}, {1505.,1545.}, std::kLinear, 0.5, 0.2, BCEngineMCMC::kMedium); // 18.1%, kStep?, pos priot 0.2 -> 0.5
+  /*
   fitter.Fit("K40_1461",    {1460.8}, {1441.,1481.}, std::kStep,   0.2, 0.2, BCEngineMCMC::kMedium); // 10.7%, kStep?
   fitter.Fit("Co60_1332",   {1332.5}, {1313.,1353.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); //100.0%
   fitter.Fit("Co60_1173",   {1173.2}, {1153.,1193.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); // 99.9%
@@ -37,16 +40,25 @@ void GammaAnalysis( TString name, TH1D* histo, TF1* res )
   fitter.Fit("e+e-_Kr85_514",      { 511.0, 514.0}, { 491., 534.}, std::kLinear,    0.2, 0.2, BCEngineMCMC::kMedium); // 0.4%
   fitter.Fit("Pb212_239_Pb214_242",{ 238.6, 242.0}, { 218., 262.}, std::kQuadratic, 0.2, 0.2, BCEngineMCMC::kMedium); // 43.6%,  7.3%
   fitter.Fit("Ac228_338_Pb214_352",{ 338.3, 351.9}, { 318., 372.}, std::kQuadratic, 0.2, 0.2, BCEngineMCMC::kMedium); // 11.3%, 35.6%
+  */
 }
+
 
 
 int main() 
 {
-  TFile *file = TFile::Open("p03-r000-v02-spectra.root", "READ");
-  TDirectory *rawDir = (TDirectory*)file->Get("raw");
-  TH1D* hEnrBEGeRaw = (TH1D*)rawDir->Get("BEGe");
-  TF1* begeRes = new TF1("bege","2.35482*sqrt(0.7066704786968127+0.0004285840596287735*x)");
-  GammaAnalysis("EnrBEGeRaw" , hEnrBEGeRaw, begeRes);//(TF1*)resFile->Get("bege"));
+
+  TString histo_file = "./tmp/tmp-spectra.root";
+  TFile *file = TFile::Open(histo_file, "READ");
+  TNamed *output = (TNamed*)file->Get("outputDir");
+  TString outputDir = (TString)output->GetTitle();
+  TH1D* hEnrBEGeRaw = (TH1D*)file->Get("Spectrum");
+  TParameter<double>* a_res = (TParameter<double>*)file->Get("a_res");
+  TParameter<double>* b_res = (TParameter<double>*)file->Get("b_res");
+  TF1* begeRes = new TF1("res",Form("2.35482*sqrt(%d+%d*x)",a_res, b_res));
+  //TF1* begeRes = new TF1("bege","2.35482*sqrt(0.7066704786968127+0.0004285840596287735*x)");
+  GammaAnalysis("EnrBEGeRaw" , hEnrBEGeRaw, begeRes, outputDir);
+  
 }
 
 
