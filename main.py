@@ -128,6 +128,7 @@ def main():
     if info[3] == "single":
         for d in all_detectors:
             d=[d]
+            output = output + "/single/" + d
             outputdir = ROOT.TNamed("outputDir",output)
             histo  = get_histo(gamma_src_code, result_dict, d, info[5])
             resolution = get_resolution(config_file, d)
@@ -152,6 +153,7 @@ def main():
             
             
     else:
+        output = output + "/" + info[3]
         outputDir = ROOT.TNamed("outputDir",output)
         histo =  get_histo(gamma_src_code, result_dict, info[3], info[5])
         resolution = get_resolution(config_file, info[3])

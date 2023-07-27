@@ -1,6 +1,6 @@
 {
     "gamma-src-code": "/lfs/l1/legend/users/bianca/gamma-analysis_TAUP/legend-gamma-lines-analysis",
-    "output": "/lfs/l1/legend/users/bianca/gamma-analysis_TAUP/legend-gamma-lines-analysisoutput/",
+    "output": "/lfs/l1/legend/users/bianca/gamma-analysis_TAUP/legend-gamma-lines-analysis/output/",
     "dataset": {
       "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
       "version": "v01.06",
