@@ -84,8 +84,10 @@ def main():
     # get config file as an input
     parser = argparse.ArgumentParser(description="Main code for gamma-analysis.")
     parser.add_argument("--config", help="Path to JSON config file.")
+    parser.add_argument("--det", help="Path to JSON config file.")
     args = parser.parse_args()
     config_file = args.config
+    det = args.det
     logger_expo.debug(f"You are going to inspect config={config_file}")
 
 
@@ -140,105 +142,53 @@ def main():
 
     #create json file with the exposure
     exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2])
-
-    for p in result_dict.keys():
-        for r in result_dict[p]:
-            # get all the detector names
-            dataset = {
-                "experiment": "L200",
-                "period": p,
-                "type": "phy",
-                "version": info[4],
-                "path": info[0],
-                "runs": int(r.split("r")[-1]),
-            }
-            geds = ldm.Subsystem("geds", dataset=dataset)
-            channel_map = geds.channel_map
-            # remove off detectors
-            channel_map = channel_map[channel_map.status != "off"]
-            all_detectors = list(channel_map.name)
-        
+      
         
     if info[3] == "single":
-        for p in result_dict.keys():
-            for r in result_dict[p]:
-                # get all the detector names
-                dataset = {
-                    "experiment": "L200",
-                    "period": p,
-                    "type": "phy",
-                    "version": info[4],
-                    "path": info[0],
-                    "runs": int(r.split("r")[-1]),
-                }
-                geds = ldm.Subsystem("geds", dataset=dataset)
-                channel_map = geds.channel_map
-                channel_map = channel_map[channel_map.status != "off"]
-                all_detectors = list(channel_map.name)
-                all_strings = list(channel_map.location)
-                all_positions = list(channel_map.position)
-        
-        for d,s,p in zip(all_detectors, all_strings, all_positions):
-            print(d,s,p)
-            output = output + "/single/" + d
-            outputDir = ROOT.TNamed("outputDir",output)
-            histo_name = "s"+str(s)+"-p"+str(p)+"-"+d
-            histo  = get_histo(gamma_src_code, result_dict, histo_name, info[5])
-            d=[d]
-            resolution = get_resolution(config_file, d)
-            a_res = ROOT.TParameter("double")( "a_res", resolution[0] )
-            b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
-            #store in tmp files
-            tmp_directory = './tmp'
-            if not os.path.exists(tmp_directory):
-                os.makedirs(tmp_directory)
-            tmp_file_name = f'{tmp_directory}/tmp-spectra.root'
-            tmp_file = ROOT.TFile(tmp_file_name, 'RECREATE')
-            outputDir.Write()
-            histo.Write()
-            a_res.Write()
-            b_res.Write()
-            tmp_file.Close()
-        return
-            
-            
+        histo_name = det
+        det_name = det[-7:]
+        output = output + "/single/" + det_name       
     else:
-        output = output + "/" + info[3]
-        outputDir = ROOT.TNamed("outputDir",output)
-        histo =  get_histo(gamma_src_code, result_dict, info[3], info[5])
-        resolution = get_resolution(config_file, info[3])
-        a_res = ROOT.TParameter("double")( "a_res", resolution[0] )
-        b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
-        #store resolution in json file
-        resolution_file="resolution_p3p4.json"
-        try:
-            with open(resolution_file, 'r') as fp:
-                resolution_dict = json.load(fp)
-            if not info[5] in resolution_dict:
-                resolution_dict[info[5]]={}
-            resolution_dict[info[5]][info[3]] = resolution
-            with open (resolution_file, "w") as f:
-                json.dump(resolution_dict, f, indent=4)
+        histo_name = info[3]
+        det_name = info[3]
+        output = output + "/" + det_name
+    
+    outputDir = ROOT.TNamed("outputDir",output)        
+    histo  = get_histo(gamma_src_code, result_dict, histo_name, info[5])
+    resolution = get_resolution(config_file, det_name)
+    a_res = ROOT.TParameter("double")( "a_res", resolution[0] )
+    b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
+    
+    #store resolution in json file
+    resolution_file="resolution_p3p4.json"
+    try:
+        with open(resolution_file, 'r') as fp:
+            resolution_dict = json.load(fp)
+        if not info[5] in resolution_dict:
+            resolution_dict[info[5]]={}
+        resolution_dict[info[5]][det_name] = resolution
+        with open (resolution_file, "w") as f:
+            json.dump(resolution_dict, f, indent=4)
 
-        except FileNotFoundError:
-            logger_expo.debug('Summary resolution file not found, will create a new one.')
-            resolution_dict = {info[5]:{info[3]: resolution}}
-            with open(resolution_file, 'w') as fp:
-                json.dump(resolution_dict, fp, indent=4)
-        logger_expo.debug(f'Resolution parameters are stored here: {resolution_file}')
+    except FileNotFoundError:
+        logger_expo.debug('Summary resolution file not found, will create a new one.')
+        resolution_dict = {info[5]:{det_name: resolution}}
+        with open(resolution_file, 'w') as fp:
+            json.dump(resolution_dict, fp, indent=4)
+    logger_expo.debug(f'Resolution parameters are stored here: {resolution_file}')
 
-        #store in tmp files
-        tmp_directory = './tmp'
-        if not os.path.exists(tmp_directory):
-            os.makedirs(tmp_directory)
-        tmp_file_name = f'{tmp_directory}/tmp-spectra.root'
-        tmp_file = ROOT.TFile(tmp_file_name, 'RECREATE')
-        outputDir.Write()
-        histo.Write()
-        a_res.Write()
-        b_res.Write()
-        tmp_file.Close()
-        return
+    #store in tmp files
+    tmp_directory = './tmp'
+    if not os.path.exists(tmp_directory):
+        os.makedirs(tmp_directory)
+    tmp_file_name = f'{tmp_directory}/tmp-spectra.root'
+    tmp_file = ROOT.TFile(tmp_file_name, 'RECREATE')
+    outputDir.Write()
+    histo.Write()
+    a_res.Write()
+    b_res.Write()
+    tmp_file.Close()
+
 
     logger_expo.debug("EOF")
 
