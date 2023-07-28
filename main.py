@@ -138,31 +138,34 @@ def main():
                 run_avail.append(r)
         result_dict[p] = run_avail   
 
+    #create json file with the exposure
     exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2])
-    periods_avail = list(exposure_det.keys())
 
-    for p in result_dict.keys():
-        for r in result_dict[p]:
-            # get all the detector names
-            dataset = {
-                "experiment": "L200",
-                "period": p,
-                "type": "phy",
-                "version": info[4],
-                "path": info[0],
-                "runs": int(r.split("r")[-1]),
-            }
-            geds = ldm.Subsystem("geds", dataset=dataset)
-            channel_map = geds.channel_map
-            all_detectors = list(channel_map.name)
-        
-        
     if info[3] == "single":
-        for d in all_detectors:
-            d=[d]
+        for p in result_dict.keys():
+            for r in result_dict[p]:
+                # get all the detector names
+                dataset = {
+                    "experiment": "L200",
+                    "period": p,
+                    "type": "phy",
+                    "version": info[4],
+                    "path": info[0],
+                    "runs": int(r.split("r")[-1]),
+                }
+                geds = ldm.Subsystem("geds", dataset=dataset)
+                channel_map = geds.channel_map
+                all_detectors = list(channel_map.name)
+                all_strings = list(channel_map.location)
+                all_positions = list(channel_map.position)
+        
+        for d,s,p in zip(all_detectors, all_strings, all_positions):
+            print(d,s,p)
             output = output + "/single/" + d
-            outputdir = ROOT.TNamed("outputDir",output)
-            histo  = get_histo(gamma_src_code, result_dict, d, info[5])
+            outputDir = ROOT.TNamed("outputDir",output)
+            histo_name = "s"+str(s)+"-p"+str(p)+"-"+d
+            histo  = get_histo(gamma_src_code, result_dict, histo_name, info[5])
+            d=[d]
             resolution = get_resolution(config_file, d)
             a_res = ROOT.TParameter("double")( "a_res", resolution[0] )
             b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
