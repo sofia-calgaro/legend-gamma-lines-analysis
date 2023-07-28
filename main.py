@@ -111,6 +111,8 @@ def main():
             }
             geds = ldm.Subsystem("geds", dataset=dataset)
             channel_map = geds.channel_map
+            # remove off detectors
+            channel_map = channel_map[channel_map.status != "off"]
             all_detectors = list(channel_map.name)
         
         
