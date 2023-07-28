@@ -4,12 +4,38 @@ import numpy as np
 import sys
 import os
 import ROOT
+import logging
+import legend_data_monitor as ldm
 sys.path.insert(0, './resolution')
 from get_resolution import *
 sys.path.insert(1, './livetime_and_exposure')
 import get_exposure
 
 np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning) 
+
+# -----------------------------------------------------------------------------------------
+# LOGGER SETTINGS 
+logger_expo = logging.getLogger(__name__)
+logger_expo.setLevel(logging.DEBUG)
+
+# create a StreamHandler to display log messages on the terminal
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.DEBUG)
+
+# set the desired format for the log messages
+log_formatter = logging.Formatter('%(asctime)s %(message)s')
+stream_handler.setFormatter(log_formatter)
+
+# add the StreamHandler to the logger_expo logger
+logger_expo.addHandler(stream_handler)
+
+# set the log levels for ldm.utils.logger and ldm.utils.stream_handler to shut up info from ldm code
+ldm.utils.logger.setLevel(logging.WARNING) 
+ldm.utils.stream_handler.setLevel(logging.WARNING)
+# -----------------------------------------------------------------------------------------
+
+
+
 
 def return_config_info(config_file):
     # ...reading the config file...
@@ -60,23 +86,29 @@ def main():
     parser.add_argument("--config", help="Path to JSON config file.")
     args = parser.parse_args()
     config_file = args.config
-    print(f"You are going to inspect config={config_file}")
+    logger_expo.debug(f"You are going to inspect config={config_file}")
 
 
     # ...reading the config file...
     gamma_src_code, output, info, expo = return_config_info(config_file)
-    print("...inspected!")
+    logger_expo.debug("...inspected!")
     
     #check version set by the user
     versions_avail = ["v01.05", "v01.06"]
     if not info[4] in versions_avail:
-        print(f"{info[4]} is not an available version. Try among '[v01.05, v01.06]'")
+        logger_expo.debug(f"{info[4]} is not an available version. Try among '[v01.05, v01.06]'")
         return
         
     #check cut set by the user
     cuts_avail = ['raw',  'LAr AC', 'LAr C']
     if not info[5] in cuts_avail:
-        print(f"{info[5]} is not an available cut. Try among '['raw',  'LAr AC', 'LAr C']'")
+        logger_expo.debug(f"{info[5]} is not an available cut. Try among '['raw',  'LAr AC', 'LAr C']'")
+        return
+
+    #check detector set by the user
+    detectors_avail = ['all',  'single', 'BEGe', 'COAX', 'ICPC', 'PPC']
+    if isinstance(info[3],str) and  not info[3] in detectors_avail:
+        logger_expo.debug(f"{info[3]} is not an available detector. Try among '['all',  'single', 'BEGe', 'COAX', 'ICPC', 'PPC']'")
         return
         
     #check periods and runs set by the user
@@ -93,14 +125,14 @@ def main():
 
     for p in info[1]:
         if not p in np.take(list_avail,0,1):
-            print(f"{p} is not an available period")
+            logger_expo.debug(f"{p} is not an available period")
             return
         tot_idx=len(periods_avail)
         idx=[idx for idx in range(0,tot_idx) if list_avail[idx][0]==p][0]
         run_avail= []
         for r in info[2]:
             if not r in list_avail[idx][1]:
-                print(f"{p} {r} is not an available run")
+                logger_expo.debug(f"{p} {r} is not an available run")
                 #return
             else:
                 run_avail.append(r)
@@ -145,10 +177,6 @@ def main():
             a_res.Write()
             b_res.Write()
             tmp_file.Close()
-            #bashCommand = "make"
-            #bashCommand2 = f"./runGammaAnalysis {tmp_file_name} {resolution[0]} {resolution[1]}"
-            #os.system(bashCommand)
-            #os.system(bashCommand2)
         return
             
             
@@ -159,6 +187,24 @@ def main():
         resolution = get_resolution(config_file, info[3])
         a_res = ROOT.TParameter("double")( "a_res", resolution[0] )
         b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
+        #store resolution in json file
+        resolution_file="resolution_p3p4.json"
+        try:
+            with open(resolution_file, 'r') as fp:
+                resolution_dict = json.load(fp)
+            if not info[5] in resolution_dict:
+                resolution_dict[info[5]]={}
+            resolution_dict[info[5]][info[3]] = resolution
+            with open (resolution_file, "w") as f:
+                json.dump(resolution_dict, f, indent=4)
+
+        except FileNotFoundError:
+            logger_expo.debug('Summary resolution file not found, will create a new one.')
+            resolution_dict = {info[5]:{info[3]: resolution}}
+            with open(resolution_file, 'w') as fp:
+                json.dump(resolution_dict, fp, indent=4)
+        logger_expo.debug(f'Resolution parameters are stored here: {resolution_file}')
+
         #store in tmp files
         tmp_directory = './tmp'
         if not os.path.exists(tmp_directory):
@@ -170,13 +216,9 @@ def main():
         a_res.Write()
         b_res.Write()
         tmp_file.Close()
-        #bashCommand = "cd gamma-fitter-BATv100 && make"
-        #bashCommand2 = f"cd gamma-fitter-BATv100 && ./runGammaAnalysis {gamma_src_code} {info} {resolution[0]} {resolution[1]}"
-        #os.system(bashCommand)
-        #os.system(bashCommand2) 
         return
 
-    print("EOF")
+    logger_expo.debug("EOF")
 
 if __name__=="__main__":
     main()
