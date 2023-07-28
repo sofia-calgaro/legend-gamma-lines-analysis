@@ -79,8 +79,11 @@ def get_resolution(config_file, detectors):
                 resolution_list.append(res_det)
 
     #get the lists of the two resolution parameters
-    a = np.take(resolution_list,0,1)
-    b = np.take(resolution_list,1,1)
+    if resolution_list != []:
+        a = np.take(resolution_list,0,1)
+        b = np.take(resolution_list,1,1)
+    else:
+        return [None, None]
 
     #get the average sum of the res parameters 
     par_A = weighted_average(a, exposure_list)

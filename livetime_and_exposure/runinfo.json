@@ -3,11 +3,11 @@
         "p03": {
             "r000": {
                 "start_key": "20230312T043356Z",
-                "livetime_in_s": 443740
+                "livetime_in_s": 443740 
             },
             "r001": {
                 "start_key": "20230318T015140Z",
-                "livetime_in_s": 550760
+                "livetime_in_s": 550760 
             },
             "r002": {
                 "start_key": "20230324T205907Z",
@@ -15,11 +15,11 @@
             },
             "r003": {
                 "start_key": "20230401T012732Z",
-                "livetime_in_s": 453880
+                "livetime_in_s": 446340
             },
             "r004": {
                 "start_key": "20230406T235540Z",
-                "livetime_in_s": 463060
+                "livetime_in_s": 463040
             },
             "r005": {
                 "start_key": "20230412T171450Z",
@@ -29,15 +29,15 @@
         "p04": {
             "r000": {
                 "start_key": "20230415T033517Z", 
-                "livetime_in_s": 543560
+                "livetime_in_s": 543520
             },
             "r001": {
                 "start_key": "20230421T174901Z", 
-                "livetime_in_s": 238000
+                "livetime_in_s": 237840
             },
             "r002": {
                 "start_key": "20230424T185631Z", 
-                "livetime_in_s": 567860
+                "livetime_in_s": 562660
             },
             "r003": {
                 "start_key": "20230501T205951Z", 
@@ -45,13 +45,13 @@
             },
             "r006": {
                 "start_key": "20230509T151748Z", 
-                "livetime_in_s": 236580
+                "livetime_in_s": 236560
             }
         },
         "p05": {
             "r001": {
                 "start_key": "20230518T002458Z", 
-                "livetime_in_s": 382960
+                "livetime_in_s": 382920
             },
             "r002": {
                 "start_key": "20230522T165851Z", 
@@ -69,11 +69,11 @@
             },
             "r001": {
                 "start_key": "20230619T182752Z", 
-                "livetime_in_s": 588200
+                "livetime_in_s": 588160
             },
             "r002": {
                 "start_key": "20230626T215146Z", 
-                "livetime_in_s": 573700
+                "livetime_in_s": 573680
             },
             "r003": {
                 "start_key": "20230704T015055Z", 
@@ -82,6 +82,10 @@
             "r004": {
                 "start_key": "20230710T151847Z", 
                 "livetime_in_s": 592800
+            },
+            "r005": {
+                "start_key": "20230717T175107Z", 
+                "livetime_in_s": 573220
             }
         }
     },
@@ -149,6 +153,9 @@
             },
             "r004": {
                 "start_key": "20230710T103450Z"
+            },
+            "r005": {
+                "start_key": "20230717T130655Z"
             }
         }
     }

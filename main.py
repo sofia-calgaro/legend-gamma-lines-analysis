@@ -141,6 +141,24 @@ def main():
     #create json file with the exposure
     exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2])
 
+    for p in result_dict.keys():
+        for r in result_dict[p]:
+            # get all the detector names
+            dataset = {
+                "experiment": "L200",
+                "period": p,
+                "type": "phy",
+                "version": info[4],
+                "path": info[0],
+                "runs": int(r.split("r")[-1]),
+            }
+            geds = ldm.Subsystem("geds", dataset=dataset)
+            channel_map = geds.channel_map
+            # remove off detectors
+            channel_map = channel_map[channel_map.status != "off"]
+            all_detectors = list(channel_map.name)
+        
+        
     if info[3] == "single":
         for p in result_dict.keys():
             for r in result_dict[p]:
@@ -155,6 +173,7 @@ def main():
                 }
                 geds = ldm.Subsystem("geds", dataset=dataset)
                 channel_map = geds.channel_map
+                channel_map = channel_map[channel_map.status != "off"]
                 all_detectors = list(channel_map.name)
                 all_strings = list(channel_map.location)
                 all_positions = list(channel_map.position)
