@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+#$ -P short ### queue
+#$ -j y     ### have logoutput and erroroutput in the same file
+#$ -o /dev/null
+#$ -e /dev/null
+
+LOGFILE=$2".out"
+
+
+if [ $2 == 'all' ] || [ $2 == 'BEGe' ] || [ $2 == 'ICPC' ] || [ $2 == 'COAX' ] || [ $2 == 'PPC' ]; then
+    singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && python main.py --config $1"
+else
+ singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && python main.py --config $1 --det $3"
+fi
+#cd gamma-fitter-BATv100 && make 
+#./gamma-fitter-BATv100/runGammaAnalysis  &> /lfs/l1/legend/users/bianca/gamma-analysis_TAUP/legend-gamma-lines-analysis/output/log/$LOGFILE

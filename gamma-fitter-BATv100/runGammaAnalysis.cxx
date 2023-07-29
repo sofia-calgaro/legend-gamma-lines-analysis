@@ -9,12 +9,8 @@
 #include <TParameter.h>
 
 //C++
-#include <cstdio>
-#include <cstdlib>
 #include <string>
-#include <iostream>
-#include <iomanip>
-#include <fstream>
+
 
 
 

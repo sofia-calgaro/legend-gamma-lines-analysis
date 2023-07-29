@@ -56,7 +56,7 @@ def get_resolution(config_file, detectors):
             elif detectors == "PPC":
                 detector_list = [idx for idx in all_detectors if idx[0] == "P"]
             else:
-                detector_list = detectors
+                detector_list = [detectors]
 
             for d in detector_list:
                 if not d in all_detectors: #for list of detectors set by the user
