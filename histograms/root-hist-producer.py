@@ -11,8 +11,9 @@ hist_range = [0, 5500]
 number_bins = int((hist_range[1] - hist_range[0]) / bin_width)
 
 # path to hdf5 data files
-version = "v01_06"
-path = f"/data1/users/krause/share/high_lvl/{version}"
+version = "v01_06" 
+#path = f"/data1/users/krause/share/high_lvl/{version}" #LNGS cluster
+path = f"/lfs/l1/legend/users/dandrea/high_lvl/{version}" # mpik
 
 # list avalilable periods
 periods = os.listdir(path)
@@ -39,7 +40,8 @@ for p in periods:
             "period": p,
             "type": "phy",
             "version": "",
-            "path": "/data2/public/prodenv/prod-blind/tmp/auto",
+            #"path": "/data2/public/prodenv/prod-blind/tmp/auto", #LNGS cluster
+            "path" : "/lfs/l1/legend/data/public/prodenv/prod-blind/tmp/auto", # MPIK cluster
             "runs": int(r_name[1:]),
         }
         geds = ldm.Subsystem("geds", dataset=dataset)
