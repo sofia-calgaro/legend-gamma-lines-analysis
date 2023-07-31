@@ -152,14 +152,14 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
     logger_expo.debug(f"You are going to inspect following periods and runs: {data}")
     logger_expo.debug(f"You are going to inspect detectors that have the following status: {status}")
     logger_expo.debug(f"Individual exposures will be stored here: \"exposure_in_kg_{time_unit}.json\"")
-    logger_expo.debug(f"Summary exposures (and masses) will be stored here: \"output.log\"")
+    logger_expo.debug(f"Summary exposures (and masses) will be stored here: \"output_exposure.log\"")
 
     # get hardware map (for masses)
     dets_map = lmeta.hardware.detectors.germanium.diodes
 
     # Remove the file if it already exists
-    if os.path.exists('output.log'):
-        os.remove('output.log')
+    if os.path.exists('output_exposure.log'):
+        os.remove('output_exposure.log')
 
     # get livetimes
     run_info = parse_json_or_dict(LT_file)
@@ -258,7 +258,7 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
             overall_expo_ppc += tot_expo_ppc
             
             # save summary exposure in output file
-            logging.basicConfig(filename='output.log', level=logging.INFO, format='%(message)s')
+            logging.basicConfig(filename='output_exposure.log', level=logging.INFO, format='%(message)s')
             logging.info(f"\nTotal exposure for {period}-{run} is: {round(tot_expo,5)} kg*{time_unit}")
             logging.info(f"--- Total exposure for COAX: {round(tot_expo_coax,5)} kg*{time_unit} (m_tot={round(tot_mass_coax,5)} kg)")
             logging.info(f"--- Total exposure for BEGe: {round(tot_expo_bege,5)} kg*{time_unit} (m_tot={round(tot_mass_bege,5)} kg)")
