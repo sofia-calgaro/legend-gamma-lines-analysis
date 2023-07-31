@@ -104,7 +104,7 @@ int GammaLineFit::Fit( vector<double> lines, pair<double,double> range,
   //! perform fit
   std::ostringstream oss;
   for (size_t i = 0; i < lines.size(); ++i) {
-        oss << lines[i];
+        oss << (int)std::round(lines[i]);
         if (i < lines.size() - 1) {
             oss << "_"; // Add a separator for all elements except the last one
         }
