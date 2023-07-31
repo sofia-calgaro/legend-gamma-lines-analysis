@@ -2,6 +2,7 @@
 
 gamma_src_code="$(grep -oP '(?<="gamma-src-code": ")[^"]*' $1)"
 cut="$(grep -oP '(?<="cut": ")[^"]*' $1)"
+cut=$(echo "${cut//\ }")
 detector_type="$(grep -oP '(?<="detectors": ")[^"]*' $1)"
 if [ "$detector_type" == "single" ]; then
   file="./list_detectors_p3p4.json"
@@ -15,11 +16,11 @@ with open('$file', 'r') as f:
     d_name=$(echo "${d_name//\[}")
     d_name=$(echo "${d_name//\]}")
     d_name=$(echo "${d_name//\,}")
-    JobName="$d_name""_bat"
+    JobName="$cut"_""$d_name""_bat"
     qsub -N $JobName run-bat.qsub $1 $gamma_src_code $detector_type $d_name $cut
     done
    else
-    JobName="$detector_type""_bat"
+    JobName="$cut"_"$detector_type""_bat"
     qsub -N $JobName run-bat.qsub $1 $gamma_src_code $detector_type $cut
 fi
 

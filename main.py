@@ -181,7 +181,8 @@ def main():
     tmp_directory = './tmp'
     if not os.path.exists(tmp_directory):
         os.makedirs(tmp_directory)
-    tmp_file_name = f'{tmp_directory}/{info[5]}-{det_name}.root'
+    cut_=f'{info[5]}'.replace(" ", "")
+    tmp_file_name = f'{tmp_directory}/{cut_}-{det_name}.root'
     tmp_file = ROOT.TFile(tmp_file_name, 'RECREATE')
     outputDir.Write()
     histo.Write()

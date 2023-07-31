@@ -4,13 +4,13 @@
     "dataset": {
       "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
       "version": "v01.06",
-      "comments": ["The user can set the list of periods, runs and detector types ('single','all','BEGe', 'ICPC', 'COAX','PPC' )",
+      "comments": ["The user can set the list of periods, runs and detector types ('single','All','BEGe', 'ICPC', 'COAX','PPC' )",
                 "If they want to study only some detector then set a list [] in the 'detectors' key",
                 "The user can choose the cut to apply among ['raw',  'LAr AC', 'LAr C']"], 
       "periods": ["p03", "p04"],
       "runs": ["r000", "r001", "r002","r003", "r004", "r005"],
-      "detectors": "BEGe" ,
-      "cut": "raw"
+      "detectors": "ICPC" ,
+      "cut": "LAr AC"
     },
     "exposure": {
       "comments": ["The user can set the time unit of exposure evaluation ('sec', 'min', 'hour', 'day', 'yr')",
@@ -18,6 +18,6 @@
               "The user can choose the status of detectors to include in the exposure evaluation among 'on', 'off', 'ac' (other?) or a combination of them."], 
       "time-unit": "yr",
       "run-info-path": "/lfs/l1/legend/users/bianca/gamma-analysis_TAUP/legend-gamma-lines-analysis/livetime_and_exposure/runinfo.json",
-      "status": ["on","ac"]
+      "status": ["on"]
     }
 }  
