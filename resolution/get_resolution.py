@@ -61,7 +61,7 @@ def get_resolution(config_file, detectors):
             for d in detector_list:
                 if not d in all_detectors: #for list of detectors set by the user
                     continue
-                if d == "B00089D":  #set to on but it is off
+                if d not in exposure_det[p][r].keys():
                     continue
 
                 # get exposure

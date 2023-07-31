@@ -166,6 +166,25 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
 
     expo_all_periods_runs = {}
 
+    # total exposure (all periods and runs)
+    overall_expo = 0
+    overall_expo_coax = 0
+    overall_expo_bege = 0
+    overall_expo_icpc = 0
+    overall_expo_ppc = 0
+
+    remove_silver_detectors = [
+        "V01403A", "V01404A", "V01386A", "V07298B", "B00091D", "B00091B", "P00665A", "P00537A", "P00538B", "P00661A", "P00665B", "P00698B", # off
+        "P00661C", "B00089B", "P00573B", # new AC
+        "V04549A", "V01406A", "B00089D", "V02166B", "V01415A", "V01240A", "V01387A", "P00662C",	"V01389A", "P00909B", "P00665C", "P00574C", "P00748B", "P00662B", "P00748A", "P00712A", # AC ("P00909C" separately accounted in p03)
+    ]
+    remove_golden_detectors = [
+        "V01403A", "V01404A", "V01386A", "V07298B", "B00091D", "B00091B", "P00665A", "P00537A", "P00538B", "P00661A", "P00665B", "P00698B", # off
+        "P00661C", "B00089B", "P00573B", # new AC
+        "V04549A", "V01406A", "B00089D", "V02166B", "V01415A", "V01240A", "V01387A", "P00662C",	"V01389A", "P00909B", "P00665C", "P00574C", "P00748B", "P00662B", "P00748A", "P00712A", # AC ("P00909C" already removed because of no PSD)
+        "V05268B", "V05612B", "C000RG1", "C000RG2", "C00ANG3", "C00ANG5", "C00ANG2", "C00ANG4", "P00909C", # no PSD
+    ]
+    
     # inspect each periods individually
     for period in data.keys():
         logger_expo.info(f"... inspecting period {period}")
@@ -210,6 +229,10 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
             # Get exposure - channel by channel
             # ===================================================
             for det_name in det_names:
+                if det_name in remove_silver_detectors:
+                    continue
+                if period == "p03" and det_name == "P00909C":
+                    continue
                 mass_in_kg = dets_map[det_name]["production"]["mass_in_g"] / 1000
                 
                 ch_expo = mass_in_kg * convert_time(livetime_run, time_unit)
@@ -227,14 +250,26 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
 
                 # save exposure for a given channel
                 expo_all_periods_runs[period][r_run].update({det_name: ch_expo})
+
+            overall_expo += tot_expo
+            overall_expo_coax += tot_expo_coax
+            overall_expo_bege += tot_expo_bege
+            overall_expo_icpc += tot_expo_icpc
+            overall_expo_ppc += tot_expo_ppc
             
             # save summary exposure in output file
             logging.basicConfig(filename='output.log', level=logging.INFO, format='%(message)s')
-            logging.info(f"\nTotal exposure for {period}-{run} is: {round(tot_expo,2)} kg*{time_unit}")
-            logging.info(f"--- Total exposure for COAX: {round(tot_expo_coax,2)} kg*{time_unit} (m_tot={round(tot_mass_coax,2)} kg)")
-            logging.info(f"--- Total exposure for BEGe: {round(tot_expo_bege,2)} kg*{time_unit} (m_tot={round(tot_mass_bege,2)} kg)")
-            logging.info(f"--- Total exposure for ICPC: {round(tot_expo_icpc,2)} kg*{time_unit} (m_tot={round(tot_mass_icpc,2)} kg)")
-            logging.info(f"--- Total exposure for PPC: {round(tot_expo_ppc,2)} kg*{time_unit} (m_tot={round(tot_mass_ppc,2)} kg)")
+            logging.info(f"\nTotal exposure for {period}-{run} is: {round(tot_expo,5)} kg*{time_unit}")
+            logging.info(f"--- Total exposure for COAX: {round(tot_expo_coax,5)} kg*{time_unit} (m_tot={round(tot_mass_coax,5)} kg)")
+            logging.info(f"--- Total exposure for BEGe: {round(tot_expo_bege,5)} kg*{time_unit} (m_tot={round(tot_mass_bege,5)} kg)")
+            logging.info(f"--- Total exposure for ICPC: {round(tot_expo_icpc,5)} kg*{time_unit} (m_tot={round(tot_mass_icpc,5)} kg)")
+            logging.info(f"--- Total exposure for PPC: {round(tot_expo_ppc,5)} kg*{time_unit} (m_tot={round(tot_mass_ppc,5)} kg)")
+
+    logging.info(f"\n\nTotal exposure (all periods and runs) is: {round(overall_expo,5)} kg*{time_unit}")
+    logging.info(f"--- Total exposure for COAX: {round(overall_expo_coax,5)} kg*{time_unit}")
+    logging.info(f"--- Total exposure for BEGe: {round(overall_expo_bege,5)} kg*{time_unit}")
+    logging.info(f"--- Total exposure for ICPC: {round(overall_expo_icpc,5)} kg*{time_unit}")
+    logging.info(f"--- Total exposure for PPC: {round(overall_expo_ppc,5)} kg*{time_unit}")
 
     # save the single-channel exposure dictionary to a JSON file
     output_json_file = f'exposure_in_kg_{time_unit}'
@@ -251,3 +286,4 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
 
 if __name__ == "__main__":
     main()
+
