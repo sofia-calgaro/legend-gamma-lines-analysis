@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+gamma_src_code="$(grep -oP '(?<="gamma-src-code": ")[^"]*' $1)"
 detector_type="$(grep -oP '(?<="detectors": ")[^"]*' $1)"
 if [ "$detector_type" == "single" ]; then
-   file="./list_detectors_p3p4.json"
-   detector_list=$(python-3.9.6 -c \
+  file="./list_detectors_p3p4.json"
+  detector_list=$(python-3.9.6 -c \
 "import json;
 with open('$file', 'r') as f:
   print(json.load(f)['detector_p3p4'])")
@@ -16,11 +17,11 @@ with open('$file', 'r') as f:
     JobName="$d_name""_bat"
     echo $d_name
     echo $d
-    #./run_test.sh $1 $detector_type $d_name
-    qsub -N $JobName run-bat.qsub $1 $detector_type $d_name
+     #./run_test.sh $1 $gamma_src_code $detector_type $d_name
+    qsub -N $JobName run-bat.qsub $1 $gamma_src_code $detector_type $d_name
     done
    else
     JobName="$detector_type""_bat"
-    qsub -N $JobName run-bat.qsub $1 $detector_type;
+    qsub -N $JobName run-bat.qsub $1 $gamma_src_code $detector_type
 fi
 
