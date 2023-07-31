@@ -20,7 +20,7 @@ with open('$file', 'r') as f:
     qsub -N $JobName run-bat.qsub $1 $detector_type $d_name
     done
    else
-    JobName="$detector""_bat"
-    #qsub -N $JobName run-bat.qsub $1 $detector_type;
+    JobName="$detector_type""_bat"
+    qsub -N $JobName run-bat.qsub $1 $detector_type;
 fi
 
