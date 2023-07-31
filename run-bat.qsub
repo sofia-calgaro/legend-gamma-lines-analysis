@@ -10,7 +10,7 @@ LOGFILE=$3".out"
 cd $2
 
 if [ $3 == 'all' ] || [ $3 == 'BEGe' ] || [ $3 == 'ICPC' ] || [ $3 == 'COAX' ] || [ $3 == 'PPC' ]; then
-    #singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python ./main.py --config $1" &> ./output/log/$LOGFILE
+    singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python ./main.py --config $1" &> ./output/log/$LOGFILE
     source ~/.bashrc
     ./gamma-fitter-BATv100/runGammaAnalysis $4 $3 &> ./output/log/$LOGFILE
 else
