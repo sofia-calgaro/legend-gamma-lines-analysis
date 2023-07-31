@@ -43,7 +43,7 @@ def get_resolution(config_file, detectors):
             }
             geds = ldm.Subsystem("geds", dataset=dataset)
             channel_map = geds.channel_map
-            channel_map = channel_map[channel_map.status != "off"]
+            channel_map = channel_map[channel_map.status == "on"]
             all_detectors = list(channel_map.name)
             if detectors == "all":
                 detector_list = all_detectors
