@@ -160,7 +160,7 @@ def main():
     b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
     
     #store resolution in json file
-    resolution_file="resolution_p3p4.json"
+    resolution_file="./resolution_p3p4.json"
     try:
         with open(resolution_file, 'r') as fp:
             resolution_dict = json.load(fp)
@@ -181,13 +181,14 @@ def main():
     tmp_directory = './tmp'
     if not os.path.exists(tmp_directory):
         os.makedirs(tmp_directory)
-    tmp_file_name = f'{tmp_directory}/tmp-spectra.root'
+    tmp_file_name = f'{tmp_directory}/{info[5]}-{det_name}.root'
     tmp_file = ROOT.TFile(tmp_file_name, 'RECREATE')
     outputDir.Write()
     histo.Write()
     a_res.Write()
     b_res.Write()
     tmp_file.Close()
+    logger_expo.debug(f'Created ROOT file to give to the fitter code as input in {tmp_file_name}')
 
 
     logger_expo.debug("EOF")
