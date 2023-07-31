@@ -15,9 +15,6 @@ with open('$file', 'r') as f:
     d_name=$(echo "${d_name//\]}")
     d_name=$(echo "${d_name//\,}")
     JobName="$d_name""_bat"
-    echo $d_name
-    echo $d
-     #./run_test.sh $1 $gamma_src_code $detector_type $d_name
     qsub -N $JobName run-bat.qsub $1 $gamma_src_code $detector_type $d_name
     done
    else
