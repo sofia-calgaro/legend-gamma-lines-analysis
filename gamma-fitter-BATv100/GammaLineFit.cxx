@@ -188,7 +188,7 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
   //! provide pdf file with prior+posterior distributions
   fHistFitter->PrintKnowledgeUpdatePlots(Form("%s/%s.priorsANDposteriors.%s.pdf",fOutputDir.Data(),GetName(),name.Data()), 2,2);
   fHistFitter->PrintSummary();
-  fHistFitter->WriteMarginalizedDistributions(Form("%s/%s_marginalized.root",fOutputDir.Data(),GetName()), "RECREATE");
+  fHistFitter->WriteMarginalizedDistributions(Form("%s/%s_marginalized.root",fOutputDir.Data(),GetName()), "UPDATE");
 
   return 0;
 }
