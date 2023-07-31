@@ -175,7 +175,7 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
 
         # inspect each run individually
         for run in runs:
-            r_run = f"{str(run).zfill(3)}"
+            r_run = f"{str(run).zfill(3)}" if isinstance(run,str) else f"r{str(run).zfill(3)}"
             logger_expo.info(f"...... {r_run}")
             expo_all_periods_runs[period].update({r_run: {}})
 
