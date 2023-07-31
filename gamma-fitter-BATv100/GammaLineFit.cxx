@@ -183,7 +183,7 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
   TCanvas canvas;
    fHistFitter->DrawFit("HIST",false);
    canvas.Print(Form("%s/%s.%s.png",fOutputDir.Data(),GetName(),name.Data()));
-  TFile* file = new TFile(Form("%s/%s.root",fOutputDir.Data(),GetName()),"UPDATE");
+  TFile* file = new TFile(Form("%s/%s.%s.root",fOutputDir.Data(),GetName(), name.Data()),"RECREATE");
    fHistFitter->GetHistogram().Write(Form("%s_hist",name.Data()));
    //fHistFitter->GetFitFunction()->Write(Form("%s_bestfit",name.Data()));
    fHistFitter->GetFitFunctionGraph(bestFitPars)->Write(Form("%s_bestfit",name.Data()));
@@ -196,7 +196,7 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
   //! provide pdf file with prior+posterior distributions
   fHistFitter->PrintKnowledgeUpdatePlots(Form("%s/%s.priorsANDposteriors.%s.pdf",fOutputDir.Data(),GetName(),name.Data()), 2,2);
   fHistFitter->PrintSummary();
-  fHistFitter->WriteMarginalizedDistributions(Form("%s/%s_marginalized.root",fOutputDir.Data(),GetName()), "UPDATE");
+  fHistFitter->WriteMarginalizedDistributions(Form("%s/%s_marginalized.%s.root",fOutputDir.Data(),GetName(), name.Data()), "RECREATE");
 
   return 0;
 }
