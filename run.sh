@@ -16,7 +16,7 @@ with open('$file', 'r') as f:
     d_name=$(echo "${d_name//\[}")
     d_name=$(echo "${d_name//\]}")
     d_name=$(echo "${d_name//\,}")
-    JobName="$cut"_""$d_name""_bat"
+    JobName="$cut"_"$d_name""_bat"
     qsub -N $JobName run-bat.qsub $1 $gamma_src_code $detector_type $d_name $cut
     done
    else
