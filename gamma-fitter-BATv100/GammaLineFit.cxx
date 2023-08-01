@@ -159,13 +159,16 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
     BCH1D intensity = fHistFitter->GetMarginalized(nBkgPars + 3 * i + 2);
 
     // fix the bands for each posterior at 68.3%, 95.4%, 99.7%
-    fHistFitter->GetBCH1DdrawingOptions().SetBandType(BCH1D::kCentralInterval);
+    //fHistFitter->GetBCH1DdrawingOptions().SetBandType(BCH1D::kCentralInterval);
 
     double mode = intensity.GetBestFitParameters();
     double low=0, high=0;
-    //intensity.GetSmallestIntervals(0.682689); // not able to convert from 0.9.4 to 1.0.0
-    low = intensity.GetQuantile(0.16); // put better numbers
-    high = intensity.GetQuantile(0.84);
+    BCH1D::BCH1DSmallestInterval SI = intensity.GetSmallestIntervals(0.682689);
+    if (SI.intervals.empty()) {
+      log << "SI intervals are empty!" << std::endl;
+    }
+    low = SI.intervals.front().xmin;
+    high = SI.intervals.front().xmax;
 
   //************************************************************************
     if(low>0) {                                                                        // intensity
