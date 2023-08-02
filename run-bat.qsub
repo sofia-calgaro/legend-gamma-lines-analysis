@@ -15,7 +15,6 @@ if [ $3 == 'All' ] || [ $3 == 'BEGe' ] || [ $3 == 'ICPC' ] || [ $3 == 'COAX' ] |
 else
  singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python ./main.py --config $1 --det $4" &> ./output/log/$LOGFILE
  source ~/.bashrc
- det_name= ${4: -7}
-./gamma-fitter-BATv100/runGammaAnalysisSingle $5 $det_name &> ./output/log/$LOGFILE
+./gamma-fitter-BATv100/runGammaAnalysisSingle $5 ${4: -7} &> ./output/log/$LOGFILE
 fi
 #cd gamma-fitter-BATv100 && make 
