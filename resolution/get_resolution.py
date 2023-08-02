@@ -45,7 +45,7 @@ def get_resolution(config_file, detectors):
             channel_map = geds.channel_map
             channel_map = channel_map[channel_map.status == "on"]
             all_detectors = list(channel_map.name)
-            if detectors == "all":
+            if detectors == "All":
                 detector_list = all_detectors
             elif detectors == "BEGe":
                 detector_list= [idx for idx in all_detectors if idx[0] == "B"]

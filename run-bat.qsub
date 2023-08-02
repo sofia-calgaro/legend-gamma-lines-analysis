@@ -1,15 +1,14 @@
 #!/bin/bash
 #
 #$ -j y     ### have logoutput and erroroutput in the same file
-#$ -o /dev/null
-#$ -e /dev/null
-#$ -o /lfs/l1/legend/users/biancacci
-#$ -e /lfs/l1/legend/users/biancacci 
+#$ -o /lfs/l1/legend/users/bianca/gamma-analysis_TAUP/legend-gamma-lines-analysis
+#$ -e /lfs/l1/legend/users/bianca/gamma-analysis_TAUP/legend-gamma-lines-analysis
+
 LOGFILE=$3".out"
 
 cd $2
 
-if [ $3 == 'all' ] || [ $3 == 'BEGe' ] || [ $3 == 'ICPC' ] || [ $3 == 'COAX' ] || [ $3 == 'PPC' ]; then
+if [ $3 == 'All' ] || [ $3 == 'BEGe' ] || [ $3 == 'ICPC' ] || [ $3 == 'COAX' ] || [ $3 == 'PPC' ]; then
     singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python ./main.py --config $1" &> ./output/log/$LOGFILE
     source ~/.bashrc
     ./gamma-fitter-BATv100/runGammaAnalysis $4 $3 &> ./output/log/$LOGFILE
@@ -19,4 +18,4 @@ else
  det_name= ${4: -7}
 ./gamma-fitter-BATv100/runGammaAnalysisSingle $5 $det_name &> ./output/log/$LOGFILE
 fi
-#cd gamma-fitter-BATv100 && make
+#cd gamma-fitter-BATv100 && make 

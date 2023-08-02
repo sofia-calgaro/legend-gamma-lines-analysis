@@ -108,9 +108,9 @@ def main():
         return
 
     #check detector set by the user
-    detectors_avail = ['all',  'single', 'BEGe', 'COAX', 'ICPC', 'PPC']
+    detectors_avail = ['All',  'single', 'BEGe', 'COAX', 'ICPC', 'PPC']
     if isinstance(info[3],str) and  not info[3] in detectors_avail:
-        logger_expo.debug(f"{info[3]} is not an available detector. Try among '['all',  'single', 'BEGe', 'COAX', 'ICPC', 'PPC']'")
+        logger_expo.debug(f"{info[3]} is not an available detector. Try among '['All',  'single', 'BEGe', 'COAX', 'ICPC', 'PPC']'")
         return
         
     #check periods and runs set by the user
