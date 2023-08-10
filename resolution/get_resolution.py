@@ -1,8 +1,11 @@
 import os, json, sys
 import numpy as np
-sys.path.insert(1, './')
+sys.path.insert(0, './')
 import main
 
+sys.path.insert(1, './livetime_and_exposure')
+import get_exposure
+from legendmeta import JsonDB
 import legend_data_monitor as ldm
 from legendmeta import LegendMetadata
 
@@ -25,6 +28,7 @@ def get_resolution(config_file, detectors):
         exposure_det = json.load(file)
     exposure_list = []
     resolution_list = []
+    run_info = get_exposure.parse_json_or_dict(expo[1])
 
     for p in info[1]:
         runs_avail = exposure_det[p].keys()
@@ -32,19 +36,17 @@ def get_resolution(config_file, detectors):
             if not r in runs_avail:
                 continue 
 
-            # load geds channelmap using legend_data_monitor
-            dataset = {
-                "experiment": "L200",
-                "period": p,
-                "type": "phy",
-                "version": info[4],
-                "path": info[0],
-                "runs": int(r.split("r")[-1]),
-            }
-            geds = ldm.Subsystem("geds", dataset=dataset)
-            channel_map = geds.channel_map
-            channel_map = channel_map[channel_map.status == "on"]
-            all_detectors = list(channel_map.name)
+            # get channel map for a specific run and period
+            first_timestamp = run_info["phy"][p][r]["start_key"]
+            map_file = os.path.join(expo[3], expo[4], "inputs/dataprod/config")
+            full_status_map = JsonDB(map_file).on(
+                timestamp=first_timestamp, system="geds"
+            )["analysis"]
+            status_map = {key: value for key, value in full_status_map.items() if value.get('usability') in expo[2]}
+            all_detectors = [det for det in status_map.keys() if "S" not in det]
+            map_file = os.path.join(expo[3], expo[4], "inputs/hardware/configuration/channelmaps")
+            channel_map = JsonDB(map_file).on(timestamp=first_timestamp)
+
             if detectors == "All":
                 detector_list = all_detectors
             elif detectors == "BEGe":
@@ -59,9 +61,12 @@ def get_resolution(config_file, detectors):
                 detector_list = [detectors]
 
             for d in detector_list:
-                if not d in all_detectors: #for list of detectors set by the user
+                if len(detector_list) == 1 and isinstance(detector_list, list):
+                    d = d[0]
+                print(".....", d)
+                if d not in all_detectors: # for list of detectors set by the user
                     continue
-                if d not in exposure_det[p][r].keys():
+                if d not in list(exposure_det[p][r].keys()):
                     continue
 
                 # get exposure
@@ -69,14 +74,14 @@ def get_resolution(config_file, detectors):
                 exposure_list.append(exp_det)
 
                 #get resolution
-                c=channel_map.channel[channel_map.name==d]
-                c="ch"+str(c.values[0])
+                c="ch"+str(channel_map[d]['daq']['rawid'])
                 path_resolutions = os.path.join(info[0], info[4], "generated/par/hit/cal", p, r)
                 file= [file for file in os.listdir(path_resolutions) if file.endswith("results.json")]
                 with open(os.path.join(path_resolutions, file[0]), "r") as file:
                     resolution_det = json.load(file)
                     res_det = resolution_det[c][operation][par][pars]
                 resolution_list.append(res_det)
+
 
     #get the lists of the two resolution parameters
     if resolution_list != []:

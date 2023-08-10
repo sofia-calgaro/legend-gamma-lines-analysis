@@ -8,6 +8,7 @@ import json
 import logging
 import argparse
 import pandas as pd
+from legendmeta import JsonDB
 from datetime import datetime
 from matplotlib import pyplot as plt
 from argparse import RawTextHelpFormatter
@@ -65,15 +66,17 @@ def parse_json_or_dict(value):
         return eval(value)
 
 
-def main(LT_file=None, time_unit=None, data=None, status=None):
+def main(LT_file=None, time_unit=None, data=None, status=None, prodenv=None, version=None):
     """Get livetimes from an input file.
     
     You can run the script either from the command line, or you can use the module in another script.
 
     The function returns a dictionary with exposures evaluated channel by channel, run by run, period by period.
     """
-    if LT_file and time_unit and data and status:
+    if LT_file and time_unit and data and status and prodenv and version:
         data = parse_json_or_dict(data)
+        if isinstance(status, str):
+            status = status.split()
     else:
         # set up the argument parser
         parser = argparse.ArgumentParser(description="Evaluate exposure, run by run, detector by detector, starting from input livetimes expressed in seconds.", formatter_class=RawTextHelpFormatter)
@@ -124,6 +127,9 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
         to ensure that the entire dictionary is treated as a single string.
         """
 
+        prodenv_help = "Path to production environment."
+        version_help = "Version of files to inspect."
+
         status_help = """\
         Statuses (among 'on', 'off', 'ac') to include when evaluating the exposure.
         The argument has to be of the following type:
@@ -136,6 +142,8 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
         parser.add_argument("--livetime", help=livetime_help)
         parser.add_argument("--time_unit", help=time_unit_help)
         parser.add_argument("--data", help=data_help)
+        parser.add_argument("--prodenv", help=prodenv_help)
+        parser.add_argument("--version", help=version_help)
         parser.add_argument("--status", nargs="+", help=status_help)
 
         # parse the command-line arguments
@@ -145,11 +153,14 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
         LT_file = args.livetime
         time_unit = args.time_unit
         data = parse_json_or_dict(args.data)
+        prodenv = args.prodenv
+        version = args.version
         status = args.status
+
 
     logger_expo.debug(f"Getting livetime values from \"{LT_file}\"")
     logger_expo.debug(f"You are going to evaluate exposure in kg*{time_unit}")
-    logger_expo.debug(f"You are going to inspect following periods and runs: {data}")
+    logger_expo.debug(f"You are going to inspect following periods and runs: {data} (from {prodenv}, version={version})")
     logger_expo.debug(f"You are going to inspect detectors that have the following status: {status}")
     logger_expo.debug(f"Individual exposures will be stored here: \"exposure_in_kg_{time_unit}.json\"")
     logger_expo.debug(f"Summary exposures (and masses) will be stored here: \"output_exposure.log\"")
@@ -173,18 +184,6 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
     overall_expo_icpc = 0
     overall_expo_ppc = 0
 
-    remove_silver_detectors = [
-        "V01403A", "V01404A", "V01386A", "V07298B", "B00091D", "B00091B", "P00665A", "P00537A", "P00538B", "P00661A", "P00665B", "P00698B", # off
-        "P00661C", "B00089B", "P00573B", # new AC
-        "V04549A", "V01406A", "B00089D", "V02166B", "V01415A", "V01240A", "V01387A", "P00662C",	"V01389A", "P00909B", "P00665C", "P00574C", "P00748B", "P00662B", "P00748A", "P00712A", # AC ("P00909C" separately accounted in p03)
-    ]
-    remove_golden_detectors = [
-        "V01403A", "V01404A", "V01386A", "V07298B", "B00091D", "B00091B", "P00665A", "P00537A", "P00538B", "P00661A", "P00665B", "P00698B", # off
-        "P00661C", "B00089B", "P00573B", # new AC
-        "V04549A", "V01406A", "B00089D", "V02166B", "V01415A", "V01240A", "V01387A", "P00662C",	"V01389A", "P00909B", "P00665C", "P00574C", "P00748B", "P00662B", "P00748A", "P00712A", # AC ("P00909C" already removed because of no PSD)
-        "V05268B", "V05612B", "C000RG1", "C000RG2", "C00ANG3", "C00ANG5", "C00ANG2", "C00ANG4", "P00909C", # no PSD
-    ]
-    
     # inspect each periods individually
     for period in data.keys():
         logger_expo.info(f"... inspecting period {period}")
@@ -200,12 +199,13 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
 
             # get channel map for a specific run and period
             first_timestamp = run_info["phy"][period][r_run]["start_key"]
-            full_map = lmeta.dataprod.config.on(
+            map_file = os.path.join(prodenv, version, "inputs/dataprod/config")
+            full_status_map = JsonDB(map_file).on(
                 timestamp=first_timestamp, system="geds"
             )["analysis"]
 
             # keep detectors of for a given specified status
-            channel_map = {key: value for key, value in full_map.items() if value.get('usability') in status}
+            channel_map = {key: value for key, value in full_status_map.items() if value.get('usability') in status}
 
             # get a list of detectors (exclude SiPMs)
             det_names = [det for det in channel_map.keys() if "S" not in det]
@@ -229,10 +229,6 @@ def main(LT_file=None, time_unit=None, data=None, status=None):
             # Get exposure - channel by channel
             # ===================================================
             for det_name in det_names:
-                if det_name in remove_silver_detectors:
-                    continue
-                if period == "p03" and det_name == "P00909C":
-                    continue
                 mass_in_kg = dets_map[det_name]["production"]["mass_in_g"] / 1000
                 
                 ch_expo = mass_in_kg * convert_time(livetime_run, time_unit)

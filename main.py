@@ -56,8 +56,10 @@ def return_config_info(config_file):
     # exposure info
     exposure_time_unit = config["exposure"]["time-unit"]
     run_info_path = config["exposure"]["run-info-path"]
-    status = config["exposure"]["status"]
-    expo = [exposure_time_unit, run_info_path, status]
+    status = config["exposure"]["status"].split()
+    expo_prodenv = config["exposure"]["prodenv"]
+    expo_version = config["exposure"]["version"]
+    expo = [exposure_time_unit, run_info_path, status, expo_prodenv, expo_version]
 
     return gamma_src_code, output, info, expo
         

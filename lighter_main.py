@@ -3,6 +3,7 @@ import argparse
 import numpy as np
 import sys
 import os
+from legendmeta import JsonDB
 sys.path.insert(0, './resolution')
 from get_resolution import *
 sys.path.insert(1, './livetime_and_exposure')
@@ -29,8 +30,10 @@ def return_config_info(config_file):
     # exposure info
     exposure_time_unit = config["exposure"]["time-unit"]
     run_info_path = config["exposure"]["run-info-path"]
-    status = config["exposure"]["status"]
-    expo = [exposure_time_unit, run_info_path, status]
+    status = config["exposure"]["status"].split()
+    expo_prodenv = config["exposure"]["prodenv"]
+    expo_version = config["exposure"]["version"]
+    expo = [exposure_time_unit, run_info_path, status, expo_prodenv, expo_version]
 
     return gamma_src_code, output, info, expo
      
@@ -42,7 +45,6 @@ def main():
     args = parser.parse_args()
     config_file = args.config
     print(f"You are going to inspect config={config_file}")
-
 
     # ...reading the config file...
     gamma_src_code, output, info, expo = return_config_info(config_file)
@@ -87,36 +89,28 @@ def main():
                 run_avail.append(r)
         result_dict[p] = run_avail   
 
-    exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2])
+    exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2], expo[3], expo[4])
     periods_avail = list(exposure_det.keys())
 
     for p in result_dict.keys():
         for r in result_dict[p]:
-            # get all the detector names
-            dataset = {
-                "experiment": "L200",
-                "period": p,
-                "type": "phy",
-                "version": info[4],
-                "path": info[0],
-                "runs": int(r.split("r")[-1]),
-            }
-            geds = ldm.Subsystem("geds", dataset=dataset)
-            channel_map = geds.channel_map
-            channel_map = channel_map[channel_map.status != "off"]
-            all_detectors = list(channel_map.name)
+            # get channel map for a specific run and period
+            first_timestamp = run_info["phy"][p][r]["start_key"]
+            map_file = os.path.join(expo[3], expo[4], "inputs/dataprod/config")
+            full_status_map = JsonDB(map_file).on(
+                timestamp=first_timestamp, system="geds"
+            )["analysis"]
+            channel_map = {key: value for key, value in full_status_map.items() if value.get('usability') in expo[2]}
+            all_detectors = [det for det in channel_map.keys() if "S" not in det]
         
     total_resolution = {}
         
     if info[3] == "single":
         for d in all_detectors:
-            print(".....", d)
             total_resolution.update({d: {}})
             d=[d]
             resolution = get_resolution(config_file, d)
             total_resolution[d[0]].update({"a_res": resolution[0], "b_res": resolution[1]})
-            
-            
     else:
         total_resolution.update({info[3]: {}})
         resolution = get_resolution(config_file, info[3])
