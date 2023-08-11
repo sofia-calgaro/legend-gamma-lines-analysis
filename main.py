@@ -56,7 +56,7 @@ def return_config_info(config_file):
     # exposure info
     exposure_time_unit = config["exposure"]["time-unit"]
     run_info_path = config["exposure"]["run-info-path"]
-    status = config["exposure"]["status"].split()
+    status = config["exposure"]["status"].split() if isinstance(config["exposure"]["status"], str) else config["exposure"]["status"]
     expo_prodenv = config["exposure"]["prodenv"]
     expo_version = config["exposure"]["version"]
     expo = [exposure_time_unit, run_info_path, status, expo_prodenv, expo_version]
@@ -143,7 +143,7 @@ def main():
         result_dict[p] = run_avail   
 
     #create json file with the exposure
-    exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2])
+    exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2], expo[3], expo[4])
       
         
     if info[3] == "single":
