@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 #$ -j y     ### have logoutput and erroroutput in the same file
-#$ -o /lfs/l1/legend/users/bianca/gamma-analysis_TAUP/legend-gamma-lines-analysis
-#$ -e /lfs/l1/legend/users/bianca/gamma-analysis_TAUP/legend-gamma-lines-analysis
+#$ -o $PWD
+#$ -e $PWD
 
 LOGFILE=$3".out"
 
