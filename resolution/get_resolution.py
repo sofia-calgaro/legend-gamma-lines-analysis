@@ -62,7 +62,7 @@ def get_resolution(config_file, detectors):
 
             for d in detector_list:
                 if len(detector_list) == 1 and isinstance(detector_list, list):
-                    d = d[0]
+                    d = d[0] if isinstance(d, list) else d
                 print(".....", d)
                 if d not in all_detectors: # for list of detectors set by the user
                     continue
