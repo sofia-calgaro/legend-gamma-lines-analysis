@@ -120,9 +120,21 @@ with open("phIIplus/COAX_phIIplus.json", "w") as json_file:
 with open("phIIplus/ICPC_phIIplus.json", "w") as json_file:
     json.dump(GERDA_IC_phII_plus, json_file, indent=4)
 
+# ----------------------------------------------------------------------------------------------
+# exposure saved as phII, phII+, phII & phII+
+expo_BEGe = [31.46, 21.87, 53.33]
+expo_COAX = [28.64, 13.18, 41.82]
+expo_ICPC = [0.0, 8.54, 8.54]
 
+# ----------------------------------------------------------------------------------------------
 # compute the average among the two periods
-def calculate_average(dictII, dictIIplus):
+def calculate_average_for_det_type(dictII, dictIIplus, det_type):
+    # get the correct exposure dict
+    if det_type == "BEGe":
+        expo_dict = expo_BEGe
+    if det_type == "COAX":
+        expo_dict = expo_COAX
+
     # Initialize an empty dictionary to store the averages
     average_dict = {
         "isotope": ["42K", "40K", "60Co", "60Co", "228Ac", "228Ac", "228Ac", "228Ac", "212Bi", "212Pb", "208Tl", "208Tl", "208Tl", "214Pb", "214Pb", "214Pb", "214Bi", "214Bi", "214Bi", "214Bi", "214Bi", "214Bi", "214Bi", "e+e-", "85Kr", "65Zn"],
@@ -147,17 +159,19 @@ def calculate_average(dictII, dictIIplus):
     for cut in ["raw", "LArC", "LArAC"]:
         average_dict.update({cut: {}})
         for entry in ["mode", "low_68", "upp_68"]:
-            new_entry = [(v1+dictIIplus[cut][entry][idx])*0.5 for idx,v1 in enumerate(dictII[cut][entry])]
+            # exposure weightted mean 
+            new_entry = [(v1*expo_dict[0] + dictIIplus[cut][entry][idx]*expo_dict[1]) / expo_dict[2] for idx,v1 in enumerate(dictII[cut][entry])]
+            # saved in dict
             average_dict[cut].update({entry: new_entry})
 
     return average_dict
 
 # Calculate the average dictionary
-BEGe_average_dictionary = calculate_average(GERDA_BEGe_phII, GERDA_BEGe_phII_plus)
+BEGe_average_dictionary = calculate_average_for_det_type(GERDA_BEGe_phII, GERDA_BEGe_phII_plus, "BEGe")
 with open("phII_phIIplus/BEGe_II_IIplus.json", "w") as json_file:
     json.dump(BEGe_average_dictionary, json_file, indent=4)
 
-COAX_average_dictionary = calculate_average(GERDA_COAX_phII, GERDA_COAX_phII_plus)
+COAX_average_dictionary = calculate_average_for_det_type(GERDA_COAX_phII, GERDA_COAX_phII_plus, "COAX")
 with open("phII_phIIplus/COAX_II_IIplus.json", "w") as json_file:
     json.dump(COAX_average_dictionary, json_file, indent=4)
 
@@ -165,3 +179,37 @@ ICPC_average_dictionary = GERDA_IC_phII_plus
 with open("phII_phIIplus/ICPC_IIplus.json", "w") as json_file:
     json.dump(ICPC_average_dictionary, json_file, indent=4)
 
+# ----------------------------------------------------------------------------------------------
+# calculate total numbers (BEGe + ICPC) for GERDA, through an exposure-weighted mean
+
+# Initialize an empty dictionary to store the averages
+BEGe_ICPC_dict = {
+    "isotope": ["42K", "40K", "60Co", "60Co", "228Ac", "228Ac", "228Ac", "228Ac", "212Bi", "212Pb", "208Tl", "208Tl", "208Tl", "214Pb", "214Pb", "214Pb", "214Bi", "214Bi", "214Bi", "214Bi", "214Bi", "214Bi", "214Bi", "e+e-", "85Kr", "65Zn"],
+    "energy": [1525, 1461, 1333, 1173, 911, 969, 965, 338, 727, 239, 2615, 583, 861, 295, 242, 352, 609, 1765, 1238, 2204, 1378, 2448, 1120, 511, 514, 1125],
+    "raw": {
+        "mode": [],
+        "low_68": [],
+        "upp_68": []
+    },
+    "LArC": {
+        "mode": [],
+        "low_68": [],
+        "upp_68": []
+    },
+    "LArAC": {
+        "mode": [],
+        "low_68": [],
+        "upp_68": []
+    }
+}
+
+for cut in ["raw", "LArC", "LArAC"]:
+    BEGe_ICPC_dict.update({cut: {}})
+    for entry in ["mode", "low_68", "upp_68"]:
+        # exposure weightted mean 
+        new_entry = [(v1*expo_BEGe[0] + GERDA_BEGe_phII_plus[cut][entry][idx]*expo_BEGe[1] + GERDA_IC_phII_plus[cut][entry][idx]*expo_ICPC[0] + GERDA_IC_phII_plus[cut][entry][idx]*expo_ICPC[1]) / (expo_BEGe[2] + expo_ICPC[2]) for idx,v1 in enumerate(GERDA_BEGe_phII[cut][entry])]
+        # saved in dict
+        BEGe_ICPC_dict[cut].update({entry: new_entry})
+
+with open("phII_phIIplus/BEGe_ICPC.json", "w") as json_file:
+    json.dump(BEGe_ICPC_dict, json_file, indent=4)
