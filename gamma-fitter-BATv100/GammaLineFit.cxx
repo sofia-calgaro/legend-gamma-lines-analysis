@@ -171,12 +171,12 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
     high = SI.intervals.front().xmax;
 
   //************************************************************************
-    if(low>0) {                                                                        // intensity
+    if(low>0 and mode>0) {                                                           // intensity
    log << std::setw(20) << Form("(%*.3f [%*.3f,%*.3f])",5,mode,5,low,5,high) << " cts (mode [68%])"         << "\n";
     } else                                                                           // upper limit
    log << std::setw(20) << Form(" <%*.3f",5,intensity.GetQuantile(0.90)) << " cts (90%)"                   << "\n";
    log << "-------------- " << std::setfill(' ')                                                << "\n";
-  }                                                                                      // p-value
+  }                                                                                  // p-value
    log << " p-value:      " << std::setw(20) << fHistFitter->GetPValue()                        << "\n";    
    log << "------------------------------------------------------------"                   << "\n";
   //-----------------------------------------------------------------------------------------------
