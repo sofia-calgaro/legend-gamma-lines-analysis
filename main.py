@@ -43,6 +43,8 @@ def return_config_info(config_file):
     gamma_src_code = config["gamma-src-code"]
     # output path
     output = config["output"]
+    # histograms root files path
+    histo_folder = config["histo-folder"]
     # general info
     prodenv = config["dataset"]["prodenv"]
     periods = config["dataset"]["periods"]
@@ -59,14 +61,14 @@ def return_config_info(config_file):
     expo_version = config["exposure"]["version"]
     expo = [exposure_time_unit, run_info_path, status, expo_prodenv, expo_version]
 
-    return gamma_src_code, output, info, expo
+    return gamma_src_code, output, info, expo, histo_folder
         
-def get_histo(gamma_src_code, result_dict,  detectors, cut):
+def get_histo(gamma_src_code, histo_folder, result_dict,  detectors, cut):
     """Combine single histograms."""
     histo_list = ROOT.std.vector('TH1D')()
     for p in result_dict.keys():
         for r in result_dict[p]:
-            file_histo = os.path.join(gamma_src_code, "histograms/root_files", f"{p}-{r}-v01_06-spectra.root")
+            file_histo = os.path.join(gamma_src_code, histo_folder, f"{p}-{r}-v01_06-spectra.root")
             file_root = ROOT.TFile(file_histo)
             histo =  file_root.Get(f"{cut}/{detectors}")
             histo.SetDirectory(0)
@@ -91,7 +93,7 @@ def main():
 
 
     # ...reading the config file...
-    gamma_src_code, output, info, expo = return_config_info(config_file)
+    gamma_src_code, output, info, expo, histo_folder = return_config_info(config_file)
     logger_expo.debug("...inspected!")
     
     #check version set by the user
@@ -151,7 +153,7 @@ def main():
         output = os.path.join(output, det_name)
     
     outputDir = ROOT.TNamed("outputDir",output)        
-    histo  = get_histo(gamma_src_code, result_dict, histo_name, info[5])
+    histo  = get_histo(gamma_src_code, histo_folder, result_dict, histo_name, info[5])
     resolution = get_resolution(config_file, det_name)
     if resolution == [None, None]:
         logger_expo.error("Resolution is a=b=None - maybe det is not available? Exit here")
