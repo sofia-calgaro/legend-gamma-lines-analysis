@@ -66,7 +66,7 @@ def get_resolution(config_file, detectors):
                 print(".....", d)
                 if d not in all_detectors: # for list of detectors set by the user
                     continue
-                if d not in list(exposure_det[p][r].keys()):
+                if d not in list(exposure_det[p][r].keys()): # skip a detector if not present in the exposure list
                     continue
 
                 # get exposure

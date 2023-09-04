@@ -11,8 +11,6 @@ from get_resolution import *
 sys.path.insert(1, './livetime_and_exposure')
 import get_exposure
 
-np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning) 
-
 # -----------------------------------------------------------------------------------------
 # LOGGER SETTINGS 
 logger_expo = logging.getLogger(__name__)
@@ -80,13 +78,12 @@ def get_histo(gamma_src_code, result_dict,  detectors, cut):
         histo_tot.Add(histo_list.at(i))
     histo_ = histo_tot.Clone()
     return histo_ 
-    return 0
 
 def main():
     # get config file as an input
     parser = argparse.ArgumentParser(description="Main code for gamma-analysis.")
     parser.add_argument("--config", help="Path to JSON config file.")
-    parser.add_argument("--det", help="Path to JSON config file.")
+    parser.add_argument("--det", help="Detector type ('single','all','BEGe', 'ICPC', 'COAX','PPC').")
     args = parser.parse_args()
     config_file = args.config
     det = args.det
@@ -128,7 +125,8 @@ def main():
     result_dict = {}
 
     for p in info[1]:
-        if not p in np.take(list_avail,0,1):
+        avail_periods = [item[0] for item in list_avail]
+        if p not in avail_periods:
             logger_expo.debug(f"{p} is not an available period")
             return
         tot_idx=len(periods_avail)
@@ -145,7 +143,6 @@ def main():
     #create json file with the exposure
     exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2], expo[3], expo[4])
       
-        
     if info[3] == "single":
         histo_name = det
         det_name = det[-7:]
