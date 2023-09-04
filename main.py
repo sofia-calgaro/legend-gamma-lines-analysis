@@ -83,7 +83,7 @@ def main():
     # get config file as an input
     parser = argparse.ArgumentParser(description="Main code for gamma-analysis.")
     parser.add_argument("--config", help="Path to JSON config file.")
-    parser.add_argument("--det", help="Detector type ('single','all','BEGe', 'ICPC', 'COAX','PPC').")
+    parser.add_argument("--det", help="Detector type ('single', 'all', 'BEGe', 'ICPC', 'COAX', 'PPC').")
     args = parser.parse_args()
     config_file = args.config
     det = args.det
@@ -128,14 +128,12 @@ def main():
         avail_periods = [item[0] for item in list_avail]
         if p not in avail_periods:
             logger_expo.debug(f"{p} is not an available period")
-            return
         tot_idx=len(periods_avail)
         idx=[idx for idx in range(0,tot_idx) if list_avail[idx][0]==p][0]
         run_avail= []
         for r in info[2]:
             if not r in list_avail[idx][1]:
                 logger_expo.debug(f"{p} {r} is not an available run")
-                #return
             else:
                 run_avail.append(r)
         result_dict[p] = run_avail   
@@ -146,15 +144,18 @@ def main():
     if info[3] == "single":
         histo_name = det
         det_name = det[-7:]
-        output = output + "/single/" + det_name       
+        output = os.path.join(output, "single", det_name)
     else:
         histo_name = info[3]
         det_name = info[3]
-        output = output + "/" + det_name
+        output = os.path.join(output, det_name)
     
     outputDir = ROOT.TNamed("outputDir",output)        
     histo  = get_histo(gamma_src_code, result_dict, histo_name, info[5])
     resolution = get_resolution(config_file, det_name)
+    if resolution == [None, None]:
+        logger_expo.error("Resolution is a=b=None - maybe det is not available? Exit here")
+        return
     a_res = ROOT.TParameter("double")( "a_res", resolution[0] )
     b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
     
