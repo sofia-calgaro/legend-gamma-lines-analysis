@@ -26,6 +26,7 @@ void GammaAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir )
   fitter.Fit("Co60_1173",   {1173.2}, {1153.,1193.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); // 99.9%
   //Th chain
   fitter.Fit("Ac228_911" ,  { 911.2}, { 891., 931.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); // 25.8%
+  fitter.Fit("Ac228_1588" ,  { 1588.2}, { 1568., 1608.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); // 3.2%
   //fitter.Fit("Ac228_969" ,  { 969.0}, { 949., 989.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); // 15.8%, -> in overlap!
   //fitter.Fit("Ac228_338" ,  { 338.3}, { 318., 348.}, std::kQuadratic); // 11.3% check coax!!                   -> in overlap!
   fitter.Fit("Bi212_727",   { 727.3}, { 707., 747.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); //  6.7%
@@ -38,6 +39,7 @@ void GammaAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir )
   fitter.Fit("Pb214_295",   { 295.2}, { 275., 315.}, std::kQuadratic, 0.2, 0.2, BCEngineMCMC::kMedium); // 35.6%
   fitter.Fit("Bi214_609",   { 609.3}, { 589., 629.}, std::kLinear,    0.2, 0.2, BCEngineMCMC::kMedium); // 45.5%
   fitter.Fit("Bi214_1378",   { 1377.7}, { 1358., 1398.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); //  4%
+  fitter.Fit("Bi214_1730" ,  { 1729.6}, { 1710., 1750.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); // 2.9%
   fitter.Fit("Bi214_1764",  {1764.5}, {1744.,1784.}, std::kLinear,    0.2, 0.2, BCEngineMCMC::kMedium); // 15.3%
   //fitter.Fit("Bi214_1120",  {1120.3}, {1100.,1140.}, std::kLinear,    0.2, 0.2, BCEngineMCMC::kMedium); // 14.9% -> in overlap!
   fitter.Fit("Bi214_1238",  {1238.1}, {1218.,1258.}, std::kLinear,    0.2, 0.2, BCEngineMCMC::kMedium); //  5.8%
@@ -49,6 +51,7 @@ void GammaAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir )
   fitter.Fit("Ac228_338_Pb214_352",{ 338.3, 351.9}, { 318., 372.}, std::kQuadratic, 0.2, 0.2, BCEngineMCMC::kMedium); // 11.3%, 35.6%
   fitter.Fit("Ac228_965_Ac228_969",{ 964.8, 969.0}, { 945., 989.}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); // 5%, 25.8%
   fitter.Fit("Bi214_1120_Zn65_1125",  { 1120.3, 1125.0}, { 1100.,1145.}, std::kLinear,    0.2, 0.2, BCEngineMCMC::kMedium); // 14.9%, ?%
+
 }
 
 
