@@ -83,7 +83,7 @@ def main():
     # get config file as an input
     parser = argparse.ArgumentParser(description="Main code for gamma-analysis.")
     parser.add_argument("--config", help="Path to JSON config file.")
-    parser.add_argument("--det", help="Detector type ('single', 'all', 'BEGe', 'ICPC', 'COAX', 'PPC').")
+    parser.add_argument("--det", help="Detector type ('All', 'BEGe', 'ICPC', 'COAX', 'PPC' or the name of the individual detector - in the last case, input has to be of form 'sN-pM-name'-).")
     args = parser.parse_args()
     config_file = args.config
     det = args.det
