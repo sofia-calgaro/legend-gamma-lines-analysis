@@ -1,6 +1,7 @@
 {
     "gamma-src-code": "/lfs/l1/legend/users/calgaro/taup/legend-gamma-lines-analysis",
-    "output": "/lfs/l1/legend/users/calgaro/taup/legend-gamma-lines-analysis/output/",
+    "output": "/lfs/l1/legend/users/calgaro/taup/legend-gamma-lines-analysis/output/2023-09-04/",
+    "histo-folder": "histograms/root_files/0_25keV-golden/",
     "dataset": {
       "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
       "version": "v01.06",
@@ -8,9 +9,9 @@
                 "If they want to study only some detector then set a list [] in the 'detectors' key",
                 "The user can choose the cut to apply among ['raw',  'LAr AC', 'LAr C']"], 
       "periods": ["p03", "p04"],
-      "runs": ["r000", "r001", "r002","r003", "r004", "r005"],
-      "detectors": "BEGe" ,
-      "cut": "raw"
+      "runs": ["r000", "r001", "r002","r003","r004","r005"],
+      "detectors": "BEGe",
+      "cut": "LAr AC"
     },
     "exposure": {
       "comments": ["The user can set the time unit of exposure evaluation ('sec', 'min', 'hour', 'day', 'yr')",
@@ -19,7 +20,7 @@
               "Again, you need to specify the production environment path together with its version - BE CONSISTENT WITH WHAT YOU PUT ABOVE!"], 
       "time-unit": "yr",
       "run-info-path": "/lfs/l1/legend/users/calgaro/taup/legend-gamma-lines-analysis/livetime_and_exposure/runinfo.json",
-      "status": ["on", "no_psd"],
+      "status": ["on"],
       "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
       "version": "v01.06"
     }
