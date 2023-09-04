@@ -158,10 +158,14 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
     // Get the marginalized posterior for the intensity parameter
     BCH1D intensity = fHistFitter->GetMarginalized(nBkgPars + 3 * i + 2);
 
-    // fix the bands for each posterior at 68.3%, 95.4%, 99.7%
-    //fHistFitter->GetBCH1DdrawingOptions().SetBandType(BCH1D::kCentralInterval);
-
+    // fix the bands for each posterior at 68.3%, 95.4%, 99.7% [not there in the original src code]
+    // fHistFitter->GetBCH1DdrawingOptions().SetBandType(BCH1D::kCentralInterval);
+    
+    // Get the mode for the intensity of the peak
     double mode = intensity.GetBestFitParameters();
+
+    /*
+    // Compute quantiles through BAT (sometimes it fails, ie high>mode when it's not the case)...
     double low=0, high=0;
     BCH1D::BCH1DSmallestInterval SI = intensity.GetSmallestIntervals(0.682689);
     if (SI.intervals.empty()) {
@@ -169,6 +173,12 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
     }
     low = SI.intervals.front().xmin;
     high = SI.intervals.front().xmax;
+    */
+
+    // ...another way to compute quantiles (not through BAT) 
+    double low=0, high=0;
+    low = intensity.GetQuantile(0.16);
+    high = intensity.GetQuantile(0.84);
 
   //************************************************************************
     if(low>0 and mode>0) {                                                           // intensity
