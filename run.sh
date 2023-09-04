@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+rm resolution_*
+rm exposure_*
+rm tmp/*
+
 gamma_src_code="$(grep -oP '(?<="gamma-src-code": ")[^"]*' $1)"
 cut="$(grep -oP '(?<="cut": ")[^"]*' $1)"
 cut=$(echo "${cut//\ }")
