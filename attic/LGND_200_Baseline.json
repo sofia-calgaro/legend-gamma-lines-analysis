@@ -1,0 +1,5974 @@
+{
+  "LGND200": {
+    "type": "cryostat",
+    "parameters": {
+      "multistring": [
+        "Array1StringAssembly"
+      ]
+    }
+  },
+  "Array1StringAssembly": {
+    "type": "multistring",
+    "parameters": {
+      "string": [
+        "C0S1",
+        "C0S2",
+        "C0S3",
+        "C0S4",
+        "C0S5",
+        "C0S7",
+        "C0S8",
+        "C0S9",
+        "C0S10",
+        "C0S11"
+      ]
+    }
+  },
+  "CrysAssemV02160A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V02160A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "103.5"
+    }
+  },
+  "C0S1": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "51.0",
+      "crystalassembly": [
+        "CrysAssemV02160A",
+        "CrysAssemV02160B",
+        "CrysAssemV05261B",
+        "CrysAssemV05266A",
+        "CrysAssemV05266B",
+        "CrysAssemV05268B",
+        "CrysAssemV05612A",
+        "CrysAssemV07647A",
+        "CrysAssemV07647B"
+      ]
+    }
+  },
+  "V02160A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "11",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "32.7"
+        },
+        {
+          "r": "11.3",
+          "z": "32.7"
+        },
+        {
+          "r": "11.3",
+          "z": "30.700000000000003"
+        },
+        {
+          "r": "15.5",
+          "z": "30.700000000000003"
+        },
+        {
+          "r": "15.5",
+          "z": "32.7"
+        },
+        {
+          "r": "39.9",
+          "z": "32.7"
+        },
+        {
+          "r": "39.9",
+          "z": "-12.600000000000001"
+        },
+        {
+          "r": "37.7519296744116",
+          "z": "-32.7"
+        },
+        {
+          "r": "4.7",
+          "z": "-32.7"
+        },
+        {
+          "r": "4.7",
+          "z": "1.0"
+        },
+        {
+          "r": "0.0",
+          "z": "1.0"
+        }
+      ]
+    }
+  },
+  "CrysAssemV02160B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V02160B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "103.5"
+    }
+  },
+  "V02160B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "10",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "29.65"
+        },
+        {
+          "r": "10.1",
+          "z": "29.65"
+        },
+        {
+          "r": "10.1",
+          "z": "27.65"
+        },
+        {
+          "r": "13.9",
+          "z": "27.65"
+        },
+        {
+          "r": "13.9",
+          "z": "29.65"
+        },
+        {
+          "r": "41.0",
+          "z": "29.65"
+        },
+        {
+          "r": "41.0",
+          "z": "-29.65"
+        },
+        {
+          "r": "4.8",
+          "z": "-29.65"
+        },
+        {
+          "r": "4.8",
+          "z": "0.3500000000000014"
+        },
+        {
+          "r": "0.0",
+          "z": "0.3500000000000014"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05261B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05261B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "122"
+    }
+  },
+  "V05261B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "43.5"
+        },
+        {
+          "r": "10.0",
+          "z": "43.5"
+        },
+        {
+          "r": "10.0",
+          "z": "41.5"
+        },
+        {
+          "r": "14.0",
+          "z": "41.5"
+        },
+        {
+          "r": "14.0",
+          "z": "43.5"
+        },
+        {
+          "r": "37.10000000538469",
+          "z": "43.5"
+        },
+        {
+          "r": "40.1",
+          "z": "40.5"
+        },
+        {
+          "r": "40.1",
+          "z": "-40.5"
+        },
+        {
+          "r": "37.10000000538469",
+          "z": "-43.5"
+        },
+        {
+          "r": "7.499546537017771",
+          "z": "-43.5"
+        },
+        {
+          "r": "4.0",
+          "z": "-3.5"
+        },
+        {
+          "r": "4.0",
+          "z": "21.299999999999997"
+        },
+        {
+          "r": "0.0",
+          "z": "21.299999999999997"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05266A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05266A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "103.5"
+    }
+  },
+  "V05266A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "37.6"
+        },
+        {
+          "r": "13.0",
+          "z": "37.6"
+        },
+        {
+          "r": "13.0",
+          "z": "35.6"
+        },
+        {
+          "r": "16.0",
+          "z": "35.6"
+        },
+        {
+          "r": "16.0",
+          "z": "37.6"
+        },
+        {
+          "r": "37.00000000538469",
+          "z": "37.6"
+        },
+        {
+          "r": "40.0",
+          "z": "34.6"
+        },
+        {
+          "r": "40.0",
+          "z": "-34.6"
+        },
+        {
+          "r": "37.00000000538469",
+          "z": "-37.6"
+        },
+        {
+          "r": "4.0",
+          "z": "-37.6"
+        },
+        {
+          "r": "4.0",
+          "z": "4.399999999999999"
+        },
+        {
+          "r": "0.0",
+          "z": "4.399999999999999"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05266B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05266B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "103.5"
+    }
+  },
+  "V05266B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "36.0"
+        },
+        {
+          "r": "10.0",
+          "z": "36.0"
+        },
+        {
+          "r": "10.0",
+          "z": "34.0"
+        },
+        {
+          "r": "14.0",
+          "z": "34.0"
+        },
+        {
+          "r": "14.0",
+          "z": "36.0"
+        },
+        {
+          "r": "37.05000000538469",
+          "z": "36.0"
+        },
+        {
+          "r": "40.05",
+          "z": "33.0"
+        },
+        {
+          "r": "40.05",
+          "z": "-33.0"
+        },
+        {
+          "r": "37.05000000538469",
+          "z": "-36.0"
+        },
+        {
+          "r": "4.0",
+          "z": "-36.0"
+        },
+        {
+          "r": "4.0",
+          "z": "5.899999999999999"
+        },
+        {
+          "r": "0.0",
+          "z": "5.899999999999999"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05268B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05268B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "103.5"
+    }
+  },
+  "V05268B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "32.6"
+        },
+        {
+          "r": "15.0",
+          "z": "32.6"
+        },
+        {
+          "r": "15.0",
+          "z": "30.6"
+        },
+        {
+          "r": "18.0",
+          "z": "30.6"
+        },
+        {
+          "r": "18.0",
+          "z": "32.6"
+        },
+        {
+          "r": "37.10000000538469",
+          "z": "32.6"
+        },
+        {
+          "r": "40.1",
+          "z": "29.6"
+        },
+        {
+          "r": "40.1",
+          "z": "-29.6"
+        },
+        {
+          "r": "37.10000000538469",
+          "z": "-32.6"
+        },
+        {
+          "r": "7.936989854144992",
+          "z": "-32.6"
+        },
+        {
+          "r": "4.0",
+          "z": "12.399999999999999"
+        },
+        {
+          "r": "4.0",
+          "z": "16.4"
+        },
+        {
+          "r": "0.0",
+          "z": "16.4"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05612A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05612A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "103.5"
+    }
+  },
+  "V05612A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "40.05"
+        },
+        {
+          "r": "14.75",
+          "z": "40.05"
+        },
+        {
+          "r": "14.75",
+          "z": "38.05"
+        },
+        {
+          "r": "18.25",
+          "z": "38.05"
+        },
+        {
+          "r": "18.25",
+          "z": "40.05"
+        },
+        {
+          "r": "37.00000000538469",
+          "z": "40.05"
+        },
+        {
+          "r": "40.0",
+          "z": "37.05"
+        },
+        {
+          "r": "40.0",
+          "z": "-37.05"
+        },
+        {
+          "r": "37.00000000538469",
+          "z": "-40.05"
+        },
+        {
+          "r": "6.624659902763328",
+          "z": "-40.05"
+        },
+        {
+          "r": "4.0",
+          "z": "-10.049999999999997"
+        },
+        {
+          "r": "4.0",
+          "z": "-0.04999999999999716"
+        },
+        {
+          "r": "0.0",
+          "z": "-0.04999999999999716"
+        }
+      ]
+    }
+  },
+  "CrysAssemV07647A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V07647A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "103.5"
+    }
+  },
+  "V07647A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "35.15"
+        },
+        {
+          "r": "12.0",
+          "z": "35.15"
+        },
+        {
+          "r": "12.0",
+          "z": "33.15"
+        },
+        {
+          "r": "15.0",
+          "z": "33.15"
+        },
+        {
+          "r": "15.0",
+          "z": "35.15"
+        },
+        {
+          "r": "35.793898423357405",
+          "z": "35.15"
+        },
+        {
+          "r": "39.8",
+          "z": "27.15"
+        },
+        {
+          "r": "39.8",
+          "z": "-34.15"
+        },
+        {
+          "r": "38.80000000179489",
+          "z": "-35.15"
+        },
+        {
+          "r": "4.0",
+          "z": "-35.15"
+        },
+        {
+          "r": "4.0",
+          "z": "1.8500000000000014"
+        },
+        {
+          "r": "0.0",
+          "z": "1.8500000000000014"
+        }
+      ]
+    }
+  },
+  "CrysAssemV07647B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V07647B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "103.5"
+    }
+  },
+  "V07647B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "11",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "33.05"
+        },
+        {
+          "r": "10.0",
+          "z": "33.05"
+        },
+        {
+          "r": "10.0",
+          "z": "31.049999999999997"
+        },
+        {
+          "r": "13.0",
+          "z": "31.049999999999997"
+        },
+        {
+          "r": "13.0",
+          "z": "33.05"
+        },
+        {
+          "r": "39.8",
+          "z": "33.05"
+        },
+        {
+          "r": "39.8",
+          "z": "-24.049999999999997"
+        },
+        {
+          "r": "36.80609848475365",
+          "z": "-33.05"
+        },
+        {
+          "r": "4.0",
+          "z": "-33.05"
+        },
+        {
+          "r": "4.0",
+          "z": "8.950000000000003"
+        },
+        {
+          "r": "0.0",
+          "z": "8.950000000000003"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00035C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00035C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "C0S2": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "48.0",
+      "crystalassembly": [
+        "CrysAssemB00035C",
+        "CrysAssemC000RG1",
+        "CrysAssemC000RG2",
+        "CrysAssemC00ANG3",
+        "CrysAssemC00ANG5",
+        "CrysAssemC00ANG2",
+        "CrysAssemV00074A",
+        "CrysAssemV04549A",
+        "CrysAssemV07298B"
+      ]
+    }
+  },
+  "B00035C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "13.16"
+        },
+        {
+          "r": "7.5",
+          "z": "13.16"
+        },
+        {
+          "r": "7.5",
+          "z": "11.16"
+        },
+        {
+          "r": "10.5",
+          "z": "11.16"
+        },
+        {
+          "r": "10.5",
+          "z": "13.16"
+        },
+        {
+          "r": "37.42",
+          "z": "13.16"
+        },
+        {
+          "r": "37.42",
+          "z": "-13.16"
+        },
+        {
+          "r": "0.0",
+          "z": "-13.16"
+        }
+      ]
+    }
+  },
+  "CrysAssemC000RG1": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "C000RG1",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "C000RG1": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "-31.0"
+        },
+        {
+          "r": "6.75",
+          "z": "-31.0"
+        },
+        {
+          "r": "6.75",
+          "z": "42.0"
+        },
+        {
+          "r": "17.0",
+          "z": "42.0"
+        },
+        {
+          "r": "17.0",
+          "z": "40.0"
+        },
+        {
+          "r": "20.0",
+          "z": "40.0"
+        },
+        {
+          "r": "20.0",
+          "z": "42.0"
+        },
+        {
+          "r": "36.2500000035898",
+          "z": "42.0"
+        },
+        {
+          "r": "38.25",
+          "z": "40.0"
+        },
+        {
+          "r": "38.25",
+          "z": "-37.0"
+        },
+        {
+          "r": "33.25000000897448",
+          "z": "-42.0"
+        },
+        {
+          "r": "0.0",
+          "z": "-42.0"
+        }
+      ]
+    }
+  },
+  "CrysAssemC000RG2": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "C000RG2",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "C000RG2": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "-30.0"
+        },
+        {
+          "r": "6.5",
+          "z": "-30.0"
+        },
+        {
+          "r": "6.5",
+          "z": "42.0"
+        },
+        {
+          "r": "17.0",
+          "z": "42.0"
+        },
+        {
+          "r": "17.0",
+          "z": "40.0"
+        },
+        {
+          "r": "20.0",
+          "z": "40.0"
+        },
+        {
+          "r": "20.0",
+          "z": "42.0"
+        },
+        {
+          "r": "36.7500000035898",
+          "z": "42.0"
+        },
+        {
+          "r": "38.75",
+          "z": "40.0"
+        },
+        {
+          "r": "38.75",
+          "z": "-37.0"
+        },
+        {
+          "r": "33.75000000897448",
+          "z": "-42.0"
+        },
+        {
+          "r": "0.0",
+          "z": "-42.0"
+        }
+      ]
+    }
+  },
+  "CrysAssemC00ANG3": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "C00ANG3",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "122"
+    }
+  },
+  "C00ANG3": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "-36.5"
+        },
+        {
+          "r": "7.5",
+          "z": "-36.5"
+        },
+        {
+          "r": "7.5",
+          "z": "46.5"
+        },
+        {
+          "r": "17.0",
+          "z": "46.5"
+        },
+        {
+          "r": "17.0",
+          "z": "44.5"
+        },
+        {
+          "r": "20.0",
+          "z": "44.5"
+        },
+        {
+          "r": "20.0",
+          "z": "46.5"
+        },
+        {
+          "r": "36.00000000538469",
+          "z": "46.5"
+        },
+        {
+          "r": "39.0",
+          "z": "43.5"
+        },
+        {
+          "r": "39.0",
+          "z": "-44.5"
+        },
+        {
+          "r": "37.0000000035898",
+          "z": "-46.5"
+        },
+        {
+          "r": "0.0",
+          "z": "-46.5"
+        }
+      ]
+    }
+  },
+  "CrysAssemC00ANG5": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "C00ANG5",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "130.5"
+    }
+  },
+  "C00ANG5": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "-41.5"
+        },
+        {
+          "r": "6.25",
+          "z": "-41.5"
+        },
+        {
+          "r": "6.25",
+          "z": "52.5"
+        },
+        {
+          "r": "15.0",
+          "z": "52.5"
+        },
+        {
+          "r": "15.0",
+          "z": "50.5"
+        },
+        {
+          "r": "18.0",
+          "z": "50.5"
+        },
+        {
+          "r": "18.0",
+          "z": "52.5"
+        },
+        {
+          "r": "36.25000000538469",
+          "z": "52.5"
+        },
+        {
+          "r": "39.25",
+          "z": "49.5"
+        },
+        {
+          "r": "39.25",
+          "z": "-47.5"
+        },
+        {
+          "r": "34.25000000897448",
+          "z": "-52.5"
+        },
+        {
+          "r": "0.0",
+          "z": "-52.5"
+        }
+      ]
+    }
+  },
+  "CrysAssemC00ANG2": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "C00ANG2",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "130.5"
+    }
+  },
+  "C00ANG2": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "-40.5"
+        },
+        {
+          "r": "7.0",
+          "z": "-40.5"
+        },
+        {
+          "r": "7.0",
+          "z": "53.5"
+        },
+        {
+          "r": "15.0",
+          "z": "53.5"
+        },
+        {
+          "r": "15.0",
+          "z": "51.5"
+        },
+        {
+          "r": "18.0",
+          "z": "51.5"
+        },
+        {
+          "r": "18.0",
+          "z": "53.5"
+        },
+        {
+          "r": "32.496308767967726",
+          "z": "53.5"
+        },
+        {
+          "r": "40.0",
+          "z": "42.5"
+        },
+        {
+          "r": "40.0",
+          "z": "-49.0"
+        },
+        {
+          "r": "36.26402802635585",
+          "z": "-53.5"
+        },
+        {
+          "r": "0.0",
+          "z": "-53.5"
+        }
+      ]
+    }
+  },
+  "CrysAssemV00074A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V00074A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V00074A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "10",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "41.15"
+        },
+        {
+          "r": "9.5",
+          "z": "41.15"
+        },
+        {
+          "r": "9.5",
+          "z": "39.15"
+        },
+        {
+          "r": "13.5",
+          "z": "39.15"
+        },
+        {
+          "r": "13.5",
+          "z": "41.15"
+        },
+        {
+          "r": "38.3",
+          "z": "41.15"
+        },
+        {
+          "r": "38.3",
+          "z": "-41.15"
+        },
+        {
+          "r": "5.25",
+          "z": "-41.15"
+        },
+        {
+          "r": "5.25",
+          "z": "11.25"
+        },
+        {
+          "r": "0.0",
+          "z": "11.25"
+        }
+      ]
+    }
+  },
+  "CrysAssemV04549A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V04549A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V04549A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "40.25"
+        },
+        {
+          "r": "10.0",
+          "z": "40.25"
+        },
+        {
+          "r": "10.0",
+          "z": "38.25"
+        },
+        {
+          "r": "14.0",
+          "z": "38.25"
+        },
+        {
+          "r": "14.0",
+          "z": "40.25"
+        },
+        {
+          "r": "36.500000001794895",
+          "z": "40.25"
+        },
+        {
+          "r": "37.5",
+          "z": "39.25"
+        },
+        {
+          "r": "37.5",
+          "z": "-39.25"
+        },
+        {
+          "r": "36.500000001794895",
+          "z": "-40.25"
+        },
+        {
+          "r": "5.0",
+          "z": "-40.25"
+        },
+        {
+          "r": "5.0",
+          "z": "8.75"
+        },
+        {
+          "r": "0.0",
+          "z": "8.75"
+        }
+      ]
+    }
+  },
+  "CrysAssemV07298B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V07298B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V07298B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "37.65"
+        },
+        {
+          "r": "10.0",
+          "z": "37.65"
+        },
+        {
+          "r": "10.0",
+          "z": "35.65"
+        },
+        {
+          "r": "13.0",
+          "z": "35.65"
+        },
+        {
+          "r": "13.0",
+          "z": "37.65"
+        },
+        {
+          "r": "39.000000001794895",
+          "z": "37.65"
+        },
+        {
+          "r": "40.0",
+          "z": "36.65"
+        },
+        {
+          "r": "40.0",
+          "z": "-36.65"
+        },
+        {
+          "r": "39.000000001794895",
+          "z": "-37.65"
+        },
+        {
+          "r": "4.0",
+          "z": "-37.65"
+        },
+        {
+          "r": "4.0",
+          "z": "10.550000000000004"
+        },
+        {
+          "r": "0.0",
+          "z": "10.550000000000004"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00032B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00032B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "C0S3": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "44.0",
+      "crystalassembly": [
+        "CrysAssemB00032B",
+        "CrysAssemB00091C",
+        "CrysAssemP00574B",
+        "CrysAssemP00665A",
+        "CrysAssemP00698A",
+        "CrysAssemP00712A",
+        "CrysAssemP00909C",
+        "CrysAssemP00661B",
+        "CrysAssemP00574A"
+      ]
+    }
+  },
+  "B00032B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "16.08"
+        },
+        {
+          "r": "7.5",
+          "z": "16.08"
+        },
+        {
+          "r": "7.5",
+          "z": "14.079999999999998"
+        },
+        {
+          "r": "10.5",
+          "z": "14.079999999999998"
+        },
+        {
+          "r": "10.5",
+          "z": "16.08"
+        },
+        {
+          "r": "35.945",
+          "z": "16.08"
+        },
+        {
+          "r": "35.945",
+          "z": "-16.08"
+        },
+        {
+          "r": "0.0",
+          "z": "-16.08"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00091C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00091C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "B00091C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "14.895"
+        },
+        {
+          "r": "7.5",
+          "z": "14.895"
+        },
+        {
+          "r": "7.5",
+          "z": "12.895"
+        },
+        {
+          "r": "10.5",
+          "z": "12.895"
+        },
+        {
+          "r": "10.5",
+          "z": "14.895"
+        },
+        {
+          "r": "34.955",
+          "z": "14.895"
+        },
+        {
+          "r": "34.955",
+          "z": "-14.895"
+        },
+        {
+          "r": "0.0",
+          "z": "-14.895"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00574B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00574B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00574B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "17.75"
+        },
+        {
+          "r": "1.6",
+          "z": "17.75"
+        },
+        {
+          "r": "1.6",
+          "z": "19.75"
+        },
+        {
+          "r": "29.1800000086514",
+          "z": "19.75"
+        },
+        {
+          "r": "34.0",
+          "z": "14.93"
+        },
+        {
+          "r": "34.0",
+          "z": "-19.75"
+        },
+        {
+          "r": "0.0",
+          "z": "-19.75"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00665A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00665A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00665A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "15.749999999999998"
+        },
+        {
+          "r": "1.5",
+          "z": "15.749999999999998"
+        },
+        {
+          "r": "1.5",
+          "z": "17.15"
+        },
+        {
+          "r": "29.8700000095668",
+          "z": "17.15"
+        },
+        {
+          "r": "35.2",
+          "z": "11.819999999999999"
+        },
+        {
+          "r": "35.2",
+          "z": "-17.15"
+        },
+        {
+          "r": "0.0",
+          "z": "-17.15"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00698A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00698A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00698A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "21.9"
+        },
+        {
+          "r": "1.5",
+          "z": "21.9"
+        },
+        {
+          "r": "1.5",
+          "z": "23.9"
+        },
+        {
+          "r": "30.20000000807704",
+          "z": "23.9"
+        },
+        {
+          "r": "34.7",
+          "z": "19.4"
+        },
+        {
+          "r": "34.7",
+          "z": "-23.9"
+        },
+        {
+          "r": "0.0",
+          "z": "-23.9"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00712A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00712A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00712A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "23.2"
+        },
+        {
+          "r": "1.6",
+          "z": "23.2"
+        },
+        {
+          "r": "1.6",
+          "z": "25.0"
+        },
+        {
+          "r": "26.620000009746285",
+          "z": "25.0"
+        },
+        {
+          "r": "32.05",
+          "z": "19.57"
+        },
+        {
+          "r": "32.05",
+          "z": "-25.0"
+        },
+        {
+          "r": "0.0",
+          "z": "-25.0"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00909C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00909C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00909C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "18.2"
+        },
+        {
+          "r": "1.5",
+          "z": "18.2"
+        },
+        {
+          "r": "1.5",
+          "z": "20.2"
+        },
+        {
+          "r": "31.000000008974485",
+          "z": "20.2"
+        },
+        {
+          "r": "36.0",
+          "z": "15.2"
+        },
+        {
+          "r": "36.0",
+          "z": "-20.2"
+        },
+        {
+          "r": "0.0",
+          "z": "-20.2"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00661B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00661B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00661B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "15.149999999999999"
+        },
+        {
+          "r": "1.5",
+          "z": "15.149999999999999"
+        },
+        {
+          "r": "1.5",
+          "z": "17.15"
+        },
+        {
+          "r": "31.500000008077038",
+          "z": "17.15"
+        },
+        {
+          "r": "36.0",
+          "z": "12.649999999999999"
+        },
+        {
+          "r": "36.0",
+          "z": "-17.15"
+        },
+        {
+          "r": "0.0",
+          "z": "-17.15"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00574A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00574A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00574A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "17.7"
+        },
+        {
+          "r": "1.7",
+          "z": "17.7"
+        },
+        {
+          "r": "1.7",
+          "z": "19.7"
+        },
+        {
+          "r": "28.640000009441156",
+          "z": "19.7"
+        },
+        {
+          "r": "33.9",
+          "z": "14.44"
+        },
+        {
+          "r": "33.9",
+          "z": "-19.7"
+        },
+        {
+          "r": "0.0",
+          "z": "-19.7"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00000B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00000B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "C0S4": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "48.0",
+      "crystalassembly": [
+        "CrysAssemB00000B",
+        "CrysAssemB00000C",
+        "CrysAssemB00061A",
+        "CrysAssemB00061C",
+        "CrysAssemB00076C",
+        "CrysAssemB00079B",
+        "CrysAssemB00079C",
+        "CrysAssemV01386A",
+        "CrysAssemV01403A",
+        "CrysAssemV01404A",
+        "CrysAssemV01406A",
+        "CrysAssemV01415A"
+      ]
+    }
+  },
+  "B00000B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "14.73"
+        },
+        {
+          "r": "7.5",
+          "z": "14.73"
+        },
+        {
+          "r": "7.5",
+          "z": "12.73"
+        },
+        {
+          "r": "10.5",
+          "z": "12.73"
+        },
+        {
+          "r": "10.5",
+          "z": "14.73"
+        },
+        {
+          "r": "36.98",
+          "z": "14.73"
+        },
+        {
+          "r": "36.98",
+          "z": "-14.73"
+        },
+        {
+          "r": "0.0",
+          "z": "-14.73"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00000C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00000C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00000C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "16.82"
+        },
+        {
+          "r": "7.5",
+          "z": "16.82"
+        },
+        {
+          "r": "7.5",
+          "z": "14.82"
+        },
+        {
+          "r": "10.5",
+          "z": "14.82"
+        },
+        {
+          "r": "10.5",
+          "z": "16.82"
+        },
+        {
+          "r": "37.76",
+          "z": "16.82"
+        },
+        {
+          "r": "37.76",
+          "z": "-16.82"
+        },
+        {
+          "r": "0.0",
+          "z": "-16.82"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00061A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00061A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00061A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "9",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "16.785"
+        },
+        {
+          "r": "7.5",
+          "z": "16.785"
+        },
+        {
+          "r": "7.5",
+          "z": "14.785"
+        },
+        {
+          "r": "10.5",
+          "z": "14.785"
+        },
+        {
+          "r": "10.5",
+          "z": "16.785"
+        },
+        {
+          "r": "36.74",
+          "z": "16.785"
+        },
+        {
+          "r": "36.74",
+          "z": "-0.6550000000000011"
+        },
+        {
+          "r": "31.746930931816095",
+          "z": "-16.785"
+        },
+        {
+          "r": "0.0",
+          "z": "-16.785"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00061C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00061C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00061C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "13.225"
+        },
+        {
+          "r": "7.5",
+          "z": "13.225"
+        },
+        {
+          "r": "7.5",
+          "z": "11.225"
+        },
+        {
+          "r": "10.5",
+          "z": "11.225"
+        },
+        {
+          "r": "10.5",
+          "z": "13.225"
+        },
+        {
+          "r": "37.28",
+          "z": "13.225"
+        },
+        {
+          "r": "37.28",
+          "z": "-13.225"
+        },
+        {
+          "r": "0.0",
+          "z": "-13.225"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00076C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00076C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00076C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "16.59"
+        },
+        {
+          "r": "7.5",
+          "z": "16.59"
+        },
+        {
+          "r": "7.5",
+          "z": "14.59"
+        },
+        {
+          "r": "10.5",
+          "z": "14.59"
+        },
+        {
+          "r": "10.5",
+          "z": "16.59"
+        },
+        {
+          "r": "37.92",
+          "z": "16.59"
+        },
+        {
+          "r": "37.92",
+          "z": "-16.59"
+        },
+        {
+          "r": "0.0",
+          "z": "-16.59"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00079B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00079B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00079B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "14.52"
+        },
+        {
+          "r": "7.5",
+          "z": "14.52"
+        },
+        {
+          "r": "7.5",
+          "z": "12.52"
+        },
+        {
+          "r": "10.5",
+          "z": "12.52"
+        },
+        {
+          "r": "10.5",
+          "z": "14.52"
+        },
+        {
+          "r": "38.42",
+          "z": "14.52"
+        },
+        {
+          "r": "38.42",
+          "z": "-14.52"
+        },
+        {
+          "r": "0.0",
+          "z": "-14.52"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00079C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00079C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00079C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "15.11"
+        },
+        {
+          "r": "7.5",
+          "z": "15.11"
+        },
+        {
+          "r": "7.5",
+          "z": "13.11"
+        },
+        {
+          "r": "10.5",
+          "z": "13.11"
+        },
+        {
+          "r": "10.5",
+          "z": "15.11"
+        },
+        {
+          "r": "39.475",
+          "z": "15.11"
+        },
+        {
+          "r": "39.475",
+          "z": "-15.11"
+        },
+        {
+          "r": "0.0",
+          "z": "-15.11"
+        }
+      ]
+    }
+  },
+  "CrysAssemV01386A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V01386A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V01386A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "28.95"
+        },
+        {
+          "r": "3.5",
+          "z": "28.95"
+        },
+        {
+          "r": "3.5",
+          "z": "31.65"
+        },
+        {
+          "r": "15.8",
+          "z": "31.65"
+        },
+        {
+          "r": "15.8",
+          "z": "29.65"
+        },
+        {
+          "r": "21.5",
+          "z": "29.65"
+        },
+        {
+          "r": "21.5",
+          "z": "31.65"
+        },
+        {
+          "r": "37.7",
+          "z": "31.65"
+        },
+        {
+          "r": "37.7",
+          "z": "-29.65"
+        },
+        {
+          "r": "35.7000000035898",
+          "z": "-31.65"
+        },
+        {
+          "r": "5.0",
+          "z": "-31.65"
+        },
+        {
+          "r": "5.0",
+          "z": "13.149999999999999"
+        },
+        {
+          "r": "0.0",
+          "z": "13.149999999999999"
+        }
+      ]
+    }
+  },
+  "CrysAssemV01403A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V01403A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V01403A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "30.869999999999997"
+        },
+        {
+          "r": "3.55",
+          "z": "30.869999999999997"
+        },
+        {
+          "r": "3.55",
+          "z": "33.8"
+        },
+        {
+          "r": "15.0",
+          "z": "33.8"
+        },
+        {
+          "r": "15.0",
+          "z": "31.799999999999997"
+        },
+        {
+          "r": "18.0",
+          "z": "31.799999999999997"
+        },
+        {
+          "r": "18.0",
+          "z": "33.8"
+        },
+        {
+          "r": "36.3",
+          "z": "33.8"
+        },
+        {
+          "r": "36.3",
+          "z": "-31.799999999999997"
+        },
+        {
+          "r": "34.300000003589794",
+          "z": "-33.8"
+        },
+        {
+          "r": "14.010308703694685",
+          "z": "-33.8"
+        },
+        {
+          "r": "5.0",
+          "z": "17.300000000000004"
+        },
+        {
+          "r": "0.0",
+          "z": "17.300000000000004"
+        }
+      ]
+    }
+  },
+  "CrysAssemV01404A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V01404A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V01404A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "14",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "30.85"
+        },
+        {
+          "r": "3.75",
+          "z": "30.85"
+        },
+        {
+          "r": "3.75",
+          "z": "33.75"
+        },
+        {
+          "r": "17.0",
+          "z": "33.75"
+        },
+        {
+          "r": "17.0",
+          "z": "31.75"
+        },
+        {
+          "r": "20.0",
+          "z": "31.75"
+        },
+        {
+          "r": "20.0",
+          "z": "33.75"
+        },
+        {
+          "r": "37.4",
+          "z": "33.75"
+        },
+        {
+          "r": "37.4",
+          "z": "-31.75"
+        },
+        {
+          "r": "35.400000003589795",
+          "z": "-33.75"
+        },
+        {
+          "r": "12.29993699281722",
+          "z": "-33.75"
+        },
+        {
+          "r": "5.0",
+          "z": "7.649999999999999"
+        },
+        {
+          "r": "5.0",
+          "z": "18.15"
+        },
+        {
+          "r": "0.0",
+          "z": "18.15"
+        }
+      ]
+    }
+  },
+  "CrysAssemV01406A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V01406A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V01406A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "28.4"
+        },
+        {
+          "r": "2.75",
+          "z": "28.4"
+        },
+        {
+          "r": "2.75",
+          "z": "30.5"
+        },
+        {
+          "r": "13.0",
+          "z": "30.5"
+        },
+        {
+          "r": "13.0",
+          "z": "28.5"
+        },
+        {
+          "r": "16.0",
+          "z": "28.5"
+        },
+        {
+          "r": "16.0",
+          "z": "30.5"
+        },
+        {
+          "r": "37.3",
+          "z": "30.5"
+        },
+        {
+          "r": "37.3",
+          "z": "-28.5"
+        },
+        {
+          "r": "35.300000003589794",
+          "z": "-30.5"
+        },
+        {
+          "r": "12.564427463571466",
+          "z": "-30.5"
+        },
+        {
+          "r": "5.0",
+          "z": "12.399999999999999"
+        },
+        {
+          "r": "0.0",
+          "z": "12.399999999999999"
+        }
+      ]
+    }
+  },
+  "CrysAssemV01415A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V01415A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V01415A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "14",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "35.25"
+        },
+        {
+          "r": "2.2",
+          "z": "35.25"
+        },
+        {
+          "r": "2.2",
+          "z": "37.15"
+        },
+        {
+          "r": "19.0",
+          "z": "37.15"
+        },
+        {
+          "r": "19.0",
+          "z": "35.15"
+        },
+        {
+          "r": "22.0",
+          "z": "35.15"
+        },
+        {
+          "r": "22.0",
+          "z": "37.15"
+        },
+        {
+          "r": "36.0",
+          "z": "37.15"
+        },
+        {
+          "r": "36.0",
+          "z": "-35.15"
+        },
+        {
+          "r": "34.0000000035898",
+          "z": "-37.15"
+        },
+        {
+          "r": "10.995117337096268",
+          "z": "-37.15"
+        },
+        {
+          "r": "5.0",
+          "z": "-3.1499999999999986"
+        },
+        {
+          "r": "5.0",
+          "z": "6.350000000000001"
+        },
+        {
+          "r": "0.0",
+          "z": "6.350000000000001"
+        }
+      ]
+    }
+  },
+  "CrysAssemV08682B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V08682B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "x-large",
+      "rodheight": "77"
+    }
+  },
+  "C0S5": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "54.0",
+      "crystalassembly": [
+        "CrysAssemV08682B",
+        "CrysAssemV08682A",
+        "CrysAssemV09372A",
+        "CrysAssemV09374A",
+        "CrysAssemV09724A"
+      ]
+    }
+  },
+  "V08682B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "21.65"
+        },
+        {
+          "r": "10.0",
+          "z": "21.65"
+        },
+        {
+          "r": "10.0",
+          "z": "19.65"
+        },
+        {
+          "r": "13.0",
+          "z": "19.65"
+        },
+        {
+          "r": "13.0",
+          "z": "21.65"
+        },
+        {
+          "r": "44.000000001794895",
+          "z": "21.65"
+        },
+        {
+          "r": "45.0",
+          "z": "20.65"
+        },
+        {
+          "r": "45.0",
+          "z": "-20.65"
+        },
+        {
+          "r": "44.000000001794895",
+          "z": "-21.65"
+        },
+        {
+          "r": "4.05",
+          "z": "-21.65"
+        },
+        {
+          "r": "4.05",
+          "z": "-4.549999999999997"
+        },
+        {
+          "r": "0.0",
+          "z": "-4.549999999999997"
+        }
+      ]
+    }
+  },
+  "CrysAssemV08682A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V08682A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "x-large",
+      "rodheight": "122"
+    }
+  },
+  "V08682A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "47.85"
+        },
+        {
+          "r": "12.0",
+          "z": "47.85"
+        },
+        {
+          "r": "12.0",
+          "z": "45.85"
+        },
+        {
+          "r": "15.0",
+          "z": "45.85"
+        },
+        {
+          "r": "15.0",
+          "z": "47.85"
+        },
+        {
+          "r": "44.000000001794895",
+          "z": "47.85"
+        },
+        {
+          "r": "45.0",
+          "z": "46.85"
+        },
+        {
+          "r": "45.0",
+          "z": "-46.85"
+        },
+        {
+          "r": "44.000000001794895",
+          "z": "-47.85"
+        },
+        {
+          "r": "8.374433171272214",
+          "z": "-47.85"
+        },
+        {
+          "r": "4.0",
+          "z": "2.1499999999999986"
+        },
+        {
+          "r": "4.0",
+          "z": "13.149999999999999"
+        },
+        {
+          "r": "0.0",
+          "z": "13.149999999999999"
+        }
+      ]
+    }
+  },
+  "CrysAssemV09372A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V09372A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "x-large",
+      "rodheight": "131"
+    }
+  },
+  "V09372A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "55.9"
+        },
+        {
+          "r": "12.0",
+          "z": "55.9"
+        },
+        {
+          "r": "12.0",
+          "z": "53.9"
+        },
+        {
+          "r": "15.0",
+          "z": "53.9"
+        },
+        {
+          "r": "15.0",
+          "z": "55.9"
+        },
+        {
+          "r": "45.000000001794895",
+          "z": "55.9"
+        },
+        {
+          "r": "46.0",
+          "z": "54.9"
+        },
+        {
+          "r": "46.0",
+          "z": "-54.9"
+        },
+        {
+          "r": "45.000000001794895",
+          "z": "-55.9"
+        },
+        {
+          "r": "9.249319805526657",
+          "z": "-55.9"
+        },
+        {
+          "r": "4.0",
+          "z": "4.100000000000001"
+        },
+        {
+          "r": "4.0",
+          "z": "23.1"
+        },
+        {
+          "r": "0.0",
+          "z": "23.1"
+        }
+      ]
+    }
+  },
+  "CrysAssemV09374A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V09374A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "x-large",
+      "rodheight": "103.5"
+    }
+  },
+  "V09374A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "37.8"
+        },
+        {
+          "r": "12.0",
+          "z": "37.8"
+        },
+        {
+          "r": "12.0",
+          "z": "35.8"
+        },
+        {
+          "r": "15.0",
+          "z": "35.8"
+        },
+        {
+          "r": "15.0",
+          "z": "37.8"
+        },
+        {
+          "r": "44.15000000179489",
+          "z": "37.8"
+        },
+        {
+          "r": "45.15",
+          "z": "36.8"
+        },
+        {
+          "r": "45.15",
+          "z": "-36.8"
+        },
+        {
+          "r": "44.15000000179489",
+          "z": "-37.8"
+        },
+        {
+          "r": "7.499546537017771",
+          "z": "-37.8"
+        },
+        {
+          "r": "4.0",
+          "z": "2.200000000000003"
+        },
+        {
+          "r": "4.0",
+          "z": "5.300000000000004"
+        },
+        {
+          "r": "0.0",
+          "z": "5.300000000000004"
+        }
+      ]
+    }
+  },
+  "CrysAssemV09724A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V09724A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "x-large",
+      "rodheight": "103.5"
+    }
+  },
+  "V09724A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "37.8"
+        },
+        {
+          "r": "12.0",
+          "z": "37.8"
+        },
+        {
+          "r": "12.0",
+          "z": "35.8"
+        },
+        {
+          "r": "15.0",
+          "z": "35.8"
+        },
+        {
+          "r": "15.0",
+          "z": "37.8"
+        },
+        {
+          "r": "44.05000000179489",
+          "z": "37.8"
+        },
+        {
+          "r": "45.05",
+          "z": "36.8"
+        },
+        {
+          "r": "45.05",
+          "z": "-36.8"
+        },
+        {
+          "r": "44.05000000179489",
+          "z": "-37.8"
+        },
+        {
+          "r": "7.499546537017771",
+          "z": "-37.8"
+        },
+        {
+          "r": "4.0",
+          "z": "2.200000000000003"
+        },
+        {
+          "r": "4.0",
+          "z": "5.300000000000004"
+        },
+        {
+          "r": "0.0",
+          "z": "5.300000000000004"
+        }
+      ]
+    }
+  },
+  "CrysAssemV02162B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V02162B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "112"
+    }
+  },
+  "C0S7": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "51.0",
+      "crystalassembly": [
+        "CrysAssemV02162B",
+        "CrysAssemV02166B",
+        "CrysAssemV04199A",
+        "CrysAssemV04545A",
+        "CrysAssemV05267B",
+        "CrysAssemV07646A",
+        "CrysAssemV07302B"
+      ]
+    }
+  },
+  "V02162B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "45.2"
+        },
+        {
+          "r": "10.5",
+          "z": "45.2"
+        },
+        {
+          "r": "10.5",
+          "z": "42.2"
+        },
+        {
+          "r": "15.75",
+          "z": "42.2"
+        },
+        {
+          "r": "15.75",
+          "z": "45.2"
+        },
+        {
+          "r": "40.0",
+          "z": "45.2"
+        },
+        {
+          "r": "40.0",
+          "z": "-20.200000000000003"
+        },
+        {
+          "r": "39.214343349814555",
+          "z": "-45.2"
+        },
+        {
+          "r": "15.25",
+          "z": "-45.2"
+        },
+        {
+          "r": "15.25",
+          "z": "-42.5"
+        },
+        {
+          "r": "4.0",
+          "z": "-42.5"
+        },
+        {
+          "r": "4.0",
+          "z": "9.699999999999996"
+        },
+        {
+          "r": "0.0",
+          "z": "9.699999999999996"
+        }
+      ]
+    }
+  },
+  "CrysAssemV02166B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V02166B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "112"
+    }
+  },
+  "V02166B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "10",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "47.75"
+        },
+        {
+          "r": "9.65",
+          "z": "47.75"
+        },
+        {
+          "r": "9.65",
+          "z": "45.75"
+        },
+        {
+          "r": "13.85",
+          "z": "45.75"
+        },
+        {
+          "r": "13.85",
+          "z": "47.75"
+        },
+        {
+          "r": "40.0",
+          "z": "47.75"
+        },
+        {
+          "r": "40.0",
+          "z": "-47.75"
+        },
+        {
+          "r": "4.25",
+          "z": "-47.75"
+        },
+        {
+          "r": "4.25",
+          "z": "13.850000000000001"
+        },
+        {
+          "r": "0.0",
+          "z": "13.850000000000001"
+        }
+      ]
+    }
+  },
+  "CrysAssemV04199A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V04199A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "122"
+    }
+  },
+  "V04199A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "11",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "50.2"
+        },
+        {
+          "r": "10.0",
+          "z": "50.2"
+        },
+        {
+          "r": "10.0",
+          "z": "48.2"
+        },
+        {
+          "r": "14.0",
+          "z": "48.2"
+        },
+        {
+          "r": "14.0",
+          "z": "50.2"
+        },
+        {
+          "r": "42.0",
+          "z": "50.2"
+        },
+        {
+          "r": "42.0",
+          "z": "-30.200000000000003"
+        },
+        {
+          "r": "40.98684370829766",
+          "z": "-50.2"
+        },
+        {
+          "r": "10.124206439781098",
+          "z": "-50.2"
+        },
+        {
+          "r": "4.0",
+          "z": "19.799999999999997"
+        },
+        {
+          "r": "0.0",
+          "z": "19.799999999999997"
+        }
+      ]
+    }
+  },
+  "CrysAssemV04545A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V04545A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "122"
+    }
+  },
+  "V04545A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "50.25"
+        },
+        {
+          "r": "10.0",
+          "z": "50.25"
+        },
+        {
+          "r": "10.0",
+          "z": "48.25"
+        },
+        {
+          "r": "14.0",
+          "z": "48.25"
+        },
+        {
+          "r": "14.0",
+          "z": "50.25"
+        },
+        {
+          "r": "41.500000001794895",
+          "z": "50.25"
+        },
+        {
+          "r": "42.5",
+          "z": "49.25"
+        },
+        {
+          "r": "42.5",
+          "z": "-49.25"
+        },
+        {
+          "r": "41.500000001794895",
+          "z": "-50.25"
+        },
+        {
+          "r": "4.0",
+          "z": "-50.25"
+        },
+        {
+          "r": "4.0",
+          "z": "18.950000000000003"
+        },
+        {
+          "r": "0.0",
+          "z": "18.950000000000003"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05267B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05267B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "122"
+    }
+  },
+  "V05267B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "42.75"
+        },
+        {
+          "r": "13.0",
+          "z": "42.75"
+        },
+        {
+          "r": "13.0",
+          "z": "40.75"
+        },
+        {
+          "r": "16.0",
+          "z": "40.75"
+        },
+        {
+          "r": "16.0",
+          "z": "42.75"
+        },
+        {
+          "r": "37.05000000538469",
+          "z": "42.75"
+        },
+        {
+          "r": "40.05",
+          "z": "39.75"
+        },
+        {
+          "r": "40.05",
+          "z": "-39.75"
+        },
+        {
+          "r": "37.05000000538469",
+          "z": "-42.75"
+        },
+        {
+          "r": "7.062103219890549",
+          "z": "-42.75"
+        },
+        {
+          "r": "4.0",
+          "z": "-7.75"
+        },
+        {
+          "r": "4.0",
+          "z": "8.850000000000001"
+        },
+        {
+          "r": "0.0",
+          "z": "8.850000000000001"
+        }
+      ]
+    }
+  },
+  "CrysAssemV07646A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V07646A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "122"
+    }
+  },
+  "V07646A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "15",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "47.55"
+        },
+        {
+          "r": "10.0",
+          "z": "47.55"
+        },
+        {
+          "r": "10.0",
+          "z": "45.55"
+        },
+        {
+          "r": "14.0",
+          "z": "45.55"
+        },
+        {
+          "r": "14.0",
+          "z": "47.55"
+        },
+        {
+          "r": "37.000000001794895",
+          "z": "47.55"
+        },
+        {
+          "r": "38.0",
+          "z": "46.55"
+        },
+        {
+          "r": "38.0",
+          "z": "23.549999999999997"
+        },
+        {
+          "r": "41.0",
+          "z": "18.449999999999996"
+        },
+        {
+          "r": "41.0",
+          "z": "-46.55"
+        },
+        {
+          "r": "40.000000001794895",
+          "z": "-47.55"
+        },
+        {
+          "r": "8.811876488399434",
+          "z": "-47.55"
+        },
+        {
+          "r": "4.0",
+          "z": "7.450000000000003"
+        },
+        {
+          "r": "4.0",
+          "z": "17.450000000000003"
+        },
+        {
+          "r": "0.0",
+          "z": "17.450000000000003"
+        }
+      ]
+    }
+  },
+  "CrysAssemV07302B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V07302B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "large",
+      "rodheight": "77"
+    }
+  },
+  "V07302B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "28.7"
+        },
+        {
+          "r": "8.5",
+          "z": "28.7"
+        },
+        {
+          "r": "8.5",
+          "z": "26.7"
+        },
+        {
+          "r": "12.5",
+          "z": "26.7"
+        },
+        {
+          "r": "12.5",
+          "z": "28.7"
+        },
+        {
+          "r": "39.05000000179489",
+          "z": "28.7"
+        },
+        {
+          "r": "40.05",
+          "z": "27.7"
+        },
+        {
+          "r": "40.05",
+          "z": "-27.7"
+        },
+        {
+          "r": "39.05000000179489",
+          "z": "-28.7"
+        },
+        {
+          "r": "4.0",
+          "z": "-28.7"
+        },
+        {
+          "r": "4.0",
+          "z": "1.3000000000000007"
+        },
+        {
+          "r": "0.0",
+          "z": "1.3000000000000007"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00089C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00089C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "C0S8": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "48.0",
+      "crystalassembly": [
+        "CrysAssemB00089C",
+        "CrysAssemB00089D",
+        "CrysAssemC00ANG4",
+        "CrysAssemV00048B",
+        "CrysAssemV00050A",
+        "CrysAssemV00050B",
+        "CrysAssemV01387A",
+        "CrysAssemV05261A",
+        "CrysAssemV05268A",
+        "CrysAssemV07302A"
+      ]
+    }
+  },
+  "B00089C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "12.375"
+        },
+        {
+          "r": "7.5",
+          "z": "12.375"
+        },
+        {
+          "r": "7.5",
+          "z": "10.375"
+        },
+        {
+          "r": "10.5",
+          "z": "10.375"
+        },
+        {
+          "r": "10.5",
+          "z": "12.375"
+        },
+        {
+          "r": "37.35",
+          "z": "12.375"
+        },
+        {
+          "r": "37.35",
+          "z": "-12.375"
+        },
+        {
+          "r": "0.0",
+          "z": "-12.375"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00089D": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00089D",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00089D": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "11.445"
+        },
+        {
+          "r": "7.5",
+          "z": "11.445"
+        },
+        {
+          "r": "7.5",
+          "z": "9.445"
+        },
+        {
+          "r": "10.5",
+          "z": "9.445"
+        },
+        {
+          "r": "10.5",
+          "z": "11.445"
+        },
+        {
+          "r": "36.715",
+          "z": "11.445"
+        },
+        {
+          "r": "36.715",
+          "z": "-11.445"
+        },
+        {
+          "r": "0.0",
+          "z": "-11.445"
+        }
+      ]
+    }
+  },
+  "CrysAssemC00ANG4": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "C00ANG4",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "122"
+    }
+  },
+  "C00ANG4": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "-39.0"
+        },
+        {
+          "r": "7.0",
+          "z": "-39.0"
+        },
+        {
+          "r": "7.0",
+          "z": "50.0"
+        },
+        {
+          "r": "15.0",
+          "z": "50.0"
+        },
+        {
+          "r": "15.0",
+          "z": "48.0"
+        },
+        {
+          "r": "18.0",
+          "z": "48.0"
+        },
+        {
+          "r": "18.0",
+          "z": "50.0"
+        },
+        {
+          "r": "34.50000000538469",
+          "z": "50.0"
+        },
+        {
+          "r": "37.5",
+          "z": "47.0"
+        },
+        {
+          "r": "37.5",
+          "z": "-47.0"
+        },
+        {
+          "r": "34.50000000538469",
+          "z": "-50.0"
+        },
+        {
+          "r": "0.0",
+          "z": "-50.0"
+        }
+      ]
+    }
+  },
+  "CrysAssemV00048B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V00048B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V00048B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "10",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "40.25"
+        },
+        {
+          "r": "7.5",
+          "z": "40.25"
+        },
+        {
+          "r": "7.5",
+          "z": "38.25"
+        },
+        {
+          "r": "12.5",
+          "z": "38.25"
+        },
+        {
+          "r": "12.5",
+          "z": "40.25"
+        },
+        {
+          "r": "36.3",
+          "z": "40.25"
+        },
+        {
+          "r": "36.3",
+          "z": "-40.25"
+        },
+        {
+          "r": "5.25",
+          "z": "-40.25"
+        },
+        {
+          "r": "5.25",
+          "z": "15.75"
+        },
+        {
+          "r": "0.0",
+          "z": "15.75"
+        }
+      ]
+    }
+  },
+  "CrysAssemV00050A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V00050A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V00050A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "11",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "40.2"
+        },
+        {
+          "r": "9.5",
+          "z": "40.2"
+        },
+        {
+          "r": "9.5",
+          "z": "38.2"
+        },
+        {
+          "r": "13.5",
+          "z": "38.2"
+        },
+        {
+          "r": "13.5",
+          "z": "40.2"
+        },
+        {
+          "r": "37.35",
+          "z": "40.2"
+        },
+        {
+          "r": "37.35",
+          "z": "-0.20000000000000284"
+        },
+        {
+          "r": "36.09294935970329",
+          "z": "-40.2"
+        },
+        {
+          "r": "5.25",
+          "z": "-40.2"
+        },
+        {
+          "r": "5.25",
+          "z": "-0.20000000000000284"
+        },
+        {
+          "r": "0.0",
+          "z": "-0.20000000000000284"
+        }
+      ]
+    }
+  },
+  "CrysAssemV00050B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V00050B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V00050B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "10",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "42.7"
+        },
+        {
+          "r": "9.5",
+          "z": "42.7"
+        },
+        {
+          "r": "9.5",
+          "z": "40.7"
+        },
+        {
+          "r": "13.5",
+          "z": "40.7"
+        },
+        {
+          "r": "13.5",
+          "z": "42.7"
+        },
+        {
+          "r": "36.3",
+          "z": "42.7"
+        },
+        {
+          "r": "36.3",
+          "z": "-42.7"
+        },
+        {
+          "r": "5.25",
+          "z": "-42.7"
+        },
+        {
+          "r": "5.25",
+          "z": "11.199999999999996"
+        },
+        {
+          "r": "0.0",
+          "z": "11.199999999999996"
+        }
+      ]
+    }
+  },
+  "CrysAssemV01387A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V01387A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V01387A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "31.6"
+        },
+        {
+          "r": "2.55",
+          "z": "31.6"
+        },
+        {
+          "r": "2.55",
+          "z": "33.5"
+        },
+        {
+          "r": "17.0",
+          "z": "33.5"
+        },
+        {
+          "r": "17.0",
+          "z": "31.5"
+        },
+        {
+          "r": "20.0",
+          "z": "31.5"
+        },
+        {
+          "r": "20.0",
+          "z": "33.5"
+        },
+        {
+          "r": "37.9",
+          "z": "33.5"
+        },
+        {
+          "r": "37.9",
+          "z": "-31.5"
+        },
+        {
+          "r": "35.900000003589795",
+          "z": "-33.5"
+        },
+        {
+          "r": "5.0",
+          "z": "-33.5"
+        },
+        {
+          "r": "5.0",
+          "z": "12.899999999999999"
+        },
+        {
+          "r": "0.0",
+          "z": "12.899999999999999"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05261A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05261A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V05261A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "32.6"
+        },
+        {
+          "r": "13.0",
+          "z": "32.6"
+        },
+        {
+          "r": "13.0",
+          "z": "30.6"
+        },
+        {
+          "r": "16.0",
+          "z": "30.6"
+        },
+        {
+          "r": "16.0",
+          "z": "32.6"
+        },
+        {
+          "r": "37.05000000538469",
+          "z": "32.6"
+        },
+        {
+          "r": "40.05",
+          "z": "29.6"
+        },
+        {
+          "r": "40.05",
+          "z": "-29.6"
+        },
+        {
+          "r": "37.05000000538469",
+          "z": "-32.6"
+        },
+        {
+          "r": "6.624659902763328",
+          "z": "-32.6"
+        },
+        {
+          "r": "4.0",
+          "z": "-2.6000000000000014"
+        },
+        {
+          "r": "0.0",
+          "z": "-2.6000000000000014"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05268A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05268A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V05268A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "41.6"
+        },
+        {
+          "r": "15.0",
+          "z": "41.6"
+        },
+        {
+          "r": "15.0",
+          "z": "39.6"
+        },
+        {
+          "r": "18.0",
+          "z": "39.6"
+        },
+        {
+          "r": "18.0",
+          "z": "41.6"
+        },
+        {
+          "r": "37.05000000538469",
+          "z": "41.6"
+        },
+        {
+          "r": "40.05",
+          "z": "38.6"
+        },
+        {
+          "r": "40.05",
+          "z": "-38.6"
+        },
+        {
+          "r": "37.05000000538469",
+          "z": "-41.6"
+        },
+        {
+          "r": "7.062103219890549",
+          "z": "-41.6"
+        },
+        {
+          "r": "4.0",
+          "z": "-6.600000000000001"
+        },
+        {
+          "r": "4.0",
+          "z": "3.5"
+        },
+        {
+          "r": "0.0",
+          "z": "3.5"
+        }
+      ]
+    }
+  },
+  "CrysAssemV07302A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V07302A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V07302A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "32.5"
+        },
+        {
+          "r": "10.0",
+          "z": "32.5"
+        },
+        {
+          "r": "10.0",
+          "z": "30.5"
+        },
+        {
+          "r": "14.0",
+          "z": "30.5"
+        },
+        {
+          "r": "14.0",
+          "z": "32.5"
+        },
+        {
+          "r": "39.000000001794895",
+          "z": "32.5"
+        },
+        {
+          "r": "40.0",
+          "z": "31.5"
+        },
+        {
+          "r": "40.0",
+          "z": "-31.5"
+        },
+        {
+          "r": "39.000000001794895",
+          "z": "-32.5"
+        },
+        {
+          "r": "4.0",
+          "z": "-32.5"
+        },
+        {
+          "r": "4.0",
+          "z": "2.5"
+        },
+        {
+          "r": "0.0",
+          "z": "2.5"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00002A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00002A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "C0S9": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "44.0",
+      "crystalassembly": [
+        "CrysAssemB00002A",
+        "CrysAssemB00089A",
+        "CrysAssemB00091A",
+        "CrysAssemB00091D",
+        "CrysAssemP00537A",
+        "CrysAssemP00538A",
+        "CrysAssemP00573A",
+        "CrysAssemP00661C",
+        "CrysAssemP00662C",
+        "CrysAssemP00664A",
+        "CrysAssemP00665C",
+        "CrysAssemP00748B",
+        "CrysAssemP00909B",
+        "CrysAssemB00091B"
+      ]
+    }
+  },
+  "B00002A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "9",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "13.775"
+        },
+        {
+          "r": "7.5",
+          "z": "13.775"
+        },
+        {
+          "r": "7.5",
+          "z": "11.775"
+        },
+        {
+          "r": "10.5",
+          "z": "11.775"
+        },
+        {
+          "r": "10.5",
+          "z": "13.775"
+        },
+        {
+          "r": "35.23",
+          "z": "13.775"
+        },
+        {
+          "r": "35.23",
+          "z": "-1.415000000000001"
+        },
+        {
+          "r": "28.74085493466374",
+          "z": "-13.775"
+        },
+        {
+          "r": "0.0",
+          "z": "-13.775"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00089A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00089A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "B00089A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "9",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "14.17"
+        },
+        {
+          "r": "7.5",
+          "z": "14.17"
+        },
+        {
+          "r": "7.5",
+          "z": "12.17"
+        },
+        {
+          "r": "10.5",
+          "z": "12.17"
+        },
+        {
+          "r": "10.5",
+          "z": "14.17"
+        },
+        {
+          "r": "34.315",
+          "z": "14.17"
+        },
+        {
+          "r": "34.315",
+          "z": "-2.17"
+        },
+        {
+          "r": "25.23947129360668",
+          "z": "-14.17"
+        },
+        {
+          "r": "0.0",
+          "z": "-14.17"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00091A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00091A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "B00091A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "9",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "15.59"
+        },
+        {
+          "r": "7.5",
+          "z": "15.59"
+        },
+        {
+          "r": "7.5",
+          "z": "13.59"
+        },
+        {
+          "r": "10.5",
+          "z": "13.59"
+        },
+        {
+          "r": "10.5",
+          "z": "15.59"
+        },
+        {
+          "r": "35.265",
+          "z": "15.59"
+        },
+        {
+          "r": "35.265",
+          "z": "-4.09"
+        },
+        {
+          "r": "27.995001796252836",
+          "z": "-15.59"
+        },
+        {
+          "r": "0.0",
+          "z": "-15.59"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00091D": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00091D",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "B00091D": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "15.94"
+        },
+        {
+          "r": "7.5",
+          "z": "15.94"
+        },
+        {
+          "r": "7.5",
+          "z": "13.94"
+        },
+        {
+          "r": "10.5",
+          "z": "13.94"
+        },
+        {
+          "r": "10.5",
+          "z": "15.94"
+        },
+        {
+          "r": "35.645",
+          "z": "15.94"
+        },
+        {
+          "r": "35.645",
+          "z": "-15.94"
+        },
+        {
+          "r": "0.0",
+          "z": "-15.94"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00537A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00537A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00537A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "24.35"
+        },
+        {
+          "r": "1.55",
+          "z": "24.35"
+        },
+        {
+          "r": "1.55",
+          "z": "26.35"
+        },
+        {
+          "r": "26.560000013443773",
+          "z": "26.35"
+        },
+        {
+          "r": "34.05",
+          "z": "18.86"
+        },
+        {
+          "r": "34.05",
+          "z": "-26.35"
+        },
+        {
+          "r": "0.0",
+          "z": "-26.35"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00538A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00538A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00538A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "22.849999999999998"
+        },
+        {
+          "r": "1.55",
+          "z": "22.849999999999998"
+        },
+        {
+          "r": "1.55",
+          "z": "24.95"
+        },
+        {
+          "r": "29.30000001023091",
+          "z": "24.95"
+        },
+        {
+          "r": "35.0",
+          "z": "19.25"
+        },
+        {
+          "r": "35.0",
+          "z": "-24.95"
+        },
+        {
+          "r": "0.0",
+          "z": "-24.95"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00573A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00573A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00573A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "22.7"
+        },
+        {
+          "r": "2.0",
+          "z": "22.7"
+        },
+        {
+          "r": "2.0",
+          "z": "23.8"
+        },
+        {
+          "r": "31.35000000807704",
+          "z": "23.8"
+        },
+        {
+          "r": "35.85",
+          "z": "19.3"
+        },
+        {
+          "r": "35.85",
+          "z": "-23.8"
+        },
+        {
+          "r": "0.0",
+          "z": "-23.8"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00661C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00661C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00661C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "19.25"
+        },
+        {
+          "r": "1.5",
+          "z": "19.25"
+        },
+        {
+          "r": "1.5",
+          "z": "21.05"
+        },
+        {
+          "r": "30.95000000807704",
+          "z": "21.05"
+        },
+        {
+          "r": "35.45",
+          "z": "16.55"
+        },
+        {
+          "r": "35.45",
+          "z": "-21.05"
+        },
+        {
+          "r": "0.0",
+          "z": "-21.05"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00662C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00662C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00662C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "22.2"
+        },
+        {
+          "r": "1.5",
+          "z": "22.2"
+        },
+        {
+          "r": "1.5",
+          "z": "24.2"
+        },
+        {
+          "r": "24.43000001026681",
+          "z": "24.2"
+        },
+        {
+          "r": "30.15",
+          "z": "18.48"
+        },
+        {
+          "r": "30.15",
+          "z": "-24.2"
+        },
+        {
+          "r": "0.0",
+          "z": "-24.2"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00664A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00664A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00664A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "20.25"
+        },
+        {
+          "r": "1.55",
+          "z": "20.25"
+        },
+        {
+          "r": "1.55",
+          "z": "22.15"
+        },
+        {
+          "r": "27.260000009853982",
+          "z": "22.15"
+        },
+        {
+          "r": "32.75",
+          "z": "16.659999999999997"
+        },
+        {
+          "r": "32.75",
+          "z": "-22.15"
+        },
+        {
+          "r": "0.0",
+          "z": "-22.15"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00665C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00665C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00665C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "21.8"
+        },
+        {
+          "r": "1.5",
+          "z": "21.8"
+        },
+        {
+          "r": "1.5",
+          "z": "23.7"
+        },
+        {
+          "r": "27.110000009405262",
+          "z": "23.7"
+        },
+        {
+          "r": "32.35",
+          "z": "18.46"
+        },
+        {
+          "r": "32.35",
+          "z": "-23.7"
+        },
+        {
+          "r": "0.0",
+          "z": "-23.7"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00748B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00748B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00748B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "24.3"
+        },
+        {
+          "r": "1.55",
+          "z": "24.3"
+        },
+        {
+          "r": "1.55",
+          "z": "26.3"
+        },
+        {
+          "r": "25.8200000129771",
+          "z": "26.3"
+        },
+        {
+          "r": "33.05",
+          "z": "19.07"
+        },
+        {
+          "r": "33.05",
+          "z": "-26.3"
+        },
+        {
+          "r": "0.0",
+          "z": "-26.3"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00909B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00909B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00909B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "17.8"
+        },
+        {
+          "r": "1.5",
+          "z": "17.8"
+        },
+        {
+          "r": "1.5",
+          "z": "19.8"
+        },
+        {
+          "r": "30.000000008974485",
+          "z": "19.8"
+        },
+        {
+          "r": "35.0",
+          "z": "14.8"
+        },
+        {
+          "r": "35.0",
+          "z": "-19.8"
+        },
+        {
+          "r": "0.0",
+          "z": "-19.8"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00091B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00091B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "B00091B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "15.13"
+        },
+        {
+          "r": "7.5",
+          "z": "15.13"
+        },
+        {
+          "r": "7.5",
+          "z": "13.13"
+        },
+        {
+          "r": "10.5",
+          "z": "13.13"
+        },
+        {
+          "r": "10.5",
+          "z": "15.13"
+        },
+        {
+          "r": "35.29",
+          "z": "15.13"
+        },
+        {
+          "r": "35.29",
+          "z": "-15.13"
+        },
+        {
+          "r": "0.0",
+          "z": "-15.13"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00000D": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00000D",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "C0S10": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "48.0",
+      "crystalassembly": [
+        "CrysAssemB00000D",
+        "CrysAssemB00002C",
+        "CrysAssemB00032C",
+        "CrysAssemB00032D",
+        "CrysAssemB00035A",
+        "CrysAssemB00035B",
+        "CrysAssemB00061B",
+        "CrysAssemB00089B",
+        "CrysAssemV00048A",
+        "CrysAssemV01240A",
+        "CrysAssemV01389A",
+        "CrysAssemV05267A",
+        "CrysAssemV05612B"
+      ]
+    }
+  },
+  "B00000D": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "16.14"
+        },
+        {
+          "r": "7.5",
+          "z": "16.14"
+        },
+        {
+          "r": "7.5",
+          "z": "14.14"
+        },
+        {
+          "r": "10.5",
+          "z": "14.14"
+        },
+        {
+          "r": "10.5",
+          "z": "16.14"
+        },
+        {
+          "r": "38.195",
+          "z": "16.14"
+        },
+        {
+          "r": "38.195",
+          "z": "-16.14"
+        },
+        {
+          "r": "0.0",
+          "z": "-16.14"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00002C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00002C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00002C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "16.295"
+        },
+        {
+          "r": "7.5",
+          "z": "16.295"
+        },
+        {
+          "r": "7.5",
+          "z": "14.295000000000002"
+        },
+        {
+          "r": "10.5",
+          "z": "14.295000000000002"
+        },
+        {
+          "r": "10.5",
+          "z": "16.295"
+        },
+        {
+          "r": "37.44",
+          "z": "16.295"
+        },
+        {
+          "r": "37.44",
+          "z": "-16.295"
+        },
+        {
+          "r": "0.0",
+          "z": "-16.295"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00032C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00032C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00032C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "16.575"
+        },
+        {
+          "r": "7.5",
+          "z": "16.575"
+        },
+        {
+          "r": "7.5",
+          "z": "14.575"
+        },
+        {
+          "r": "10.5",
+          "z": "14.575"
+        },
+        {
+          "r": "10.5",
+          "z": "16.575"
+        },
+        {
+          "r": "35.995",
+          "z": "16.575"
+        },
+        {
+          "r": "35.995",
+          "z": "-16.575"
+        },
+        {
+          "r": "0.0",
+          "z": "-16.575"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00032D": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00032D",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00032D": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "16.06"
+        },
+        {
+          "r": "7.5",
+          "z": "16.06"
+        },
+        {
+          "r": "7.5",
+          "z": "14.059999999999999"
+        },
+        {
+          "r": "10.5",
+          "z": "14.059999999999999"
+        },
+        {
+          "r": "10.5",
+          "z": "16.06"
+        },
+        {
+          "r": "36.145",
+          "z": "16.06"
+        },
+        {
+          "r": "36.145",
+          "z": "-16.06"
+        },
+        {
+          "r": "0.0",
+          "z": "-16.06"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00035A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00035A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00035A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "9",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "17.67"
+        },
+        {
+          "r": "7.5",
+          "z": "17.67"
+        },
+        {
+          "r": "7.5",
+          "z": "15.670000000000002"
+        },
+        {
+          "r": "10.5",
+          "z": "15.670000000000002"
+        },
+        {
+          "r": "10.5",
+          "z": "17.67"
+        },
+        {
+          "r": "36.77",
+          "z": "17.67"
+        },
+        {
+          "r": "36.77",
+          "z": "-4.920000000000002"
+        },
+        {
+          "r": "29.139282427344",
+          "z": "-17.67"
+        },
+        {
+          "r": "0.0",
+          "z": "-17.67"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00035B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00035B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00035B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "16.05"
+        },
+        {
+          "r": "7.5",
+          "z": "16.05"
+        },
+        {
+          "r": "7.5",
+          "z": "14.05"
+        },
+        {
+          "r": "10.5",
+          "z": "14.05"
+        },
+        {
+          "r": "10.5",
+          "z": "16.05"
+        },
+        {
+          "r": "38.165",
+          "z": "16.05"
+        },
+        {
+          "r": "38.165",
+          "z": "-16.05"
+        },
+        {
+          "r": "0.0",
+          "z": "-16.05"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00061B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00061B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00061B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "15.105"
+        },
+        {
+          "r": "7.5",
+          "z": "15.105"
+        },
+        {
+          "r": "7.5",
+          "z": "13.105"
+        },
+        {
+          "r": "10.5",
+          "z": "13.105"
+        },
+        {
+          "r": "10.5",
+          "z": "15.105"
+        },
+        {
+          "r": "37.975",
+          "z": "15.105"
+        },
+        {
+          "r": "37.975",
+          "z": "-15.105"
+        },
+        {
+          "r": "0.0",
+          "z": "-15.105"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00089B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00089B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "53.5"
+    }
+  },
+  "B00089B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "12.425"
+        },
+        {
+          "r": "7.5",
+          "z": "12.425"
+        },
+        {
+          "r": "7.5",
+          "z": "10.425"
+        },
+        {
+          "r": "10.5",
+          "z": "10.425"
+        },
+        {
+          "r": "10.5",
+          "z": "12.425"
+        },
+        {
+          "r": "38.025",
+          "z": "12.425"
+        },
+        {
+          "r": "38.025",
+          "z": "-12.425"
+        },
+        {
+          "r": "0.0",
+          "z": "-12.425"
+        }
+      ]
+    }
+  },
+  "CrysAssemV00048A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V00048A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V00048A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "10",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "40.2"
+        },
+        {
+          "r": "10.0",
+          "z": "40.2"
+        },
+        {
+          "r": "10.0",
+          "z": "38.2"
+        },
+        {
+          "r": "13.0",
+          "z": "38.2"
+        },
+        {
+          "r": "13.0",
+          "z": "40.2"
+        },
+        {
+          "r": "37.3",
+          "z": "40.2"
+        },
+        {
+          "r": "37.3",
+          "z": "-40.2"
+        },
+        {
+          "r": "5.25",
+          "z": "-40.2"
+        },
+        {
+          "r": "5.25",
+          "z": "7.199999999999996"
+        },
+        {
+          "r": "0.0",
+          "z": "7.199999999999996"
+        }
+      ]
+    }
+  },
+  "CrysAssemV01240A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V01240A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V01240A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "14",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "41.099999999999994"
+        },
+        {
+          "r": "2.85",
+          "z": "41.099999999999994"
+        },
+        {
+          "r": "2.85",
+          "z": "42.8"
+        },
+        {
+          "r": "19.0",
+          "z": "42.8"
+        },
+        {
+          "r": "19.0",
+          "z": "40.8"
+        },
+        {
+          "r": "22.0",
+          "z": "40.8"
+        },
+        {
+          "r": "22.0",
+          "z": "42.8"
+        },
+        {
+          "r": "38.5",
+          "z": "42.8"
+        },
+        {
+          "r": "38.5",
+          "z": "-40.8"
+        },
+        {
+          "r": "36.5000000035898",
+          "z": "-42.8"
+        },
+        {
+          "r": "12.405733181118919",
+          "z": "-42.8"
+        },
+        {
+          "r": "5.0",
+          "z": "-0.7999999999999972"
+        },
+        {
+          "r": "5.0",
+          "z": "10.0"
+        },
+        {
+          "r": "0.0",
+          "z": "10.0"
+        }
+      ]
+    }
+  },
+  "CrysAssemV01389A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V01389A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V01389A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "14",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "40.6"
+        },
+        {
+          "r": "2.1",
+          "z": "40.6"
+        },
+        {
+          "r": "2.1",
+          "z": "42.6"
+        },
+        {
+          "r": "19.0",
+          "z": "42.6"
+        },
+        {
+          "r": "19.0",
+          "z": "40.6"
+        },
+        {
+          "r": "22.0",
+          "z": "40.6"
+        },
+        {
+          "r": "22.0",
+          "z": "42.6"
+        },
+        {
+          "r": "38.5",
+          "z": "42.6"
+        },
+        {
+          "r": "38.5",
+          "z": "-40.6"
+        },
+        {
+          "r": "36.5000000035898",
+          "z": "-42.6"
+        },
+        {
+          "r": "12.053079220113256",
+          "z": "-42.6"
+        },
+        {
+          "r": "5.0",
+          "z": "-2.6000000000000014"
+        },
+        {
+          "r": "5.0",
+          "z": "10.699999999999996"
+        },
+        {
+          "r": "0.0",
+          "z": "10.699999999999996"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05267A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05267A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V05267A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "12",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "40.1"
+        },
+        {
+          "r": "15.0",
+          "z": "40.1"
+        },
+        {
+          "r": "15.0",
+          "z": "38.1"
+        },
+        {
+          "r": "18.0",
+          "z": "38.1"
+        },
+        {
+          "r": "18.0",
+          "z": "40.1"
+        },
+        {
+          "r": "37.00000000538469",
+          "z": "40.1"
+        },
+        {
+          "r": "40.0",
+          "z": "37.1"
+        },
+        {
+          "r": "40.0",
+          "z": "-23.1"
+        },
+        {
+          "r": "36.01268600230733",
+          "z": "-40.1"
+        },
+        {
+          "r": "4.0",
+          "z": "-40.1"
+        },
+        {
+          "r": "4.0",
+          "z": "0.10000000000000142"
+        },
+        {
+          "r": "0.0",
+          "z": "0.10000000000000142"
+        }
+      ]
+    }
+  },
+  "CrysAssemV05612B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "V05612B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "medium",
+      "rodheight": "103.5"
+    }
+  },
+  "V05612B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "13",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "42.5"
+        },
+        {
+          "r": "15.0",
+          "z": "42.5"
+        },
+        {
+          "r": "15.0",
+          "z": "40.5"
+        },
+        {
+          "r": "18.0",
+          "z": "40.5"
+        },
+        {
+          "r": "18.0",
+          "z": "42.5"
+        },
+        {
+          "r": "35.00000000538469",
+          "z": "42.5"
+        },
+        {
+          "r": "38.0",
+          "z": "39.5"
+        },
+        {
+          "r": "38.0",
+          "z": "-39.5"
+        },
+        {
+          "r": "35.00000000538469",
+          "z": "-42.5"
+        },
+        {
+          "r": "8.374433171272214",
+          "z": "-42.5"
+        },
+        {
+          "r": "4.0",
+          "z": "7.5"
+        },
+        {
+          "r": "4.0",
+          "z": "27.599999999999994"
+        },
+        {
+          "r": "0.0",
+          "z": "27.599999999999994"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00000A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00000A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "C0S11": {
+    "type": "string",
+    "parameters": {
+      "RodSupportRadius": "51.0",
+      "crystalassembly": [
+        "CrysAssemB00000A",
+        "CrysAssemB00002B",
+        "CrysAssemB00032A",
+        "CrysAssemP00538B",
+        "CrysAssemP00573B",
+        "CrysAssemP00575A",
+        "CrysAssemP00574C",
+        "CrysAssemP00661A",
+        "CrysAssemP00662A",
+        "CrysAssemP00662B",
+        "CrysAssemP00665B",
+        "CrysAssemP00748A",
+        "CrysAssemP00698B"
+      ]
+    }
+  },
+  "B00000A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "9",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "13.205"
+        },
+        {
+          "r": "7.5",
+          "z": "13.205"
+        },
+        {
+          "r": "7.5",
+          "z": "11.205"
+        },
+        {
+          "r": "10.5",
+          "z": "11.205"
+        },
+        {
+          "r": "10.5",
+          "z": "13.205"
+        },
+        {
+          "r": "35.165",
+          "z": "13.205"
+        },
+        {
+          "r": "35.165",
+          "z": "-1.1449999999999996"
+        },
+        {
+          "r": "23.230635368935133",
+          "z": "-13.205"
+        },
+        {
+          "r": "0.0",
+          "z": "-13.205"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00002B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00002B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "B00002B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "8",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "14.33"
+        },
+        {
+          "r": "7.5",
+          "z": "14.33"
+        },
+        {
+          "r": "7.5",
+          "z": "12.33"
+        },
+        {
+          "r": "10.5",
+          "z": "12.33"
+        },
+        {
+          "r": "10.5",
+          "z": "14.33"
+        },
+        {
+          "r": "35.505",
+          "z": "14.33"
+        },
+        {
+          "r": "35.505",
+          "z": "-14.33"
+        },
+        {
+          "r": "0.0",
+          "z": "-14.33"
+        }
+      ]
+    }
+  },
+  "CrysAssemB00032A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "B00032A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "B00032A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "9",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "12.45"
+        },
+        {
+          "r": "7.5",
+          "z": "12.45"
+        },
+        {
+          "r": "7.5",
+          "z": "10.45"
+        },
+        {
+          "r": "10.5",
+          "z": "10.45"
+        },
+        {
+          "r": "10.5",
+          "z": "12.45"
+        },
+        {
+          "r": "33.13",
+          "z": "12.45"
+        },
+        {
+          "r": "33.13",
+          "z": "-6.949999999999999"
+        },
+        {
+          "r": "30.005565146739734",
+          "z": "-12.45"
+        },
+        {
+          "r": "0.0",
+          "z": "-12.45"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00538B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00538B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00538B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "22.549999999999997"
+        },
+        {
+          "r": "1.6",
+          "z": "22.549999999999997"
+        },
+        {
+          "r": "1.6",
+          "z": "24.65"
+        },
+        {
+          "r": "29.39000000988988",
+          "z": "24.65"
+        },
+        {
+          "r": "34.9",
+          "z": "19.14"
+        },
+        {
+          "r": "34.9",
+          "z": "-24.65"
+        },
+        {
+          "r": "0.0",
+          "z": "-24.65"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00573B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00573B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00573B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "24.4"
+        },
+        {
+          "r": "1.555",
+          "z": "24.4"
+        },
+        {
+          "r": "1.555",
+          "z": "26.4"
+        },
+        {
+          "r": "26.330000014574566",
+          "z": "26.4"
+        },
+        {
+          "r": "34.45",
+          "z": "18.28"
+        },
+        {
+          "r": "34.45",
+          "z": "-26.4"
+        },
+        {
+          "r": "0.0",
+          "z": "-26.4"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00575A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00575A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00575A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "23.6"
+        },
+        {
+          "r": "1.6",
+          "z": "23.6"
+        },
+        {
+          "r": "1.6",
+          "z": "25.6"
+        },
+        {
+          "r": "28.890000010518094",
+          "z": "25.6"
+        },
+        {
+          "r": "34.75",
+          "z": "19.740000000000002"
+        },
+        {
+          "r": "34.75",
+          "z": "-25.6"
+        },
+        {
+          "r": "0.0",
+          "z": "-25.6"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00574C": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00574C",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00574C": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "18.6"
+        },
+        {
+          "r": "1.55",
+          "z": "18.6"
+        },
+        {
+          "r": "1.55",
+          "z": "20.6"
+        },
+        {
+          "r": "28.37000001010527",
+          "z": "20.6"
+        },
+        {
+          "r": "34.0",
+          "z": "14.970000000000002"
+        },
+        {
+          "r": "34.0",
+          "z": "-20.6"
+        },
+        {
+          "r": "0.0",
+          "z": "-20.6"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00661A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00661A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00661A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "15.400000000000002"
+        },
+        {
+          "r": "1.5",
+          "z": "15.400000000000002"
+        },
+        {
+          "r": "1.5",
+          "z": "17.1"
+        },
+        {
+          "r": "30.20000000807704",
+          "z": "17.1"
+        },
+        {
+          "r": "34.7",
+          "z": "12.600000000000001"
+        },
+        {
+          "r": "34.7",
+          "z": "-17.1"
+        },
+        {
+          "r": "0.0",
+          "z": "-17.1"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00662A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00662A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00662A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "17.9"
+        },
+        {
+          "r": "1.55",
+          "z": "17.9"
+        },
+        {
+          "r": "1.55",
+          "z": "19.9"
+        },
+        {
+          "r": "24.98000001026681",
+          "z": "19.9"
+        },
+        {
+          "r": "30.7",
+          "z": "14.18"
+        },
+        {
+          "r": "30.7",
+          "z": "-19.9"
+        },
+        {
+          "r": "0.0",
+          "z": "-19.9"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00662B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00662B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00662B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "17.9"
+        },
+        {
+          "r": "1.5",
+          "z": "17.9"
+        },
+        {
+          "r": "1.5",
+          "z": "19.9"
+        },
+        {
+          "r": "24.66000001057194",
+          "z": "19.9"
+        },
+        {
+          "r": "30.55",
+          "z": "14.009999999999998"
+        },
+        {
+          "r": "30.55",
+          "z": "-19.9"
+        },
+        {
+          "r": "0.0",
+          "z": "-19.9"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00665B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00665B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00665B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "15.350000000000001"
+        },
+        {
+          "r": "1.5",
+          "z": "15.350000000000001"
+        },
+        {
+          "r": "1.5",
+          "z": "17.35"
+        },
+        {
+          "r": "27.890000009620646",
+          "z": "17.35"
+        },
+        {
+          "r": "33.25",
+          "z": "11.990000000000002"
+        },
+        {
+          "r": "33.25",
+          "z": "-17.35"
+        },
+        {
+          "r": "0.0",
+          "z": "-17.35"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00748A": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00748A",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "77"
+    }
+  },
+  "P00748A": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "24.5"
+        },
+        {
+          "r": "1.55",
+          "z": "24.5"
+        },
+        {
+          "r": "1.55",
+          "z": "26.3"
+        },
+        {
+          "r": "28.730000008382166",
+          "z": "26.3"
+        },
+        {
+          "r": "33.4",
+          "z": "21.630000000000003"
+        },
+        {
+          "r": "33.4",
+          "z": "-26.3"
+        },
+        {
+          "r": "0.0",
+          "z": "-26.3"
+        }
+      ]
+    }
+  },
+  "CrysAssemP00698B": {
+    "type": "crystalassembly",
+    "parameters": {
+      "detector": "P00698B",
+      "hexrod": "P369A",
+      "baseplatematerial": "PEN",
+      "baseplatesize": "small",
+      "rodheight": "53.5"
+    }
+  },
+  "P00698B": {
+    "type": "detector",
+    "parameters": {
+      "planes": "7",
+      "geometry": [
+        {
+          "r": "0.0",
+          "z": "13.7"
+        },
+        {
+          "r": "1.5",
+          "z": "13.7"
+        },
+        {
+          "r": "1.5",
+          "z": "15.5"
+        },
+        {
+          "r": "27.64000000917192",
+          "z": "15.5"
+        },
+        {
+          "r": "32.75",
+          "z": "10.39"
+        },
+        {
+          "r": "32.75",
+          "z": "-15.5"
+        },
+        {
+          "r": "0.0",
+          "z": "-15.5"
+        }
+      ]
+    }
+  }
+}
