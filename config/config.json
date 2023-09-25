@@ -18,7 +18,6 @@
               "The user can choose the status of detectors to include in the exposure evaluation among 'on', 'off', 'ac', 'no_psd' or a combination of them.",
               "Again, you need to specify the production environment path together with its version - BE CONSISTENT WITH WHAT YOU PUT ABOVE!"], 
       "time-unit": "yr",
-      "run-info-path": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis/src/settings/runinfo.json",
       "status": ["on"],
       "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
       "version": "v01.06"
