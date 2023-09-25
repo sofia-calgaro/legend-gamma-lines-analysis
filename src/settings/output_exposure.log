@@ -1,0 +1,31 @@
+
+Total exposure for p03-r000 is: 1.11676 kg*yr
+--- Total exposure for COAX: 0 kg*yr (m_tot=0 kg)
+--- Total exposure for BEGe: 0.23202 kg*yr (m_tot=16.489 kg)
+--- Total exposure for ICPC: 0.88474 kg*yr (m_tot=62.8775 kg)
+--- Total exposure for PPC: 0 kg*yr (m_tot=0 kg)
+...... r001
+
+Total exposure for p03-r001 is: 1.3861 kg*yr
+--- Total exposure for COAX: 0 kg*yr (m_tot=0 kg)
+--- Total exposure for BEGe: 0.28797 kg*yr (m_tot=16.489 kg)
+--- Total exposure for ICPC: 1.09812 kg*yr (m_tot=62.8775 kg)
+--- Total exposure for PPC: 0 kg*yr (m_tot=0 kg)
+... inspecting period p04
+...... r000
+
+Total exposure for p04-r000 is: 1.36787 kg*yr
+--- Total exposure for COAX: 0 kg*yr (m_tot=0 kg)
+--- Total exposure for BEGe: 0.28419 kg*yr (m_tot=16.489 kg)
+--- Total exposure for ICPC: 1.08369 kg*yr (m_tot=62.8775 kg)
+--- Total exposure for PPC: 0 kg*yr (m_tot=0 kg)
+
+
+Total exposure (all periods and runs) is: 3.87073 kg*yr
+--- Total exposure for COAX: 0 kg*yr
+--- Total exposure for BEGe: 0.80417 kg*yr
+--- Total exposure for ICPC: 3.06655 kg*yr
+--- Total exposure for PPC: 0 kg*yr
+Resolution parameters are stored here: src/settings/resolution_p3p4.json
+Created ROOT file to give to the fitter code as input in ./tmp/raw-BEGe.root
+EOF

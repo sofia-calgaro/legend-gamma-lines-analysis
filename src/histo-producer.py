@@ -2,7 +2,6 @@ import os
 import ROOT
 import pandas as pd
 import legend_data_monitor as ldm
-from legendmeta import LegendMetadata
 
 
 # specify bin width in keV

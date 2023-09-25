@@ -6,10 +6,11 @@ import os
 import ROOT
 import logging
 import legend_data_monitor as ldm
-sys.path.insert(0, './resolution')
 from get_resolution import *
-sys.path.insert(1, './livetime_and_exposure')
 import get_exposure
+
+from legendmeta import LegendMetadata
+lmeta = LegendMetadata()
 
 # -----------------------------------------------------------------------------------------
 # LOGGER SETTINGS 
@@ -55,11 +56,10 @@ def return_config_info(config_file):
     info = [prodenv, periods, runs, detectors, version, cut]
     # exposure info
     exposure_time_unit = config["exposure"]["time-unit"]
-    run_info_path = config["exposure"]["run-info-path"]
     status = config["exposure"]["status"].split() if isinstance(config["exposure"]["status"], str) else config["exposure"]["status"]
     expo_prodenv = config["exposure"]["prodenv"]
     expo_version = config["exposure"]["version"]
-    expo = [exposure_time_unit, run_info_path, status, expo_prodenv, expo_version]
+    expo = [exposure_time_unit, status, expo_prodenv, expo_version]
 
     return gamma_src_code, output, info, expo, histo_folder
         
@@ -117,23 +117,22 @@ def main():
     #check periods and runs set by the user
     list_avail = []
 
-    with open(expo[1], "r") as file:
-        run_info = json.load(file)
-    periods_avail = list(run_info["phy"].keys())
+    run_info = lmeta.dataprod.runinfo
+    periods_avail = list(run_info.keys())
     for p in periods_avail:
-        runs_avail = list(run_info["phy"][p].keys())
+        runs_avail = list(run_info[p].keys())
         list_avail.append((p,runs_avail))
 
     result_dict = {}
 
-    for p in info[1]:
+    for idx_p,p in enumerate(info[1]):
         avail_periods = [item[0] for item in list_avail]
         if p not in avail_periods:
             logger_expo.debug(f"{p} is not an available period")
         tot_idx=len(periods_avail)
         idx=[idx for idx in range(0,tot_idx) if list_avail[idx][0]==p][0]
         run_avail= []
-        for r in info[2]:
+        for r in info[2][idx_p]:
             if not r in list_avail[idx][1]:
                 logger_expo.debug(f"{p} {r} is not an available run")
             else:
@@ -141,7 +140,7 @@ def main():
         result_dict[p] = run_avail   
 
     #create json file with the exposure
-    exposure_det = get_exposure.main(expo[1], expo[0], str(result_dict), expo[2], expo[3], expo[4])
+    _ = get_exposure.main(expo[0], str(result_dict), expo[1], expo[2], expo[3])
       
     if info[3] == "single":
         histo_name = det
@@ -162,7 +161,7 @@ def main():
     b_res = ROOT.TParameter("double")( "b_res", resolution[1] )
     
     #store resolution in json file
-    resolution_file="./resolution_p3p4.json"
+    resolution_file="src/settings/resolution_p3p4.json"
     try:
         with open(resolution_file, 'r') as fp:
             resolution_dict = json.load(fp)

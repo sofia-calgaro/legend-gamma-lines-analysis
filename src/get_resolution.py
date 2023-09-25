@@ -2,12 +2,10 @@ import os, json, sys
 import numpy as np
 sys.path.insert(0, './')
 import main
-
-sys.path.insert(1, './livetime_and_exposure')
-import get_exposure
 from legendmeta import JsonDB
-import legend_data_monitor as ldm
+
 from legendmeta import LegendMetadata
+lmeta = LegendMetadata()
 
 operation ='ecal'
 par ='cuspEmax_ctc_cal'
@@ -15,36 +13,36 @@ pars = 'eres_pars'
 
 def get_resolution(config_file, detectors):
     # retrieve useful info
-    gamma_src_code, output, info, expo, _ = main.return_config_info(config_file)
+    _, _, info, expo, _ = main.return_config_info(config_file)
 
-    file_exposure = f'exposure_in_kg_{expo[0]}'
-    if isinstance(expo[2],list):
-        for st in expo[2]:
+    file_exposure = f'src/settings/exposure_in_kg_{expo[0]}'
+    if isinstance(expo[1],list):
+        for st in expo[1]:
             file_exposure += f"_{st}" 
-    if isinstance(expo[2], str):
-        file_exposure += f"_{expo[2]}" 
+    if isinstance(expo[1], str):
+        file_exposure += f"_{expo[1]}" 
     file_exposure += '.json'
     with open(file_exposure, "r") as file:
         exposure_det = json.load(file)
     exposure_list = []
     resolution_list = []
-    run_info = get_exposure.parse_json_or_dict(expo[1])
+    run_info = lmeta.dataprod.runinfo
 
-    for p in info[1]:
+    for idx_p,p in enumerate(info[1]):
         runs_avail = exposure_det[p].keys()
-        for r in info[2]:
+        for r in info[2][idx_p]:
             if not r in runs_avail:
                 continue 
 
             # get channel map for a specific run and period
-            first_timestamp = run_info["phy"][p][r]["start_key"]
-            map_file = os.path.join(expo[3], expo[4], "inputs/dataprod/config")
+            first_timestamp = run_info[p][r]["phy"]["start_key"]
+            map_file = os.path.join(expo[2], expo[3], "inputs/dataprod/config")
             full_status_map = JsonDB(map_file).on(
                 timestamp=first_timestamp, system="geds"
             )["analysis"]
-            status_map = {key: value for key, value in full_status_map.items() if value.get('usability') in expo[2]}
+            status_map = {key: value for key, value in full_status_map.items() if value.get('usability') in expo[1]}
             all_detectors = [det for det in status_map.keys() if "S" not in det]
-            map_file = os.path.join(expo[3], expo[4], "inputs/hardware/configuration/channelmaps")
+            map_file = os.path.join(expo[2], expo[3], "inputs/hardware/configuration/channelmaps")
             channel_map = JsonDB(map_file).on(timestamp=first_timestamp)
 
             if detectors == "All":
