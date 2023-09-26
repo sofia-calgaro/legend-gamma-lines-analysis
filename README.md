@@ -20,7 +20,7 @@ Below, you need to provide input for data to read and data to inspect (eg. perio
         "dataset": {
             "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
             "version": "v01.06",
-            "comments": ["The user can set the list of periods, runs and detector types ('single','all','BEGe', 'ICPC', 'COAX','PPC' )",
+            "comments": ["The user can set the list of periods, runs and detector types ('single','All','BEGe', 'ICPC', 'COAX','PPC' )",
                         "If they want to study only some detector then set a list [] in the 'detectors' key",
                         "The user can choose the cut to apply among ['raw',  'LAr AC', 'LAr C']"], 
             "periods": ["p03", "p04"],
