@@ -66,14 +66,14 @@ def parse_json_or_dict(value):
         return eval(value)
 
 
-def main(LT_file=None, time_unit=None, data=None, status=None, prodenv=None, version=None):
+def main(time_unit=None, data=None, status=None, prodenv=None, version=None):
     """Get livetimes from an input file.
     
     You can run the script either from the command line, or you can use the module in another script.
 
     The function returns a dictionary with exposures evaluated channel by channel, run by run, period by period.
     """
-    if LT_file and time_unit and data and status and prodenv and version:
+    if time_unit and data and status and prodenv and version:
         data = parse_json_or_dict(data)
         if isinstance(status, str):
             status = status.split()
@@ -81,35 +81,6 @@ def main(LT_file=None, time_unit=None, data=None, status=None, prodenv=None, ver
         # set up the argument parser
         parser = argparse.ArgumentParser(description="Evaluate exposure, run by run, detector by detector, starting from input livetimes expressed in seconds.", formatter_class=RawTextHelpFormatter)
         
-        livetime_help = """\
-        Path to the input JSON file (or dictionary object) that stores the livetime in seconds for a given run and period and the starting key of a given run.
-        In the future, this dictionary will be fully retrievable from metadata.
-        The content of the dictionary has to be of the following type:
-
-        {
-        "phy": {
-            "p03": {
-                "r000": {
-                    "start_key": "20230312T043356Z",
-                    "livetime_in_s": 443740
-                },
-                "r001": {
-                    "start_key": "20230318T015140Z",
-                    "livetime_in_s": 550760
-                },
-                "r002": {
-                    "start_key": "20230324T205907Z",
-                    "livetime_in_s": 554660
-                },
-                ...
-            },
-            ...
-        }
-
-        Note: If you use a dictionary from the command line, be sure to enclose the dictionary argument within single quotes (') 
-        to ensure that the entire dictionary is treated as a single string.
-        """
-
         time_unit_help = """\
         String (among 'sec', 'min', 'hour', 'day', 'yr') to get the exposure in a given time format. Mass is always computed in kg in the exposure's evaluation.
         """
@@ -139,7 +110,6 @@ def main(LT_file=None, time_unit=None, data=None, status=None, prodenv=None, ver
         3. on off ac = to include only ON+OFF+AC detectors
         """
 
-        parser.add_argument("--livetime", help=livetime_help)
         parser.add_argument("--time_unit", help=time_unit_help)
         parser.add_argument("--data", help=data_help)
         parser.add_argument("--prodenv", help=prodenv_help)
@@ -150,30 +120,27 @@ def main(LT_file=None, time_unit=None, data=None, status=None, prodenv=None, ver
         args = parser.parse_args()
 
         # get input info
-        LT_file = args.livetime
         time_unit = args.time_unit
         data = parse_json_or_dict(args.data)
         prodenv = args.prodenv
         version = args.version
         status = args.status
 
-
-    logger_expo.debug(f"Getting livetime values from \"{LT_file}\"")
     logger_expo.debug(f"You are going to evaluate exposure in kg*{time_unit}")
     logger_expo.debug(f"You are going to inspect following periods and runs: {data} (from {prodenv}, version={version})")
     logger_expo.debug(f"You are going to inspect detectors that have the following status: {status}")
-    logger_expo.debug(f"Individual exposures will be stored here: \"exposure_in_kg_{time_unit}.json\"")
-    logger_expo.debug(f"Summary exposures (and masses) will be stored here: \"output_exposure.log\"")
+    logger_expo.debug(f"Individual exposures will be stored here: \"src/settings/exposure_in_kg_{time_unit}.json\"")
+    logger_expo.debug(f"Summary exposures (and masses) will be stored here: \"src/settings/output_exposure.log\"")
+
+    # get run/livetime info as a json file 
+    run_info = lmeta.dataprod.runinfo
 
     # get hardware map (for masses)
     dets_map = lmeta.hardware.detectors.germanium.diodes
 
     # Remove the file if it already exists
-    if os.path.exists('output_exposure.log'):
-        os.remove('output_exposure.log')
-
-    # get livetimes
-    run_info = parse_json_or_dict(LT_file)
+    if os.path.exists('src/settings/output_exposure.log'):
+        os.remove('src/settings/output_exposure.log')
 
     expo_all_periods_runs = {}
 
@@ -194,11 +161,14 @@ def main(LT_file=None, time_unit=None, data=None, status=None, prodenv=None, ver
         # inspect each run individually
         for run in runs:
             r_run = f"{str(run).zfill(3)}" if isinstance(run,str) else f"r{str(run).zfill(3)}"
-            logger_expo.info(f"...... {r_run}")
-            expo_all_periods_runs[period].update({r_run: {}})
 
             # get channel map for a specific run and period
-            first_timestamp = run_info["phy"][period][r_run]["start_key"]
+            if "phy" not in run_info[period][r_run].keys():
+                continue
+            
+            logger_expo.info(f"...... {r_run}")
+            expo_all_periods_runs[period].update({r_run: {}})
+            first_timestamp = run_info[period][r_run]["phy"]["start_key"]
             map_file = os.path.join(prodenv, version, "inputs/dataprod/config")
             full_status_map = JsonDB(map_file).on(
                 timestamp=first_timestamp, system="geds"
@@ -213,7 +183,7 @@ def main(LT_file=None, time_unit=None, data=None, status=None, prodenv=None, ver
             # ===================================================
             # Get livetime from input dictionary
             # ===================================================
-            livetime_run = run_info["phy"][period][r_run]["livetime_in_s"]
+            livetime_run = run_info[period][r_run]["phy"]["livetime_in_s"]
 
             tot_expo = 0
             tot_expo_coax = 0
@@ -254,7 +224,7 @@ def main(LT_file=None, time_unit=None, data=None, status=None, prodenv=None, ver
             overall_expo_ppc += tot_expo_ppc
             
             # save summary exposure in output file
-            logging.basicConfig(filename='output_exposure.log', level=logging.INFO, format='%(message)s')
+            logging.basicConfig(filename='src/settings/output_exposure.log', level=logging.INFO, format='%(message)s')
             logging.info(f"\nTotal exposure for {period}-{run} is: {round(tot_expo,5)} kg*{time_unit}")
             logging.info(f"--- Total exposure for COAX: {round(tot_expo_coax,5)} kg*{time_unit} (m_tot={round(tot_mass_coax,5)} kg)")
             logging.info(f"--- Total exposure for BEGe: {round(tot_expo_bege,5)} kg*{time_unit} (m_tot={round(tot_mass_bege,5)} kg)")
@@ -268,7 +238,7 @@ def main(LT_file=None, time_unit=None, data=None, status=None, prodenv=None, ver
     logging.info(f"--- Total exposure for PPC: {round(overall_expo_ppc,5)} kg*{time_unit}")
 
     # save the single-channel exposure dictionary to a JSON file
-    output_json_file = f'exposure_in_kg_{time_unit}'
+    output_json_file = f'src/settings/exposure_in_kg_{time_unit}'
     if isinstance(status,list):
         for st in status:
             output_json_file += f"_{st}" 

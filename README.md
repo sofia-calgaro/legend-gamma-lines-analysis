@@ -1,12 +1,45 @@
-# legend-gamma-lines-analysis
+# How to run the code
+From terminal, outside any legend sif container, type
 
-Repository to store old GERDA code to inspect gamma lines. The code was personally provided by Christoph Wiesinger. The code is based on ROOT (version ??) and BAT 0.9.4.
+```bash
+    $ ./run.sh config/config.json
+```
 
-## gamma-fitter
-Folder with codes to apply a Bayesian analysis over a TH1D histogram to analyze gamma lines.
 
-## histograms
-Folder storing files to produce ROOT histograms tobe used for the gamma analysis.
+# Config entries
+Put here some useful paths:
+```bash
+    {
+        "gamma-src-code": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis", // where you have located the folder
+        "output": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis/output/2023-09-04/", // where you want to store any fit output
+        "histo-folder": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis/src/root_files/0_25keV-golden/", // where you can find the generated ROOT files
+```
 
-## livetime_and_exposure
-Folder with codes to get the exposure of inidividual channel in a given run and period.
+Below, you need to provide input for data to read and data to inspect (eg. periods/runs/detector type/cut)
+```bash        
+        "dataset": {
+            "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
+            "version": "v01.06",
+            "comments": ["The user can set the list of periods, runs and detector types ('single','All','BEGe', 'ICPC', 'COAX','PPC' )",
+                        "If they want to study only some detector then set a list [] in the 'detectors' key",
+                        "The user can choose the cut to apply among ['raw',  'LAr AC', 'LAr C']"], 
+            "periods": ["p03", "p04"],
+            "runs": [["r000", "r001"], ["r000"]], // one list of runs for each period
+            "detectors": "BEGe",
+            "cut": "raw"
+        },
+```
+
+Below, specify entries needed for exposure:
+```bash
+        "exposure": {
+            "comments": ["The user can set the time unit of exposure evaluation ('sec', 'min', 'hour', 'day', 'yr')",
+                    "The user can choose the status of detectors to include in the exposure evaluation among 'on', 'off', 'ac', 'no_psd' or a combination of them.",
+                    "Again, you need to specify the production environment path together with its version - BE CONSISTENT WITH WHAT YOU PUT ABOVE!"], 
+            "time-unit": "yr", 
+            "status": ["on"], // status of detector to take into account
+            "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/", // same as above for data to read
+            "version": "v01.06" // same as above for data to read
+        }
+    }  
+```

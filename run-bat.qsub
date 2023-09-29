@@ -7,24 +7,31 @@
 LOGFILE=$4".out"
 OUT_FOLDER=$3
 
-# Check if the folder already exists
+# Check if the folders already exist
 if [ ! -d "$OUT_FOLDER" ]; then
     mkdir -p "$OUT_FOLDER"
 fi
 if [ ! -d "$OUT_FOLDER/log" ]; then
     mkdir -p "$OUT_FOLDER/log"
 fi
+if [ ! -d "$OUT_FOLDER/$4" ]; then
+    mkdir -p "$OUT_FOLDER/$4"
+fi
 
 
 cd $2
 
 if [ $4 == 'All' ] || [ $4 == 'BEGe' ] || [ $4 == 'ICPC' ] || [ $4 == 'COAX' ] || [ $4 == 'PPC' ]; then
-    singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python ./main.py --config $1" &> $OUT_FOLDER/log/$LOGFILE
+    singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python src/main.py --config $1" &> $OUT_FOLDER/log/$LOGFILE
     source ~/.bashrc
-    ./gamma-fitter-BATv100/runGammaAnalysis $5 $4 &> $OUT_FOLDER/log/$LOGFILE
+    #cd src/gamma-fitter/runGammaAnalysis
+    #make runGammaAnalysis &&
+    #runGammaAnalysis $5 $4 &> $OUT_FOLDER/log/$LOGFILE
+    src/gamma-fitter/runGammaAnalysis $5 $4 &> $OUT_FOLDER/log/$LOGFILE
 else
- singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python ./main.py --config $1 --det $5" &> $OUT_FOLDER/log/$LOGFILE
- source ~/.bashrc
-./gamma-fitter-BATv100/runGammaAnalysisSingle $6 ${5: -7} &> $OUT_FOLDER/log/$LOGFILE
+    singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python src/main.py --config $1 --det $5" &> $OUT_FOLDER/log/$LOGFILE
+    source ~/.bashrc
+    cd src/gamma-fitter/runGammaAnalysis
+    make runGammaAnalysisSingle &&
+    runGammaAnalysisSingle $6 ${5: -7} &> $OUT_FOLDER/log/$LOGFILE
 fi
-#cd gamma-fitter-BATv100 && make 
