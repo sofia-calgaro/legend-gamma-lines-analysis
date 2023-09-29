@@ -57,9 +57,7 @@ def return_config_info(config_file):
     # exposure info
     exposure_time_unit = config["exposure"]["time-unit"]
     status = config["exposure"]["status"].split() if isinstance(config["exposure"]["status"], str) else config["exposure"]["status"]
-    expo_prodenv = config["exposure"]["prodenv"]
-    expo_version = config["exposure"]["version"]
-    expo = [exposure_time_unit, status, expo_prodenv, expo_version]
+    expo = [exposure_time_unit, status]
 
     return gamma_src_code, output, info, expo, histo_folder
         
@@ -140,7 +138,7 @@ def main():
         result_dict[p] = run_avail   
 
     #create json file with the exposure
-    _ = get_exposure.main(expo[0], str(result_dict), expo[1], expo[2], expo[3])
+    _ = get_exposure.main(expo[0], str(result_dict), expo[1], info[0], info[4])
       
     if info[3] == "single":
         histo_name = det
