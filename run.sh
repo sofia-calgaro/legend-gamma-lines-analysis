@@ -11,7 +11,7 @@ cut="$(grep -oP '(?<="cut": ")[^"]*' $1)"
 cut=$(echo "${cut//\ }")
 detector_type="$(grep -oP '(?<="detectors": ")[^"]*' $1)"
 if [ "$detector_type" == "single" ]; then
-  file="./list_detectors_p3p4.json"
+  file="src/settings/list_detectors.json"
   detector_list=$(python-3.9.6 -c \
 "import json;
 with open('$file', 'r') as f:
