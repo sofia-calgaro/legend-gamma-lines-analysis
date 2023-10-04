@@ -118,7 +118,7 @@ def main():
     
     # create histograms with run and periods of interest if specified or if not already present
     if histo_info[4] is True or (histo_info[4] is False and not os.path.isdir(os.path.join('src/root_files', histo_info[0]))):
-        get_histos(config_file)
+        make_histos(config_file)
         logger_expo.debug(f"New histograms were created in {os.path.join('src/root_files', histo_info[0])}")
     
     #check periods and runs set by the user

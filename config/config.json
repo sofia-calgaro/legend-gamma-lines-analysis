@@ -6,11 +6,11 @@
   "dataset": {
     "periods": ["p03", "p04"],
     "runs": [["r000", "r001"], ["r000"]],
-    "status": ["on"],
+    "status": ["on", "no_psd"],
     "detectors": "BEGe",
     "cut": "raw",
     "histogram": {
-      "overwrite": false,
+      "overwrite": true,
       "folder": "raw_BEGe",
       "bin-width": 1,
       "x-min-keV": 0,

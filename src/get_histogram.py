@@ -5,12 +5,10 @@ import pandas as pd
 import legend_data_monitor as ldm
 import main
 
-def get_histos(config_file: str | dict):
-    # get config file as an input
-    print(f"You are going to inspect config={config_file}")
+def make_histos(config_file: str | dict):
 
     # ...reading the config file...
-    _, _, info, _, histo_info = main.return_config_info(config_file)
+    _, _, info, status, histo_info = main.return_config_info(config_file)
     print("...inspected!")
 
     # specify bin width and energy range in keV
@@ -77,8 +75,24 @@ def get_histos(config_file: str | dict):
             lar_ac_dir = myfile.mkdir("LAr AC")
             lar_c_dir = myfile.mkdir("LAr C")
         
-            # remove pulser, baseline and muon events, events not passing Quality Cuts, select events with multiplicty == 1 and load data of detectors usable for analysis
-            raw = (data.is_pulser == False) & (data.is_baseline == False) & (data.is_muon_tagged == False) & (data.is_physical == True) & (data.multiplicity == 1) & (data.is_valid_channel == True)
+            # remove pulser, baseline and muon events, events not passing Quality Cuts, select events with multiplicty == 1 
+            raw_base = (data.is_pulser == False) & (data.is_baseline == False) & (data.is_muon_tagged == False) & (data.is_physical == True) & (data.multiplicity == 1) & (data.is_saturated == False)
+            # apply additional cuts depending on the selected detector status(es)
+            if "on" in status:
+                if "ac" in status or "no_psd" in status:
+                    if "ac"  in status and "no_psd" in status:
+                        raw = raw_base # 'BRONZE' dataset - everything (ON, AC, NO-PSD) 
+                        print("You are building the BRONZE dataset")
+                    else:
+                        if "ac" in status: 
+                            raw = raw_base & (data.is_usable_aoe == True) # whatever dataset
+                            print("You are building the ? dataset")
+                        if "no_psd" in status: 
+                            raw = raw_base & (data.is_valid_channel == True) # 'SILVER' dataset
+                            print("You are building the SILVER dataset")
+                else:
+                    raw = raw_base & (data.is_valid_channel == True) & (data.is_usable_aoe == True) # 'GOLDEN' dataset
+                    print("You are building the GOLDEN dataset")
         
             # select raw data + remove events in coincidence with LAr (LAr AC)
             lar_ac = raw & (data.is_lar_rejected == False)
