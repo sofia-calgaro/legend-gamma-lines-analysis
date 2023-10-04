@@ -13,14 +13,14 @@ pars = 'eres_pars'
 
 def get_resolution(config_file, detectors):
     # retrieve useful info
-    _, _, info, expo, _ = main.return_config_info(config_file)
+    _, _, info, status, _ = main.return_config_info(config_file)
 
-    file_exposure = f'src/settings/exposure_in_kg_{expo[0]}'
-    if isinstance(expo[1],list):
-        for st in expo[1]:
+    file_exposure = f'src/settings/exposure_in_kg_yr'
+    if isinstance(status,list):
+        for st in status:
             file_exposure += f"_{st}" 
-    if isinstance(expo[1], str):
-        file_exposure += f"_{expo[1]}" 
+    if isinstance(status, str):
+        file_exposure += f"_{status}" 
     file_exposure += '.json'
     with open(file_exposure, "r") as file:
         exposure_det = json.load(file)
@@ -40,7 +40,7 @@ def get_resolution(config_file, detectors):
             full_status_map = JsonDB(map_file).on(
                 timestamp=first_timestamp, system="geds"
             )["analysis"]
-            status_map = {key: value for key, value in full_status_map.items() if value.get('usability') in expo[1]}
+            status_map = {key: value for key, value in full_status_map.items() if value.get('usability') in status}
             all_detectors = [det for det in status_map.keys() if "S" not in det]
             map_file = os.path.join(info[0], info[4], "inputs/hardware/configuration/channelmaps")
             channel_map = JsonDB(map_file).on(timestamp=first_timestamp)

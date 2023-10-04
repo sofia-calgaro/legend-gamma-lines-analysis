@@ -61,11 +61,9 @@ def return_config_info(config_file):
     cut = config["dataset"]["cut"]
     info = [prodenv, periods, runs, detectors, version, cut]
     # exposure info
-    exposure_time_unit = config["exposure"]["time-unit"]
     status = config["exposure"]["status"].split() if isinstance(config["exposure"]["status"], str) else config["exposure"]["status"]
-    expo = [exposure_time_unit, status]
 
-    return gamma_src_code, output, info, expo, histo_info
+    return gamma_src_code, output, info, status, histo_info
         
 def get_histo(gamma_src_code, histo_folder, version, result_dict, detectors, cut):
     """Combine single histograms."""
@@ -97,7 +95,7 @@ def main():
 
 
     # ...reading the config file...
-    gamma_src_code, output, info, expo, histo_info = return_config_info(config_file)
+    gamma_src_code, output, info, status, histo_info = return_config_info(config_file)
     logger_expo.debug("...inspected!")
     
     #check version set by the user
@@ -149,7 +147,7 @@ def main():
         result_dict[p] = run_avail   
 
     #create json file with the exposure
-    _ = get_exposure.main(expo[0], str(result_dict), expo[1], info[0], info[4])
+    _ = get_exposure.main("yr", str(result_dict), status, info[0], info[4])
       
     if info[3] == "single":
         histo_name = det

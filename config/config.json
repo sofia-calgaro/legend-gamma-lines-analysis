@@ -22,7 +22,6 @@
     "exposure": {
       "comments": ["The user can set the time unit of exposure evaluation ('sec', 'min', 'hour', 'day', 'yr')",
               "The user can choose the status of detectors to include in the exposure evaluation among 'on', 'off', 'ac', 'no_psd' or a combination of them."],
-      "time-unit": "yr",
       "status": ["on"]
     }
 }  
