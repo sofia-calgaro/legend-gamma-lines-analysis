@@ -50,7 +50,8 @@ def return_config_info(config_file):
     histo_bin_width = config["dataset"]["histogram"]["bin-width"]
     histo_x_min = config["dataset"]["histogram"]["x-min-keV"]
     histo_x_max = config["dataset"]["histogram"]["x-max-keV"]
-    histo_info = [histo_folder, histo_bin_width, histo_x_min, histo_x_max]
+    histo_overwrite = config["dataset"]["histogram"]["overwrite"]
+    histo_info = [histo_folder, histo_bin_width, histo_x_min, histo_x_max, histo_overwrite]
     # general info
     prodenv = config["dataset"]["prodenv"]
     periods = config["dataset"]["periods"]
@@ -117,10 +118,11 @@ def main():
         logger_expo.debug(f"{info[3]} is not an available detector. Try among '['All',  'single', 'BEGe', 'COAX', 'ICPC', 'PPC']'")
         return
     
-    # create histograms with run and periods of interest
-    get_histos(config_file)
-    logger_expo.debug(f"Histograms were created in {os.path.join('src/root_files', histo_info[0])}")
-        
+    # create histograms with run and periods of interest if specified or if not already present
+    if histo_info[4] is True or (histo_info[4] is False and not os.path.isdir(os.path.join('src/root_files', histo_info[0]))):
+        get_histos(config_file)
+        logger_expo.debug(f"New histograms were created in {os.path.join('src/root_files', histo_info[0])}")
+    
     #check periods and runs set by the user
     list_avail = []
 

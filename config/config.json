@@ -12,6 +12,7 @@
       "detectors": "BEGe",
       "cut": "raw",
       "histogram": {
+        "overwrite": false,
         "folder": "raw_BEGe",
         "bin-width": 1,
         "x-min-keV": 0,
