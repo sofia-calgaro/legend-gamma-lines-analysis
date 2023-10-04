@@ -36,13 +36,13 @@ def get_resolution(config_file, detectors):
 
             # get channel map for a specific run and period
             first_timestamp = run_info[p][r]["phy"]["start_key"]
-            map_file = os.path.join(expo[2], expo[3], "inputs/dataprod/config")
+            map_file = os.path.join(info[0], info[4], "inputs/dataprod/config")
             full_status_map = JsonDB(map_file).on(
                 timestamp=first_timestamp, system="geds"
             )["analysis"]
             status_map = {key: value for key, value in full_status_map.items() if value.get('usability') in expo[1]}
             all_detectors = [det for det in status_map.keys() if "S" not in det]
-            map_file = os.path.join(expo[2], expo[3], "inputs/hardware/configuration/channelmaps")
+            map_file = os.path.join(info[0], info[4], "inputs/hardware/configuration/channelmaps")
             channel_map = JsonDB(map_file).on(timestamp=first_timestamp)
 
             if detectors == "All":

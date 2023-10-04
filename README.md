@@ -34,12 +34,9 @@ Below, specify entries needed for exposure:
 ```bash
         "exposure": {
             "comments": ["The user can set the time unit of exposure evaluation ('sec', 'min', 'hour', 'day', 'yr')",
-                    "The user can choose the status of detectors to include in the exposure evaluation among 'on', 'off', 'ac', 'no_psd' or a combination of them.",
-                    "Again, you need to specify the production environment path together with its version - BE CONSISTENT WITH WHAT YOU PUT ABOVE!"], 
+                    "The user can choose the status of detectors to include in the exposure evaluation among 'on', 'off', 'ac', 'no_psd' or a combination of them."],
             "time-unit": "yr", 
-            "status": ["on"], // status of detector to take into account
-            "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/", // same as above for data to read
-            "version": "v01.06" // same as above for data to read
+            "status": ["on"] // status of detector to take into account
         }
     }  
 ```
