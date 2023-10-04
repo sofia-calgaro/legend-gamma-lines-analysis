@@ -53,15 +53,15 @@ def return_config_info(config_file):
     histo_overwrite = config["dataset"]["histogram"]["overwrite"]
     histo_info = [histo_folder, histo_bin_width, histo_x_min, histo_x_max, histo_overwrite]
     # general info
-    prodenv = config["dataset"]["prodenv"]
+    prodenv = config["prodenv"]
+    version = config["version"]
     periods = config["dataset"]["periods"]
     runs = config["dataset"]["runs"]
     detectors = config["dataset"]["detectors"]
-    version = config["dataset"]["version"]
     cut = config["dataset"]["cut"]
     info = [prodenv, periods, runs, detectors, version, cut]
     # exposure info
-    status = config["exposure"]["status"].split() if isinstance(config["exposure"]["status"], str) else config["exposure"]["status"]
+    status = config["dataset"]["status"].split() if isinstance(config["dataset"]["status"], str) else config["dataset"]["status"]
 
     return gamma_src_code, output, info, status, histo_info
         
