@@ -15,7 +15,7 @@ if [ "$detector_type" == "single" ]; then
   detector_list=$(python-3.9.6 -c \
 "import json;
 with open('$file', 'r') as f:
-  print(json.load(f)['detector_p3p4'])")
+  print(json.load(f)['detectors'])")
   for d in $detector_list
    do
     d_name=$(echo "${d//\'}")
