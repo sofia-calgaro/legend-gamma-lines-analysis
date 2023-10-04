@@ -1,7 +1,6 @@
 {
     "gamma-src-code": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis",
     "output": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis/output/2023-09-04/",
-    "histo-folder": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis/src/root_files/0_25keV-golden/",
     "dataset": {
       "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
       "version": "v01.06",
@@ -11,7 +10,13 @@
       "periods": ["p03", "p04"],
       "runs": [["r000", "r001"], ["r000"]],
       "detectors": "BEGe",
-      "cut": "raw"
+      "cut": "raw",
+      "histogram": {
+        "folder": "raw_BEGe",
+        "bin-width": 1,
+        "x-min-keV": 0,
+        "x-max-keV": 5000
+      }
     },
     "exposure": {
       "comments": ["The user can set the time unit of exposure evaluation ('sec', 'min', 'hour', 'day', 'yr')",

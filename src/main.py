@@ -7,6 +7,7 @@ import ROOT
 import logging
 import legend_data_monitor as ldm
 from get_resolution import *
+from get_histogram import *
 import get_exposure
 
 from legendmeta import LegendMetadata
@@ -44,8 +45,12 @@ def return_config_info(config_file):
     gamma_src_code = config["gamma-src-code"]
     # output path
     output = config["output"]
-    # histograms root files path
-    histo_folder = config["histo-folder"]
+    # histogram info
+    histo_folder = config["dataset"]["histogram"]["folder"]
+    histo_bin_width = config["dataset"]["histogram"]["bin-width"]
+    histo_x_min = config["dataset"]["histogram"]["x-min-keV"]
+    histo_x_max = config["dataset"]["histogram"]["x-max-keV"]
+    histo_info = [histo_folder, histo_bin_width, histo_x_min, histo_x_max]
     # general info
     prodenv = config["dataset"]["prodenv"]
     periods = config["dataset"]["periods"]
@@ -59,14 +64,14 @@ def return_config_info(config_file):
     status = config["exposure"]["status"].split() if isinstance(config["exposure"]["status"], str) else config["exposure"]["status"]
     expo = [exposure_time_unit, status]
 
-    return gamma_src_code, output, info, expo, histo_folder
+    return gamma_src_code, output, info, expo, histo_info
         
-def get_histo(gamma_src_code, histo_folder, result_dict,  detectors, cut):
+def get_histo(gamma_src_code, histo_folder, version, result_dict, detectors, cut):
     """Combine single histograms."""
     histo_list = ROOT.std.vector('TH1D')()
     for p in result_dict.keys():
         for r in result_dict[p]:
-            file_histo = os.path.join(gamma_src_code, histo_folder, f"{p}-{r}-v01_06-spectra.root")
+            file_histo = os.path.join(gamma_src_code, "src/root_files", histo_folder, f"{p}-{r}-{version}-spectra.root")
             file_root = ROOT.TFile(file_histo)
             histo =  file_root.Get(f"{cut}/{detectors}")
             histo.SetDirectory(0)
@@ -87,11 +92,11 @@ def main():
     args = parser.parse_args()
     config_file = args.config
     det = args.det
-    logger_expo.debug(f"You are going to inspect config={config_file}")
+    logger_expo.debug(f"You selected '{config_file}'")
 
 
     # ...reading the config file...
-    gamma_src_code, output, info, expo, histo_folder = return_config_info(config_file)
+    gamma_src_code, output, info, expo, histo_info = return_config_info(config_file)
     logger_expo.debug("...inspected!")
     
     #check version set by the user
@@ -111,6 +116,10 @@ def main():
     if isinstance(info[3],str) and  not info[3] in detectors_avail:
         logger_expo.debug(f"{info[3]} is not an available detector. Try among '['All',  'single', 'BEGe', 'COAX', 'ICPC', 'PPC']'")
         return
+    
+    # create histograms with run and periods of interest
+    get_histos(config_file)
+    logger_expo.debug(f"Histograms were created in {os.path.join('src/root_files', histo_info[0])}")
         
     #check periods and runs set by the user
     list_avail = []
@@ -150,7 +159,7 @@ def main():
         output = os.path.join(output, det_name)
     
     outputDir = ROOT.TNamed("outputDir",output)        
-    histo  = get_histo(gamma_src_code, histo_folder, result_dict, histo_name, info[5])
+    histo  = get_histo(gamma_src_code, histo_info[0], info[4], result_dict, histo_name, info[5])
     resolution = get_resolution(config_file, det_name)
     if resolution == [None, None]:
         logger_expo.error("Resolution is a=b=None - maybe det is not available? Exit here")
