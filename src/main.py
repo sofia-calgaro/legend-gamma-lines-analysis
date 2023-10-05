@@ -50,21 +50,20 @@ def return_config_info(config_file):
     histo_bin_width = config["dataset"]["histogram"]["bin-width"]
     histo_x_min = config["dataset"]["histogram"]["x-min-keV"]
     histo_x_max = config["dataset"]["histogram"]["x-max-keV"]
-    histo_info = [histo_folder, histo_bin_width, histo_x_min, histo_x_max]
+    histo_overwrite = config["dataset"]["histogram"]["overwrite"]
+    histo_info = [histo_folder, histo_bin_width, histo_x_min, histo_x_max, histo_overwrite]
     # general info
-    prodenv = config["dataset"]["prodenv"]
+    prodenv = config["prodenv"]
+    version = config["version"]
     periods = config["dataset"]["periods"]
     runs = config["dataset"]["runs"]
     detectors = config["dataset"]["detectors"]
-    version = config["dataset"]["version"]
     cut = config["dataset"]["cut"]
     info = [prodenv, periods, runs, detectors, version, cut]
     # exposure info
-    exposure_time_unit = config["exposure"]["time-unit"]
-    status = config["exposure"]["status"].split() if isinstance(config["exposure"]["status"], str) else config["exposure"]["status"]
-    expo = [exposure_time_unit, status]
+    status = config["dataset"]["status"].split() if isinstance(config["dataset"]["status"], str) else config["dataset"]["status"]
 
-    return gamma_src_code, output, info, expo, histo_info
+    return gamma_src_code, output, info, status, histo_info
         
 def get_histo(gamma_src_code, histo_folder, version, result_dict, detectors, cut):
     """Combine single histograms."""
@@ -96,7 +95,7 @@ def main():
 
 
     # ...reading the config file...
-    gamma_src_code, output, info, expo, histo_info = return_config_info(config_file)
+    gamma_src_code, output, info, status, histo_info = return_config_info(config_file)
     logger_expo.debug("...inspected!")
     
     #check version set by the user
@@ -117,10 +116,11 @@ def main():
         logger_expo.debug(f"{info[3]} is not an available detector. Try among '['All',  'single', 'BEGe', 'COAX', 'ICPC', 'PPC']'")
         return
     
-    # create histograms with run and periods of interest
-    get_histos(config_file)
-    logger_expo.debug(f"Histograms were created in {os.path.join('src/root_files', histo_info[0])}")
-        
+    # create histograms with run and periods of interest if specified or if not already present
+    if histo_info[4] is True or (histo_info[4] is False and not os.path.isdir(os.path.join('src/root_files', histo_info[0]))):
+        make_histos(config_file)
+        logger_expo.debug(f"New histograms were created in {os.path.join('src/root_files', histo_info[0])}")
+    
     #check periods and runs set by the user
     list_avail = []
 
@@ -147,7 +147,7 @@ def main():
         result_dict[p] = run_avail   
 
     #create json file with the exposure
-    _ = get_exposure.main(expo[0], str(result_dict), expo[1], info[0], info[4])
+    _ = get_exposure.main("yr", str(result_dict), status, info[0], info[4])
       
     if info[3] == "single":
         histo_name = det

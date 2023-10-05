@@ -7,36 +7,49 @@ From terminal, outside any legend sif container, type
 
 
 # Config entries
-Put here some useful paths:
+Put here some useful paths and info to retrieve data:
 ```bash
     {
         "gamma-src-code": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis", // where you have located the folder
         "output": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis/output/2023-09-04/", // where you want to store any fit output
-        "histo-folder": "/lfs/l1/legend/users/calgaro/legend_analysis/legend-gamma-lines-analysis/src/root_files/0_25keV-golden/", // where you can find the generated ROOT files
+        "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/", // folder containing processed data
+        "version": "v01.06", // version of processed data
 ```
 
-Below, you need to provide input for data to read and data to inspect (eg. periods/runs/detector type/cut)
+Below, you need to provide input for which data you want to inspect (eg. periods/runs/detector type/cut)
 ```bash        
         "dataset": {
-            "prodenv": "/lfs/l1/legend/data/public/prodenv/prod-blind/ref/",
-            "version": "v01.06",
-            "comments": ["The user can set the list of periods, runs and detector types ('single','All','BEGe', 'ICPC', 'COAX','PPC' )",
-                        "If they want to study only some detector then set a list [] in the 'detectors' key",
-                        "The user can choose the cut to apply among ['raw',  'LAr AC', 'LAr C']"], 
-            "periods": ["p03", "p04"],
-            "runs": [["r000", "r001"], ["r000"]], // one list of runs for each period
-            "detectors": "BEGe",
-            "cut": "raw"
-        },
+            "periods": ["p03", "p04"], // list of periods to inspect
+            "runs": [["r000", "r001"], ["r000"]], // for each period, list of runs to inspect
+            "status": ["on", "no_psd"], // detectors status to keep in the analysis
+            "detectors": "BEGe", // choose among 'BEGe', 'COAX', 'PPC', 'ICPC', 'All', 'single'
+            "cut": "raw", // choose among 'raw', 'LArC', 'LArAC'
 ```
+In particular, you can build your specific dataset in the following way:
+- _golden_ dataset: `"status": ["on"]`
+- _silver_ dataset: `"status": ["on", "no_psd"]`
+- _bronze_ dataset: `"status": ["on", "no_psd", "ac"]`
+For each dataset, a different set of cuts is applied over flags saved in the skimmed files.
 
-Below, specify entries needed for exposure:
+If you select `"detectors": "All"`, you'll inspect the spectrum given by the sum of counts coming from all detectors. 
+If you select `"detectors": "singe"`, you'll inspect the spectrum of each detector separately. However, the analysis here considers only the K lines because of their higher statistics (useful to perform studies on the spatial distribution of K-40 and K-42 contaminants).
+
+Finally, there is a specific entry for building ROOT files, ie histograms containing the spectra that you can inspect:
 ```bash
-        "exposure": {
-            "comments": ["The user can set the time unit of exposure evaluation ('sec', 'min', 'hour', 'day', 'yr')",
-                    "The user can choose the status of detectors to include in the exposure evaluation among 'on', 'off', 'ac', 'no_psd' or a combination of them."],
-            "time-unit": "yr", 
-            "status": ["on"] // status of detector to take into account
+        
+            "histogram": {
+                "overwrite": true, 
+                "folder": "raw_BEGe", // name of the folder where you want to store the ROOT files; it's created under 'src/root_files/'
+                "bin-width": 1, // bin width in keV
+                "x-min-keV": 0, // minimum in keV of the x-axis of the energy spectrum
+                "x-max-keV": 5000 // maximum in keV of the x-axis of the energy spectrum
         }
-    }  
+    }
 ```
+Select `"overwrite": true` if you want to re-generate the ROOT files (ie overwrite the previous ROOT folder, if exists), otherwise `"overwrite": false` if you want to skip the generation of ROOT files because already done in the past.
+
+# `Src` content
+Apart from the core of the code, here you can find:
+- `gamma-fitter`: folder containing the BAT-C++ Bayesian analysis 
+- `root_files`: folder containing the ROOT files that are produced starting from the processed skimmed files; if not present, this is created the first time you run the code
+- `settings`: folder containing several tools and files produced along the running of the code (ex: exposure values, resolution values, list of available detectors)
