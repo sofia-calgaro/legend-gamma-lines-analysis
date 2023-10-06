@@ -102,29 +102,24 @@ det_list = ["ICPC"]
 
 for cut_path in [RAW_path, AC_path, C_path]:#, AC_path, C_path]:
     for detector_type in det_list:
-            with open(os.path.join(cut_path, detector_type, "histo.gamma.log")) as f:
-                f = f.readlines()
-                
-            for index in range(len(f)):
-                if ("*" in f[index]):
-                    if f[index].split(" ")[1] not in avoid:
-                        gamma.append(f[index].split(" ")[1])
-                        det_type.append(detector_type)
-                        if "raw"  in cut_path: cut.append("raw")
-                        if "LArAC" in cut_path: cut.append("LArAC")
-                        if "LArC" in cut_path: cut.append("LArC")
-                        for sub_index in range(17):
-                            if (index + sub_index) > len(f) - 1: break
-                            if "intensity" in f[index + sub_index]:
-                                try:
-                                    intensity.append(float(f[index + sub_index].split(" ")[9][1:])/dict_exposure[detector_type])
-                                    range_min.append(float(f[index + sub_index].split(" ")[10].split(",")[0][1:])/dict_exposure[detector_type])
-                                    range_max.append(float(f[index + sub_index].split(" ")[10].split(",")[1][:-2])/dict_exposure[detector_type])
-                                except: 
-                                    intensity.append(float(f[index+ sub_index].split(" ")[10][1:])/dict_exposure[detector_type])
-                                    range_min.append(0.0)
-                                    range_max.append(0.0)    
-
+            legend = json.load(open("histo.gamma.json"))
+            if legend["name_fit"] not in avoid:
+                gamma.append("name_fit")
+                det_type.append(detector_type)
+                if "raw"  in cut_path: cut.append("raw")
+                if "LArAC" in cut_path: cut.append("LArAC")
+                if "LArC" in cut_path: cut.append("LArC")
+                intensity_keys = [k for keys in legend["fit_parameters"]["line"].keys() if "intensity" in keys]:
+                for int_key in intensity_keys: 
+                    try:
+                        intensity.append(legend["fit_parameters"]["line"][int_key]["mode"]/dict_exposure[detector_type])
+                        range_min.append(legend["fit_parameters"]["line"][int_key]["low"]/dict_exposure[detector_type])
+                        range_max.append(legend["fit_parameters"]["line"][int_key]["high"]/dict_exposure[detector_type])
+                    except:
+                        intensity.append(legend["fit_parameters"]["line"][int_key]["upper_limit"]/dict_exposure[detector_type])
+                        range_min.append(0.0)
+                        range_max.append(0.0)
+  
 df = pd.DataFrame()
 
 df["gamma"]     = gamma
