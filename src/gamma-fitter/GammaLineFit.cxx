@@ -134,31 +134,29 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
   vector<double> bestFitParErrors = fHistFitter->GetBestFitParameterErrors();
   int nBkgPars = fBkgFunction->GetNpar();
 
-  ofstream fjson;
-  fjson.open(Form("%s/%s.gamma.json",fOutputDir.Data(),GetName()), ios::app);
 
   ordered_json foutput;
 
-  foutput["name_fit"] = name.Data();
-  foutput["range_in_keV"] = {range.first,range.second};
+  string name_fit = name.Data();
+  foutput[name_fit]["range_in_keV"] = {range.first,range.second};
 
   string units = "";
   for(int i=0;i<fBkgFunction->GetNpar();i++) { 
     if (i==0) units = "_in_cts";
     else if (i>0&&backgroundType!=kStep) units = "_in_cts/keV";
     else if (i>1) units = Form("_in_cts/keV^%d",i);
-    foutput["fit_parameters"]["background"][fBkgFunction->GetParName(i) + units]["value"] = bestFitPars[i];
-    foutput["fit_parameters"]["background"][fBkgFunction->GetParName(i)+ units]["err"] = bestFitParErrors[i];
+    foutput[name_fit]["fit_parameters"]["background"][fBkgFunction->GetParName(i) + units]["value"] = bestFitPars[i];
+    foutput[name_fit]["fit_parameters"]["background"][fBkgFunction->GetParName(i)+ units]["err"] = bestFitParErrors[i];
   }
 
   for(unsigned int i=0;i<lines.size();i++) {    
-    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["value"] = bestFitPars[nBkgPars+3*i+0];
-    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["err"] = bestFitParErrors[nBkgPars+3*i+0];
-    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["line"] = lines.at(i);
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["value"] = bestFitPars[nBkgPars+3*i+0];
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["err"] = bestFitParErrors[nBkgPars+3*i+0];
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["line"] = lines.at(i);
 
-    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["value"] = bestFitPars[nBkgPars+3*i+1];
-    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["err"] = bestFitParErrors[nBkgPars+3*i+1];
-    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["resolution"] = fRes->Eval(lines.at(i));
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["value"] = bestFitPars[nBkgPars+3*i+1];
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["err"] = bestFitParErrors[nBkgPars+3*i+1];
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["resolution"] = fRes->Eval(lines.at(i));
     
     // Perform the fit and get the marginalized posterior
     fHistFitter->MarginalizeAll();
@@ -190,19 +188,35 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
 
   //************************************************************************
     if(low>0 and mode>0) {  
-      foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["mode"] = mode;
-      foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_min"] = low;
-      foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_max"] = high;
-      foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["comments"] = "at 68%";
+      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["mode"] = mode;
+      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_min"] = low;
+      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_max"] = high;
+      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["comments"] = "at 68%";
     } 
     else {
-      foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["upper_limit"] = intensity.GetQuantile(0.90);
-      foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["comments"] = "at 90%";
+      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["upper_limit"] = intensity.GetQuantile(0.90);
+      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["comments"] = "at 90%";
     }
   }
-  foutput["p-value"] = fHistFitter->GetPValue();
+  foutput[name_fit]["fit_parameters"]["p-value"] = fHistFitter->GetPValue();
+  
    
-  fjson << foutput.dump(2);
+  fstream json_file; 
+  json_file.open(Form("%s/%s.gamma.json",fOutputDir.Data(),GetName()), ios::in | ios::out);
+  
+  if (json_file){
+    ordered_json foutput_tot = json::parse(json_file);
+    foutput_tot.update(foutput); //, true);
+    json_file.clear();
+    json_file.seekp(0);
+    json_file << foutput_tot.dump(2);
+  }
+  else{
+    json_file.close();
+    json_file.open(Form("%s/%s.gamma_new.json",fOutputDir.Data(),GetName()), ios::out);
+    json_file << foutput.dump(2);
+  }
+  
   
   //! save fit to files
   TCanvas canvas;
