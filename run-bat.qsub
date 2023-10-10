@@ -27,7 +27,7 @@ if [ $4 == 'All' ] || [ $4 == 'BEGe' ] || [ $4 == 'ICPC' ] || [ $4 == 'COAX' ] |
     #cd src/gamma-fitter/runGammaAnalysis
     #make runGammaAnalysis &&
     #runGammaAnalysis $5 $4 &> $OUT_FOLDER/log/$LOGFILE
-    src/gamma-fitter/runGammaAnalysis $5 $4 false &> $OUT_FOLDER/log/$LOGFILE
+    src/gamma-fitter/runGammaAnalysis $5 $4 false &>> $OUT_FOLDER/log/$LOGFILE
 else
     singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python src/main.py --config $1 --det $5" &> $OUT_FOLDER/log/$LOGFILE
     source ~/.bashrc
