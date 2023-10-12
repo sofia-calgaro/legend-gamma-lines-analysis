@@ -139,6 +139,7 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
 
   string name_fit = name.Data();
   foutput[name_fit]["range_in_keV"] = {range.first,range.second};
+  foutput[name_fit]["bin_width_keV"] = fHist->GetBinWidth(1);
 
   string units = "";
   for(int i=0;i<fBkgFunction->GetNpar();i++) { 
@@ -213,10 +214,9 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
   }
   else{
     json_file.close();
-    json_file.open(Form("%s/%s.gamma_new.json",fOutputDir.Data(),GetName()), ios::out);
+    json_file.open(Form("%s/%s.gamma.json",fOutputDir.Data(),GetName()), ios::out);
     json_file << foutput.dump(2);
   }
-  
   
   //! save fit to files
   TCanvas canvas;
