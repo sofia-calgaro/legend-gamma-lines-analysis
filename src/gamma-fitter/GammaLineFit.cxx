@@ -105,19 +105,7 @@ int GammaLineFit::Fit( vector<double> lines, pair<double,double> range,
   for(int i=0;i<nBkgPars;i++) fHistFitter->GetParameter(i).SetNbins(100);
 
   //! perform fit
-  std::ostringstream oss;
-  for (size_t i = 0; i < lines.size(); ++i) {
-        oss << (int)std::round(lines[i]);
-        if (i < lines.size() - 1) {
-            oss << "_"; // Add a separator for all elements except the last one
-        }
-    }
-  std::string filename_lines = oss.str();
-  BCLog::SetLogLevel(BCLog::error);
-  BCLog::OpenLog(Form("%s/%s.%s.bat.log",fOutputDir.Data(),GetName(), filename_lines.c_str()));
-  BCAux::SetStyle();
   fHistFitter->Fit();
-  BCLog::CloseLog();
 
   fFitPerformed = true;
   return 0;
