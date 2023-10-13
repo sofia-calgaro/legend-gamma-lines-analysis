@@ -12,7 +12,7 @@ gamma_lines="$(grep -oP '(?<="gamma-lines": )(true|false)' $1)"
 peak_search="$(grep -oP '(?<="run": )(true|false)' $1)"
 
 # check if you selected at least one analysis
-if [ "$gamma_lines" == "$peak_search" ]
+if [[ "$gamma_lines" == "$peak_search" && "$gamma_lines" == "false" ]]
 then
   echo "You have to select at least one analysis (gamma lines or peak search). Exit here!"
   exit 1
@@ -26,8 +26,13 @@ detector_type="$(grep -oP '(?<="detectors": ")[^"]*' $1)"
 # perform gamma lines analysis, if ture
 if [ "$detector_type" == "single" ]; then
   if [ "$peak_search" == "true" ]; then
-    echo "Peak search is still not available for single detectors. Exit here!"
+    echo "Peak search is still not available for single detectors. Checking if gamma-lines was enabled..."
+    if [ "$gamma_lines" == "true" ]; then
+      echo "...gamma-lines was enabled, continue."
+    else
+      echo "...gamma-lines was NOT enabled. Exit here!"
       exit 1
+    fi
   fi
   file="src/settings/list_detectors.json"
   detector_list=$(python-3.9.6 -c \
