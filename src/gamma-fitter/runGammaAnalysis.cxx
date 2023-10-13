@@ -10,13 +10,13 @@
 
 //C++
 #include <string>
-
-
+#include <iomanip> 
+#include <iostream>
 
 
 void GammaAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir )
 {
-  std::GammaLineFit fitter(name,histo,res, outputDir);
+  std::GammaLineFit fitter(name, histo, res, outputDir);
 
   //K lines
   fitter.Fit("K42_1525", {1524.7}, {1505.,1545.}, std::kLinear, 0.5, 0.2, BCEngineMCMC::kMedium); // 18.1%, kStep?, pos priot 0.2 -> 0.5
@@ -54,23 +54,47 @@ void GammaAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir )
 
 }
 
+
+
 void GammaAnalysisSingle( TString name, TH1D* histo, TF1* res, TString outputDir )
 {
-  std::GammaLineFit fitter(name,histo,res, outputDir);
+  std::GammaLineFit fitter(name, histo, res, outputDir);
 
-  // K lines
   fitter.Fit("K42_1525", {1524.7}, {1505.,1545.}, std::kLinear, 0.5, 0.2, BCEngineMCMC::kMedium); // 18.1%, kStep?, pos priot 0.2 -> 0.5
   fitter.Fit("K40_1461",    {1460.8}, {1441.,1481.}, std::kStep,   0.2, 0.2, BCEngineMCMC::kMedium); // 10.7%, kStep?
 }
 
+
+
+void PeakSearchAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir, double min_E, double max_E, double step, double fit_window )
+{
+  std::GammaLineFit fitter(name, histo, res, outputDir);
+
+  for ( double E0=min_E; E0<=max_E; E0+=step ) {
+    std::ostringstream stream;
+    stream << std::fixed << std::setprecision(1) << E0;
+    std::string fit_name = stream.str();
+    double low_edge = E0-fit_window/2;
+    double upp_edge = E0+fit_window/2;
+    if (E0 <= 500)            { fitter.Fit(fit_name, {E0}, {low_edge, upp_edge}, std::kQuadratic, 0.2, 0.2, BCEngineMCMC::kMedium); }
+    if (E0 > 500 && E0<=2000) { fitter.Fit(fit_name, {E0}, {low_edge, upp_edge}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); }
+    if (E0 >2000)             { fitter.Fit(fit_name, {E0}, {low_edge, upp_edge}, std::kFlat, 0.2, 0.2, BCEngineMCMC::kMedium); }
+  }
+}
+
+
+
 int main (int argc, char ** argv)
 {
 
+  // get spectrum
   TString histo_file = (("./tmp/"+std::string(argv[1]))+("-"+std::string(argv[2])))+".root";
   TFile *file = TFile::Open(histo_file, "READ");
   TNamed *output = (TNamed*)file->Get("outputDir");
   TString outputDir = (TString)output->GetTitle();
   TH1D* histo = (TH1D*)file->Get("Spectrum");
+
+  // get resolution curve
   TParameter<double>* a_res = (TParameter<double>*)file->Get("a_res");
   TParameter<double>* b_res = (TParameter<double>*)file->Get("b_res");
   double a_res_double = (double) a_res->GetVal();
@@ -79,9 +103,20 @@ int main (int argc, char ** argv)
   f_res->SetParameter(0,a_res_double);
   f_res->SetParameter(1,b_res_double);
 
-  bool single = argv[3];
-  if ( single == true ) { GammaAnalysisSingle("histo" , histo, f_res, outputDir); }
-  else { GammaAnalysis("histo" , histo, f_res, outputDir); }
+  std::string single = argv[3];
+  std::string analysis = argv[4];
+  // run analysis
+  if ( single == "true" ) { GammaAnalysisSingle("histo" , histo, f_res, outputDir); }
+  else { 
+    if (analysis == "gamma-lines") { GammaAnalysis("histo" , histo, f_res, outputDir); }
+    if (analysis == "peak-search") { 
+        double min_E = std::stod(argv[5]);
+        double max_E = std::stod(argv[6]);
+        double step  = std::stod(argv[7]);
+        double fit_window = std::stod(argv[8]);
+        PeakSearchAnalysis("histo" , histo, f_res, outputDir, min_E, max_E, step, fit_window); 
+    }
+  }
   
 }
 

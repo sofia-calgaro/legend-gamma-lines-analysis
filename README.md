@@ -43,10 +43,28 @@ Finally, there is a specific entry for building ROOT files, ie histograms contai
                 "bin-width": 1, // bin width in keV
                 "x-min-keV": 0, // minimum in keV of the x-axis of the energy spectrum
                 "x-max-keV": 5000 // maximum in keV of the x-axis of the energy spectrum
-        }
-    }
+        },
 ```
 Select `"overwrite": true` if you want to re-generate the ROOT files (ie overwrite the previous ROOT folder, if exists), otherwise `"overwrite": false` if you want to skip the generation of ROOT files because already done in the past.
+
+## Select the analysis type
+Two different analyses can be performed:
+- a gamma line study of given gamma lines; if you inspect the spectrum detector-wise, only the K lines are inspected (highest statistics lines);
+- a general peak search over the spectrum; this is not available for the 'single' case at the moment
+
+In order to select one (or both) of the anlyses, you have to enable the respective entries in the config file:
+```bash
+       "gamma-lines": true, // enable gamma line analysis
+       "peak-search": {
+           "run": true, // enable peak search
+           "energy-min-keV": 60, // energy (in keV) from where you want to look for a peak
+           "energy-max-keV": 70, // energy (in keV) up to which you want to look for a peak
+           "energy-step-keV": 1, // step (in keV) when inspecting the energy range [energy-min-keV; energy-max-keV]
+           "fit-window-width-keV": 40 // width (in keV) of the fit window, which is centred at the energy E0 at which you are performing the fit, ie the window is equal to E0+-20 keV
+       }
+     } 
+```
+
 
 # `Src` content
 Apart from the core of the code, here you can find:

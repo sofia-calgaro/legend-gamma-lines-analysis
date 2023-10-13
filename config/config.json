@@ -16,5 +16,13 @@
       "x-min-keV": 0,
       "x-max-keV": 5000
     }
+  },
+  "gamma-lines": true,
+  "peak-search": {
+      "run": true,
+      "energy-min-keV": 60,
+      "energy-max-keV": 70,
+      "energy-step-keV": 1,
+      "fit-window-width-keV": 40
   }
 }  
