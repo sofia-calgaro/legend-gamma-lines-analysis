@@ -117,6 +117,8 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
 {
   Fit(lines,range,backgroundType,linePosPrior,fwhmPrior,precision);
 
+  // qui si puo' insterire un for per il check delle posterior - ed eventualmente allargare il range dando in input un parametro in Fit(...)
+
   //! provide log output
   vector<double> bestFitPars      = fHistFitter->GetBestFitParameters();
   vector<double> bestFitParErrors = fHistFitter->GetBestFitParameterErrors();
@@ -175,17 +177,11 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
     low = intensity.GetQuantile(0.16);
     high = intensity.GetQuantile(0.84);
 
-  //************************************************************************
-    if(low>0 and mode>0) {  
-      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["mode"] = mode;
-      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_min"] = low;
-      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_max"] = high;
-      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["comments"] = "at 68%";
-    } 
-    else {
-      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["upper_limit"] = intensity.GetQuantile(0.90);
-      foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["comments"] = "at 90%";
-    }
+    // save global mode, central 68% intervcal and upper limit
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["mode"] = mode;
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_min"] = low;
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_max"] = high;
+    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["upper_limit"] = intensity.GetQuantile(0.90);
   }
   foutput[name_fit]["fit_parameters"]["p-value"] = fHistFitter->GetPValue();
   
