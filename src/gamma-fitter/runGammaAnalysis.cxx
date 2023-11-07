@@ -76,9 +76,9 @@ void PeakSearchAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir,
     std::string fit_name = stream.str();
     double low_edge = E0-fit_window/2;
     double upp_edge = E0+fit_window/2;
-    if (E0 <= 500)            { fitter.Fit(fit_name, {E0}, {low_edge, upp_edge}, std::kQuadratic, 0.2, 0.2, BCEngineMCMC::kMedium); }
-    if (E0 > 500 && E0<=2000) { fitter.Fit(fit_name, {E0}, {low_edge, upp_edge}, std::kLinear, 0.2, 0.2, BCEngineMCMC::kMedium); }
-    if (E0 >2000)             { fitter.Fit(fit_name, {E0}, {low_edge, upp_edge}, std::kFlat, 0.2, 0.2, BCEngineMCMC::kMedium); }
+    if (E0 <= 500)            { fitter.Fit(fit_name, {E0}, {low_edge, upp_edge}, std::kQuadratic, 0, 0, BCEngineMCMC::kMedium); }
+    if (E0 > 500 && E0<=2000) { fitter.Fit(fit_name, {E0}, {low_edge, upp_edge}, std::kLinear, 0, 0, BCEngineMCMC::kMedium); }
+    if (E0 >2000)             { fitter.Fit(fit_name, {E0}, {low_edge, upp_edge}, std::kFlat, 0, 0, BCEngineMCMC::kMedium); }
   }
 }
 
