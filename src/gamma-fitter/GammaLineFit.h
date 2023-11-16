@@ -55,12 +55,12 @@ public:
     void SetRes(TF1* res) { fRes = res; };
 
     //! Methods
-    int Fit(vector<double> lines, pair<double, double> range,
+    int Fit(vector<double> lines, pair<double, double> range, std::vector<int> rangePrior,
             GammaBackground backgroundType = kLinear,
             double linePosPrior = 0.2, // keV
             double fwhmPrior = 0.2,    // keV
             BCEngineMCMC::Precision precision = BCEngineMCMC::kLow);
-    int Fit(TString name, vector<double> lines, pair<double, double> range,
+    int Fit(TString name, vector<double> lines, pair<double, double> range, std::vector<int> rangePrior,
             GammaBackground backgroundType = kLinear,
             double linePosPrior = 0.2, // keV
             double fwhmPrior = 0.2,    // keV

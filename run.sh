@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# Check if the folder is not empty; then, remove content
-if [ -n "$(ls -A tmp/)" ]; then
-  rm tmp/*
-fi
-
 gamma_src_code="$(grep -oP '(?<="gamma-src-code": ")[^"]*' $1)"
 output_folder="$(grep -oP '(?<="output": ")[^"]*' $1)"
 
