@@ -7,9 +7,11 @@ from legendmeta import JsonDB
 from legendmeta import LegendMetadata
 lmeta = LegendMetadata()
 
-operation ='ecal'
+# operation ='ecal'
+operation ='partition_ecal'
 par ='cuspEmax_ctc_cal'
-pars = 'eres_pars'
+# pars = 'eres_pars'
+pars = 'eres_linear'
 
 def get_resolution(config_file, detectors):
     # retrieve useful info
@@ -73,18 +75,21 @@ def get_resolution(config_file, detectors):
 
                 #get resolution
                 c="ch"+str(channel_map[d]['daq']['rawid'])
-                path_resolutions = os.path.join(info[0], info[4], "generated/par/hit/cal", p, r)
-                file= [file for file in os.listdir(path_resolutions) if file.endswith("results.json")]
+                # path_resolutions = os.path.join(info[0], info[4], "generated/par/hit/cal", p, r)
+                path_resolutions = os.path.join(info[0], info[4], "generated/par/pht/cal", p, r)
+                file = [file for file in os.listdir(path_resolutions) if file.endswith(".json")]
                 with open(os.path.join(path_resolutions, file[0]), "r") as file:
                     resolution_det = json.load(file)
-                    res_det = resolution_det[c][operation][par][pars]
+                    res_det = resolution_det[c]["results"][operation][par][pars]["parameters"]
                 resolution_list.append(res_det)
 
 
     #get the lists of the two resolution parameters
     if resolution_list != []:
-        a = np.take(resolution_list,0,1)
-        b = np.take(resolution_list,1,1)
+        # a = np.take(resolution_list,0,1)
+        # b = np.take(resolution_list,1,1)
+        a = np.array([float(dictionary["a"]) for dictionary in resolution_list])
+        b = np.array([float(dictionary["b"]) for dictionary in resolution_list])
     else:
         return [None, None]
 

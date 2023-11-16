@@ -99,9 +99,9 @@ def main():
     logger_expo.debug("...inspected!")
     
     #check version set by the user
-    versions_avail = ["v01.05", "v01.06"]
+    versions_avail = ["v01.05", "v01.06", "v02.00"]
     if not info[4] in versions_avail:
-        logger_expo.debug(f"{info[4]} is not an available version. Try among '[v01.05, v01.06]'")
+        logger_expo.debug(f"{info[4]} is not an available version. Try among '[v01.05, v01.06, v02.00]'")
         return
         
     #check cut set by the user

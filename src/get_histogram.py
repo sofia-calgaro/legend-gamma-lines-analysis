@@ -1,9 +1,10 @@
 import os
+import main
 import ROOT
 import argparse
 import pandas as pd
+import lgdo.lh5_store as lh5
 import legend_data_monitor as ldm
-import main
 
 def make_histos(config_file: str | dict):
 
@@ -20,9 +21,10 @@ def make_histos(config_file: str | dict):
     prodenv = info[0]
     version = info[4] 
     path = os.path.join(prodenv, version, "generated/tier/skm/phy/")
+    data_path = "/lfs/l1/legend/users/morella/gamma-analysis/v02.00/generated/tier/skm/phy/"
 
     # list avalilable periods
-    periods = os.listdir(path)
+    periods = [p for p in sorted(os.listdir(data_path)) if ".json" not in p]
     print(f"Available : {periods}")
 
     # create output folder (if not already existing)
@@ -35,7 +37,7 @@ def make_histos(config_file: str | dict):
     for p in periods:
     
         # list available runs
-        runs = [run for run in os.listdir(os.path.join(path, p))]
+        runs = [run for run in sorted(os.listdir(os.path.join(data_path, p))) if len(run) == 4]
         runs_name =  runs#[run.split("_")[1] for run in os.listdir(path + "/" + p)]
 
         print(f"Available runs for {p}: {runs_name}")
@@ -55,15 +57,19 @@ def make_histos(config_file: str | dict):
             channel_map = geds.channel_map
         
             # giving same name so that merging the two dataframes is easier
-            channel_map = channel_map.rename(columns = {"channel" : "channel_id"})
+            # channel_map = channel_map.rename(columns = {"channel" : "channel_id"})
+            channel_map = channel_map.rename(columns = {"channel" : "energy_id"})
         
             # initialize empty dataframe and load data
-            full_path = os.path.join(path, p, r)
+            full_path = os.path.join(data_path, p, r)
             data = pd.DataFrame()
-            data = pd.read_hdf(os.path.join(full_path, os.listdir(full_path)[0]))
+            parameters = ["energy", "is_pulser", "is_baseline", "is_muon_tagged", "is_physical", "multiplicity", "is_saturated", "is_usable_aoe", "is_valid_channel", "is_lar_rejected", "energy_id"]
+            files = [os.path.join(full_path, file) for file in os.listdir(full_path)]
+            data = lh5.load_dfs(files, parameters, "/evt")
 
             # merge dataframes and add metadata information (detector name, string, position, etc.)
-            data = data.merge(channel_map, on = "channel_id")
+            # data = data.merge(channel_map, on = "channel_id")
+            data = data.merge(channel_map, on = "energy_id")
 
             # create root file in which histograms will be saved
             myfile = ROOT.TFile(os.path.join(folder_name, histo_info[0], f"{p}-{r_name}-{version}-spectra.root"), 'RECREATE')
@@ -117,18 +123,23 @@ def make_histos(config_file: str | dict):
                 h_all = ROOT.TH1D('All', 'All', number_bins, hist_range[0], hist_range[1])
 
                 # loop over HPGe detectors
-                for ch in tmp_data.sort_values(by = ["location", "position"]).channel_id.unique():
+                # for ch in tmp_data.sort_values(by = ["location", "position"]).channel_id.unique():
+                for ch in tmp_data.sort_values(by = ["location", "position"]).energy_id.unique():
 
                     # save name, string and position
-                    ch_name = tmp_data[tmp_data.channel_id == ch].name.unique()[0]
-                    ch_string = tmp_data[tmp_data.channel_id == ch].location.unique()[0]
-                    ch_position = tmp_data[tmp_data.channel_id == ch].position.unique()[0]
+                    # ch_name = tmp_data[tmp_data.channel_id == ch].name.unique()[0]
+                    # ch_string = tmp_data[tmp_data.channel_id == ch].location.unique()[0]
+                    # ch_position = tmp_data[tmp_data.channel_id == ch].position.unique()[0]
+                    ch_name = tmp_data[tmp_data.energy_id == ch].name.unique()[0]
+                    ch_string = tmp_data[tmp_data.energy_id == ch].location.unique()[0]
+                    ch_position = tmp_data[tmp_data.energy_id == ch].position.unique()[0]
 
                     # create histogram
                     h = ROOT.TH1D(f's{ch_string}-p{ch_position}-{ch_name}', f's{ch_string}-p{ch_position}-{ch_name}', number_bins, hist_range[0], hist_range[1])
                 
                     # fill single channel histogram
-                    for e in tmp_data[tmp_data.channel_id == ch].energy:
+                    # for e in tmp_data[tmp_data.channel_id == ch].energy:
+                    for e in tmp_data[tmp_data.energy_id == ch].energy:
                         h.Fill(e)
                         if ch_name[0] == "B": h_bege.Fill(e)
                         if ch_name[0] == "C": h_coax.Fill(e)
