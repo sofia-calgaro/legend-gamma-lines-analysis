@@ -89,10 +89,8 @@ int GammaLineFit::Fit( vector<double> lines, pair<double,double> range, std::vec
      fRes->Eval(lines.at(i))+fwhmPrior*3 );
     // ... peak intensity
     fFitFunction->SetParLimits(nBkgPars+3*i+2, //preliminary parameters +-N_prior*4*uncertainty
-     N_prior*max(0.,(fFitFunction->GetParameter(nBkgPars+3*i+2)-
-     4*fFitFunction->GetParError(nBkgPars+3*i+2))/binning),
-     N_prior*(fFitFunction->GetParameter(nBkgPars+3*i+2)+
-     4*fFitFunction->GetParError(nBkgPars+3*i+2))/binning); 
+     max(0., (fFitFunction->GetParameter(nBkgPars+3*i+2)-4*N_prior*fFitFunction->GetParError(nBkgPars+3*i+2))/binning),
+     (fFitFunction->GetParameter(nBkgPars+3*i+2)+4*N_prior*fFitFunction->GetParError(nBkgPars+3*i+2))/binning); 
   }
 
   //! create hist fitter and set priors
