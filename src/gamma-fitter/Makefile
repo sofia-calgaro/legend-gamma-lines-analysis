@@ -21,7 +21,8 @@ LIBS := $(shell bat-config --libs)
 CXXFLAGS += -I/lfs/l1/legend/software/root/v06.14/include # or -I/opt/root/include in the container
 
 # Source files
-CXXSRCS = GammaLineFit.cxx
+CXXSRCS = GammaLineFit.cxx \
+          Utils.h
 PRGSRCS = runGammaAnalysis.cxx
 
 # Object files

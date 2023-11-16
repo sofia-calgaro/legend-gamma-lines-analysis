@@ -1,20 +1,25 @@
 #include "GammaLineFit.h"
+#include "Utils.h"
 #include <iomanip>
+#include <vector>
+#include <fstream>
 
 #include "../settings/json.hpp"
 using namespace nlohmann;
 
+#include <sys/stat.h>
+
 namespace std {
 
-int GammaLineFit::Fit( vector<double> lines, pair<double,double> range,
+int GammaLineFit::Fit( vector<double> lines, pair<double,double> range, std::vector<int> rangePrior,
   GammaBackground backgroundType, double linePosPrior, double fwhmPrior,
-  BCEngineMCMC::Precision precision )
+  BCEngineMCMC::Precision precision)
 {
   if(fFitPerformed) Reset();
 
   //! create proto fit function
   GammaProtoPolynom* protoPolynom;
-  switch( backgroundType) {
+  switch( backgroundType ) {
     case kStep:      protoPolynom = new GammaProtoPolynom(0,0,lines);     break;
     case kLinear:    protoPolynom = new GammaProtoPolynom(1,range.first); break;
     case kQuadratic: protoPolynom = new GammaProtoPolynom(2,range.first); break;
@@ -64,21 +69,29 @@ int GammaLineFit::Fit( vector<double> lines, pair<double,double> range,
 
   //! set parameter ranges using preliminaries
   for(int i=0;i<nBkgPars;i++) {
-    fFitFunction->SetParLimits(i, //+-4*uncertainty
-      (fBkgFunction->GetParameter(i)-4*fBkgFunction->GetParError(i))/binning, 
-      (fBkgFunction->GetParameter(i)+4*fBkgFunction->GetParError(i))/binning);
+    int N_prior_bkg = 1;
+    if ( backgroundType!=kStep ) { N_prior_bkg = rangePrior.at(i); }
+    fFitFunction->SetParLimits(i, //+-N_prior_bkg*4*uncertainty
+      (fBkgFunction->GetParameter(i)-N_prior_bkg*4*fBkgFunction->GetParError(i))/binning, 
+      (fBkgFunction->GetParameter(i)+N_prior_bkg*4*fBkgFunction->GetParError(i))/binning);
   }
   for(unsigned int i=0;i<lines.size();i++) {
+    // enlarge just intensity of gamma line (this works only when inspecting a single gamma line)
+    int N_prior = 1;
+    if (lines.size()==1) { int size = rangePrior.size(); N_prior = rangePrior.at(size-1); }
+    // ... peak centroid
     fFitFunction->SetParLimits(nBkgPars+3*i+0, //+-4*prior width
      lines.at(i)-linePosPrior*3 ,
      lines.at(i)+linePosPrior*3 );
+    // ... peak fwhm
     fFitFunction->SetParLimits(nBkgPars+3*i+1, //+-4*prior width
      fRes->Eval(lines.at(i))-fwhmPrior*3, 
      fRes->Eval(lines.at(i))+fwhmPrior*3 );
-    fFitFunction->SetParLimits(nBkgPars+3*i+2, //preliminary parameters +-4*uncertainty
-     max(0.,(fFitFunction->GetParameter(nBkgPars+3*i+2)-
+    // ... peak intensity
+    fFitFunction->SetParLimits(nBkgPars+3*i+2, //preliminary parameters +-N_prior*4*uncertainty
+     N_prior*max(0.,(fFitFunction->GetParameter(nBkgPars+3*i+2)-
      4*fFitFunction->GetParError(nBkgPars+3*i+2))/binning),
-     (fFitFunction->GetParameter(nBkgPars+3*i+2)+
+     N_prior*(fFitFunction->GetParameter(nBkgPars+3*i+2)+
      4*fFitFunction->GetParError(nBkgPars+3*i+2))/binning); 
   }
 
@@ -89,6 +102,7 @@ int GammaLineFit::Fit( vector<double> lines, pair<double,double> range,
   GammaFitFunction funcCopy = *fFitFunction;
   fHistFitter = new BCHistogramFitter(histCopy, funcCopy, "histo_fitter_model");
 
+  // set gaus priors for line pos and fwhm
   for(unsigned int i=0;i<lines.size();i++) {
     fHistFitter->SetPriorGauss(nBkgPars+3*i+0,lines.at(i),linePosPrior);
     fHistFitter->SetPriorGauss(nBkgPars+3*i+1,fRes->Eval(lines.at(i)),fwhmPrior);
@@ -111,43 +125,40 @@ int GammaLineFit::Fit( vector<double> lines, pair<double,double> range,
   return 0;
 }
 
-int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> range,
+int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> range, std::vector<int> rangePrior,
   GammaBackground backgroundType, double linePosPrior, double fwhmPrior,
-  BCEngineMCMC::Precision precision ) 
+  BCEngineMCMC::Precision precision) 
 {
-  Fit(lines,range,backgroundType,linePosPrior,fwhmPrior,precision);
-
-  // qui si puo' insterire un for per il check delle posterior - ed eventualmente allargare il range dando in input un parametro in Fit(...)
+  Fit(lines,range,rangePrior,backgroundType,linePosPrior,fwhmPrior,precision);
 
   //! provide log output
   vector<double> bestFitPars      = fHistFitter->GetBestFitParameters();
   vector<double> bestFitParErrors = fHistFitter->GetBestFitParameterErrors();
   int nBkgPars = fBkgFunction->GetNpar();
 
-
   ordered_json foutput;
 
   string name_fit = name.Data();
-  foutput[name_fit]["range_in_keV"] = {range.first,range.second};
-  foutput[name_fit]["bin_width_keV"] = fHist->GetBinWidth(1);
+  foutput["range_in_keV"] = {range.first,range.second};
+  foutput["bin_width_keV"] = fHist->GetBinWidth(1);
 
   string units = "";
   for(int i=0;i<fBkgFunction->GetNpar();i++) { 
     if (i==0) units = "_in_cts";
     else if (i>0&&backgroundType!=kStep) units = "_in_cts/keV";
     else if (i>1) units = Form("_in_cts/keV^%d",i);
-    foutput[name_fit]["fit_parameters"]["background"][fBkgFunction->GetParName(i) + units]["value"] = bestFitPars[i];
-    foutput[name_fit]["fit_parameters"]["background"][fBkgFunction->GetParName(i)+ units]["err"] = bestFitParErrors[i];
+    foutput["fit_parameters"]["background"][fBkgFunction->GetParName(i) + units]["value"] = bestFitPars[i];
+    foutput["fit_parameters"]["background"][fBkgFunction->GetParName(i)+ units]["err"] = bestFitParErrors[i];
   }
 
   for(unsigned int i=0;i<lines.size();i++) {    
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["value"] = bestFitPars[nBkgPars+3*i+0];
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["err"] = bestFitParErrors[nBkgPars+3*i+0];
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["line"] = lines.at(i);
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["value"] = bestFitPars[nBkgPars+3*i+0];
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["err"] = bestFitParErrors[nBkgPars+3*i+0];
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+0) + string("_in_keV")]["line"] = lines.at(i);
 
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["value"] = bestFitPars[nBkgPars+3*i+1];
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["err"] = bestFitParErrors[nBkgPars+3*i+1];
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["resolution"] = fRes->Eval(lines.at(i));
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["value"] = bestFitPars[nBkgPars+3*i+1];
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["err"] = bestFitParErrors[nBkgPars+3*i+1];
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+1) + string("_in_keV")]["resolution"] = fRes->Eval(lines.at(i));
     
     // Perform the fit and get the marginalized posterior
     fHistFitter->MarginalizeAll();
@@ -156,7 +167,7 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
     BCH1D intensity = fHistFitter->GetMarginalized(nBkgPars + 3 * i + 2);
 
     // fix the bands for each posterior at 68.3%, 95.4%, 99.7% [not there in the original src code]
-    // fHistFitter->GetBCH1DdrawingOptions().SetBandType(BCH1D::kCentralInterval);
+    fHistFitter->GetBCH1DdrawingOptions().SetBandType(BCH1D::kCentralInterval);
     
     // Get the mode for the intensity of the peak
     double mode = intensity.GetBestFitParameters();
@@ -178,30 +189,18 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
     high = intensity.GetQuantile(0.84);
 
     // save global mode, central 68% intervcal and upper limit
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["mode"] = mode;
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_min"] = low;
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_max"] = high;
-    foutput[name_fit]["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["upper_limit"] = intensity.GetQuantile(0.90);
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["mode"] = mode;
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_min"] = low;
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_max"] = high;
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["upper_limit"] = intensity.GetQuantile(0.90);
   }
-  foutput[name_fit]["fit_parameters"]["p-value"] = fHistFitter->GetPValue();
-  
-   
-  fstream json_file; 
-  json_file.open(Form("%s/%s.gamma.json",fOutputDir.Data(),GetName()), ios::in | ios::out);
-  
-  if (json_file){
-    ordered_json foutput_tot = json::parse(json_file);
-    foutput_tot.update(foutput); //, true);
-    json_file.clear();
-    json_file.seekp(0);
-    json_file << foutput_tot.dump(2);
-  }
-  else{
-    json_file.close();
-    json_file.open(Form("%s/%s.gamma.json",fOutputDir.Data(),GetName()), ios::out);
-    json_file << foutput.dump(2);
-  }
-  
+  foutput["fit_parameters"]["p-value"] = fHistFitter->GetPValue();
+
+  std::string filePath = std::string(fOutputDir.Data()) + "/" + GetName() + "." + name_fit + ".json"; //".gamma.json";
+
+  //! save results to json file
+  write_to_json(filePath, name_fit, foutput);
+
   //! save fit to files
   TCanvas canvas;
    fHistFitter->DrawFit("HIST",false);
