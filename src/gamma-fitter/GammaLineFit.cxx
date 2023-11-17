@@ -68,6 +68,7 @@ int GammaLineFit::Fit( vector<double> lines, pair<double,double> range, std::vec
   fFitHist->Fit(fFitFunction,"RL");
 
   //! set parameter ranges using preliminaries
+  //--- bkg contributions
   for(int i=0;i<nBkgPars;i++) {
     int N_prior_bkg = 1;
     if ( backgroundType!=kStep ) { N_prior_bkg = rangePrior.at(i); }
@@ -75,6 +76,7 @@ int GammaLineFit::Fit( vector<double> lines, pair<double,double> range, std::vec
       (fBkgFunction->GetParameter(i)-N_prior_bkg*4*fBkgFunction->GetParError(i))/binning, 
       (fBkgFunction->GetParameter(i)+N_prior_bkg*4*fBkgFunction->GetParError(i))/binning);
   }
+  //--- lines contributions
   for(unsigned int i=0;i<lines.size();i++) {
     // enlarge just intensity of gamma line (this works only when inspecting a single gamma line)
     int N_prior = 1;
@@ -89,7 +91,7 @@ int GammaLineFit::Fit( vector<double> lines, pair<double,double> range, std::vec
      fRes->Eval(lines.at(i))+fwhmPrior*3 );
     // ... peak intensity
     fFitFunction->SetParLimits(nBkgPars+3*i+2, //preliminary parameters +-N_prior*4*uncertainty
-     max(0., (fFitFunction->GetParameter(nBkgPars+3*i+2)-4*N_prior*fFitFunction->GetParError(nBkgPars+3*i+2))/binning),
+     0,//max(0., (fFitFunction->GetParameter(nBkgPars+3*i+2)-4*N_prior*fFitFunction->GetParError(nBkgPars+3*i+2))/binning),
      (fFitFunction->GetParameter(nBkgPars+3*i+2)+4*N_prior*fFitFunction->GetParError(nBkgPars+3*i+2))/binning); 
   }
 
