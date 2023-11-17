@@ -71,6 +71,9 @@ def get_histo(gamma_src_code, histo_folder, version, result_dict, detectors, cut
     for p in result_dict.keys():
         for r in result_dict[p]:
             file_histo = os.path.join(gamma_src_code, "src/root_files", histo_folder, f"{p}-{r}-{version}-spectra.root")
+            if not os.path.exists(file_histo):
+               logger_expo.error(f"{file_histo} is NOT present - exit here.")
+               return None
             file_root = ROOT.TFile(file_histo)
             histo =  file_root.Get(f"{cut}/{detectors}")
             histo.SetDirectory(0)
@@ -160,6 +163,9 @@ def main():
     
     outputDir = ROOT.TNamed("outputDir",output)        
     histo  = get_histo(gamma_src_code, histo_info[0], info[4], result_dict, histo_name, info[5])
+    if histo is None:
+       logger_debug.error("No ROOT files were found - no spectra to be fitted were generated - exit here.")
+       sys.exit()
     resolution = get_resolution(config_file, det_name)
     if resolution == [None, None]:
         logger_expo.error("Resolution is a=b=None - maybe det is not available? Exit here")
