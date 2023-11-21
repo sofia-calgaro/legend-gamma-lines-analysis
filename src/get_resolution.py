@@ -7,8 +7,6 @@ from legendmeta import JsonDB
 from legendmeta import LegendMetadata
 lmeta = LegendMetadata()
 
-# operation ='ecal'
-operation ='partition_ecal'
 par ='cuspEmax_ctc_cal'
 # pars = 'eres_pars'
 pars = 'eres_linear'
@@ -75,13 +73,20 @@ def get_resolution(config_file, detectors):
 
                 #get resolution
                 c="ch"+str(channel_map[d]['daq']['rawid'])
-                # path_resolutions = os.path.join(info[0], info[4], "generated/par/hit/cal", p, r)
+                #path_resolutions = os.path.join(info[0], info[4], "generated/par/hit/cal", p, r)
                 path_resolutions = os.path.join(info[0], info[4], "generated/par/pht/cal", p, r)
                 file = [file for file in os.listdir(path_resolutions) if file.endswith(".json")]
+
                 with open(os.path.join(path_resolutions, file[0]), "r") as file:
                     resolution_det = json.load(file)
-                    res_det = resolution_det[c]["results"][operation][par][pars]["parameters"]
-                resolution_list.append(res_det)
+                    if info[4]=="v02.00" and p=='p07' and d in ["V07646A", "V05261A"]:
+                        # otherwise, resolution for these detectors is NaN in v02.00 partitions 
+                        res_det = resolution_det[c]["results"]['ecal'][par][pars]["parameters"]
+                    else:
+                        res_det = resolution_det[c]["results"]['partition_ecal'][par][pars]["parameters"]
+                
+                if not np.isnan(res_det['a']) and not np.isnan(res_det['b']):
+                    resolution_list.append(res_det)
 
 
     #get the lists of the two resolution parameters

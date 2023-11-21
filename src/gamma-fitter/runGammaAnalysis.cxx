@@ -89,8 +89,8 @@ void PeakSearchAnalysis( TString name, TH1D* histo, TF1* res, TString outputDir,
     while ( foundOne = true ) {
       double low_edge = E0-fit_window/2;
       double upp_edge = E0+fit_window/2;
-      bool cond1 = (E0 <= 200);
-      bool cond2 = (E0 > 200 && E0<= 2000);
+      bool cond1 = (E0 < 200);
+      bool cond2 = (E0 >= 200 && E0<= 2000);
       bool cond3 = (E0 >2000);
 
       // fit 
