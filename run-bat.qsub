@@ -40,6 +40,7 @@ else
     singularity exec /lfs/l1/legend/software/singularity/legendexp_legend-software_latest.sif bash -c "source /usr/local/bin/thisroot.sh && cd $2 && python src/main.py --config $1 --det $5" &> $OUT_FOLDER/log/$LOGFILE
     source ~/.bashrc
     #cd src/gamma-fitter/runGammaAnalysis
-    #make runGammaAnalysisSingle &&
-    src/gamma-fitter/runGammaAnalysisSingle $6 ${5: -7} true &> $OUT_FOLDER/log/$LOGFILE
+    #make runGammaAnalysis &&
+    src/gamma-fitter/runGammaAnalysis $6 ${5: -7} true $7 &> $OUT_FOLDER/log/$LOGFILE
+
 fi

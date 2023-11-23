@@ -190,6 +190,7 @@ int GammaLineFit::Fit( TString name, vector<double> lines, pair<double,double> r
 
     // save global mode, central 68% intervcal and upper limit
     foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["mode"] = mode;
+    foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["err"] = bestFitParErrors[nBkgPars+3*i+2];
     foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_min"] = low;
     foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["range_max"] = high;
     foutput["fit_parameters"]["line"][fFitFunction->GetParName(nBkgPars+3*i+2) + string("_in_cts")]["upper_limit"] = intensity.GetQuantile(0.90);
