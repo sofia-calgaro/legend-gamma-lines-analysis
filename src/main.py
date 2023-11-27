@@ -72,13 +72,17 @@ def get_histo(gamma_src_code, histo_folder, version, result_dict, detectors, cut
         for r in result_dict[p]:
             file_histo = os.path.join(gamma_src_code, "src/root_files", histo_folder, f"{p}-{r}-{version}-spectra.root")
             if not os.path.exists(file_histo):
-               logger_expo.error(f"{file_histo} is NOT present - exit here.")
-               return None
+               logger_expo.error(f"{file_histo} is NOT present - continue")
+               continue
             file_root = ROOT.TFile(file_histo)
             histo =  file_root.Get(f"{cut}/{detectors}")
+            if not histo: 
+               file_root.Close()
+               continue
             histo.SetDirectory(0)
             file_root.Close()
             histo_list.push_back(histo)  
+
     histo_tot = histo_list.at(0)
     histo_tot.SetName("Spectrum")
     for i in range(1,histo_list.size()):
@@ -204,7 +208,6 @@ def main():
     b_res.Write()
     tmp_file.Close()
     logger_expo.debug(f'Created ROOT file to give to the fitter code as input in {tmp_file_name}')
-
 
     logger_expo.debug("EOF")
 
