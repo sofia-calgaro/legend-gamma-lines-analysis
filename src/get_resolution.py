@@ -69,7 +69,6 @@ def get_resolution(config_file, detectors):
 
                 # get exposure
                 exp_det = exposure_det[p][r][d]
-                exposure_list.append(exp_det)
 
                 #get resolution
                 c="ch"+str(channel_map[d]['daq']['rawid'])
@@ -87,7 +86,9 @@ def get_resolution(config_file, detectors):
                 
                 if not np.isnan(res_det['a']) and not np.isnan(res_det['b']):
                     resolution_list.append(res_det)
-
+                    exposure_list.append(exp_det)
+                else:
+                    print("--- NaN entry ---")
 
     #get the lists of the two resolution parameters
     if resolution_list != []:
