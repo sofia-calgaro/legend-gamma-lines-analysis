@@ -3,17 +3,17 @@ import json
 import numpy as np
 import ROOT
 
-def get_results(fit_name: str, output_path: str, significance: float):
+def get_results(fit_name: str, output_path: str, significance: float, no_line: int):
     json_file = os.path.join(output_path, f"histo.{fit_name}.json")
 
     with open(json_file, 'r') as file:
         my_json = json.load(file)
 
-    if "intensity0_in_cts" in my_json[fit_name]["fit_parameters"]["line"].keys():
-        gm = my_json[fit_name]["fit_parameters"]["line"]["intensity0_in_cts"]["mode"] 
-        E0_counts_L68 = my_json[fit_name]["fit_parameters"]["line"]["intensity0_in_cts"]["range_min"] 
-        E0_counts_U68 = my_json[fit_name]["fit_parameters"]["line"]["intensity0_in_cts"]["range_max"] 
-        E0_counts_U90 = my_json[fit_name]["fit_parameters"]["line"]["intensity0_in_cts"]["upper_limit"]
+    if f"intensity{no_line}_in_cts" in my_json[fit_name]["fit_parameters"]["line"].keys():
+        gm =            my_json[fit_name]["fit_parameters"]["line"][f"intensity{no_line}_in_cts"]["mode"] 
+        E0_counts_L68 = my_json[fit_name]["fit_parameters"]["line"][f"intensity{no_line}_in_cts"]["range_min"] 
+        E0_counts_U68 = my_json[fit_name]["fit_parameters"]["line"][f"intensity{no_line}_in_cts"]["range_max"] 
+        E0_counts_U90 = my_json[fit_name]["fit_parameters"]["line"][f"intensity{no_line}_in_cts"]["upper_limit"]
 
         root_file = f"histo_marginalized.{fit_name}.root"
         file_root = ROOT.TFile.Open(os.path.join(output_path, root_file), "READ")
@@ -21,8 +21,8 @@ def get_results(fit_name: str, output_path: str, significance: float):
             print(f"Error - ROOT file does not exist for {fit_name} - exit here.")
             return None, None, None
 
-        h = file_root.Get("h1_histo_fitter_model_parameter_intensity0")
-        h_clone = file_root.Get("h1_histo_fitter_model_parameter_intensity0")
+        h = file_root.Get(f"h1_histo_fitter_model_parameter_intensity{no_line}")
+        h_clone = file_root.Get(f"h1_histo_fitter_model_parameter_intensity{no_line}")
 
         binmax = h.GetMaximumBin()
         for k in range(0,h.GetNbinsX(),1):
