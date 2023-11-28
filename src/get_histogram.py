@@ -123,39 +123,42 @@ def make_histos(config_file: str | dict):
                 h_all = ROOT.TH1D('All', 'All', number_bins, hist_range[0], hist_range[1])
 
                 # loop over HPGe detectors
-                # for ch in tmp_data.sort_values(by = ["location", "position"]).channel_id.unique():
                 for ch in tmp_data.sort_values(by = ["location", "position"]).energy_id.unique():
 
                     # save name, string and position
-                    # ch_name = tmp_data[tmp_data.channel_id == ch].name.unique()[0]
-                    # ch_string = tmp_data[tmp_data.channel_id == ch].location.unique()[0]
-                    # ch_position = tmp_data[tmp_data.channel_id == ch].position.unique()[0]
                     ch_name = tmp_data[tmp_data.energy_id == ch].name.unique()[0]
                     ch_string = tmp_data[tmp_data.energy_id == ch].location.unique()[0]
                     ch_position = tmp_data[tmp_data.energy_id == ch].position.unique()[0]
 
                     # create histogram
                     h = ROOT.TH1D(f's{ch_string}-p{ch_position}-{ch_name}', f's{ch_string}-p{ch_position}-{ch_name}', number_bins, hist_range[0], hist_range[1])
-                
-                    # fill single channel histogram
-                    # for e in tmp_data[tmp_data.channel_id == ch].energy:
-                    for e in tmp_data[tmp_data.energy_id == ch].energy:
-                        h.Fill(e)
-                        if ch_name[0] == "B": h_bege.Fill(e)
-                        if ch_name[0] == "C": h_coax.Fill(e)
-                        if ch_name[0] == "V": h_icpc.Fill(e)
-                        if ch_name[0] == "P": h_ppc.Fill(e)
 
-                    # fill all channels (full array) histogram
-                    for e in tmp_data.energy:
+                    # fill single channel histogram
+                    for e in tmp_data[tmp_data.energy_id == ch].energy:
                         h_all.Fill(e)
-    
+                        h.Fill(e)
+                        if ch_name[:2] == "B0": 
+                            h_bege.Fill(e)
+                        if ch_name[:2] == "C0":  
+                            h_coax.Fill(e)
+                        if ch_name[:2] == "V0":  
+                            h_icpc.Fill(e)
+                        if ch_name[:2] == "P0":  
+                            h_ppc.Fill(e)
+
                     h.Write()
+                    h = None
                 
                 h_bege.Write()
                 h_coax.Write()
                 h_icpc.Write()
                 h_ppc.Write()
                 h_all.Write()
+
+                h_bege = None
+                h_coax = None
+                h_icpc = None
+                h_ppc = None
+                h_all = None
         
             myfile.Close()
