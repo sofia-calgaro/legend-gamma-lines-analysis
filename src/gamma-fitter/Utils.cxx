@@ -131,13 +131,6 @@ std::vector<int> CheckPosterior(std::string fit_name, std::string path_to_output
     if ( bkg==2 ) { p2LastMean = p2LastSum/bin_5_perc; }
   }
 
-  double p0FirstBin=0, p1FirstBin=0, p2FirstBin=0;
-  double p0LastBin=0, p1LastBin=0, p2LastBin=0;
-  p0FirstBin = hp0->GetBinContent(1);
-  p0LastBin = hp0->GetBinContent(hp0->GetNbinsX());
-  p1FirstBin = hp1->GetBinContent(1);
-  p1LastBin = hp1->GetBinContent(hp1->GetNbinsX());
-  p2FirstBin = hp2->GetBinContent(0); p2LastBin = hp2->GetBinContent(hp2->GetNbinsX()); 
   double E0LastBin = hE0->GetBinContent(hE0->GetNbinsX());
 
   int ck0=0, ck1=0, ck2=0, ckE0=0;
