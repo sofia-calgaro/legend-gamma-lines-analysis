@@ -2,6 +2,8 @@
 #define GammaLineFit_H
 
 // Root
+#include <limits>
+
 #include <TH1D.h>
 #include <TF1.h>
 #include <TGraph.h>

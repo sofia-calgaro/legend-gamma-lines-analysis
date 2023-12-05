@@ -42,19 +42,19 @@ with open('$file', 'r') as f:
     d_name=$(echo "${d_name//\,}")
     analysis="gamma-lines"
     JobName="line_""$cut"_"$d_name""_bat"
-    qsub -N $JobName run-bat.qsub $1 $gamma_src_code $output_folder $detector_type $d_name $cut $analysis
+    sbatch -J $JobName bat-analysis.sh $1 $gamma_src_code $output_folder $detector_type $d_name $cut $analysis
     sleep 10
     done
 else
     if [ "$gamma_lines" == "true" ]; then
       analysis="gamma-lines"
       JobName="line_""$cut"_"$detector_type""_bat"
-      qsub -N $JobName run-bat.qsub $1 $gamma_src_code $output_folder $detector_type $cut $analysis
+      sbatch -J $JobName bat-analysis.sh $1 $gamma_src_code $output_folder $detector_type $cut $analysis
     fi
     if [ "$peak_search" == "true" ]; then
       analysis="peak-search"
       JobName="peak_""$cut"_"$detector_type""_bat"
-      qsub -N $JobName run-bat.qsub $1 $gamma_src_code $output_folder $detector_type $cut $analysis
+      sbatch -J $JobName bat-analysis.sh $1 $gamma_src_code $output_folder $detector_type $cut $analysis
     fi
 fi
 

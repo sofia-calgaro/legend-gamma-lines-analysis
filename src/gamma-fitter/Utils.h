@@ -1,3 +1,4 @@
+#include <limits>
 #include <BAT/BCModel.h>
 #include <BAT/BCMath.h>
 #include <BAT/BCMTF.h>
